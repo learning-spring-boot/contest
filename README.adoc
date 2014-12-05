@@ -2,7 +2,7 @@
 
 We are putting together a little contest. The idea is to submit a small, pithy, cool Spring Boot application to win a prize. We are hammering out the details.
 
-NOTE: If you're excited, go ahead and *start* this repo and *watch* it too!
+NOTE: If you're excited, go ahead and *star* this repo and *watch* it too!
 
 We are forming the rules and lining up judges right now!
 
