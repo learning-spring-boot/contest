@@ -1,0 +1,33 @@
+== _Learning Spring Boot_ Contest
+
+We are putting together a little contest. The idea is to submit a small, pithy, cool Spring Boot application to win a prize. We are hammering out the details.
+
+NOTE: If you're excited, go ahead and *start* this repo and *watch* it too!
+
+We are forming the rules and lining up judges right now!
+
+=== Calling all Spring Boot apps
+
+Years ago, someone invented http://www.ioccc.org/years.html[The International Obfuscated C Code Contest]. The idea was to create the most impressive C application possible, within a given size limit. The idea is that no one should be able to glean what a given entry can do by reading the source code. Instead, they would have to run the app. Seeing http://blog.aerojockey.com/post/iocccsim[Carl Banks' flight simulator] forever impressed me as a neat, pithy little app. 
+
+Well, we aren't looking for obfuscated, complex, impossible to read apps. We ARE looking for slick, cool apps that use Spring Boot. Characteristics to think about:
+
+* Stylish
+* Short and sweet
+* Custom auto-configurations are welcome
+* Custom health indicators, metrics, and fancy usage thereof
+* Nice on the server side OR cool frontends (You don't have to know JavaScript/CSS to build a cool interface)
+
+=== How/when to submit
+
+WARNING: *NO SUBMISSIONS YET!*
+
+We aren't ready yet. The dates of the event as well as the rules are being put together right now. But when the time comes, we'll announce the event.
+
+To enter:
+
+. Fork this repo.
+. Code your solution with your fork.
+. Submit a pull request.
+. Wait to see the announcement.
+. Collect your prize!
