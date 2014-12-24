@@ -1,33 +1,35 @@
 == _Learning Spring Boot_ Contest
 
-We are putting together a little contest. The idea is to submit a small, pithy, cool Spring Boot application to win a prize. We are hammering out the details.
-
-NOTE: If you're excited, go ahead and *star* this repo and *watch* it too!
-
-We are forming the rules and lining up judges right now!
+This is a contest based on _Learning Spring Boot_. The idea is to submit a small, pithy, cool Spring Boot application to win a prize. We will soon announce the prizes.
 
 === Calling all Spring Boot apps
 
-Years ago, someone invented http://www.ioccc.org/years.html[The International Obfuscated C Code Contest]. The idea was to create the most impressive C application possible, within a given size limit. The idea is that no one should be able to glean what a given entry can do by reading the source code. Instead, they would have to run the app. Seeing http://blog.aerojockey.com/post/iocccsim[Carl Banks' flight simulator] forever impressed me as a neat, pithy little app. 
+Years ago, the http://www.ioccc.org/years.html[The International Obfuscated C Code Contest] was invented. The idea was to create the most impressive C application possible, within a given size limit. The idea is that no one should be able to glean what a given entry can do by reading the source code. Instead, they would have to run the app. Seeing http://blog.aerojockey.com/post/iocccsim[Carl Banks' flight simulator] forever impressed me as a neat, pithy little app. 
 
-Well, we aren't looking for obfuscated, complex, impossible to read apps. We ARE looking for slick, cool apps that use Spring Boot. Characteristics to think about:
+Well, we aren't looking for obfuscated, complex, impossible to read apps. But we *ARE* looking for slick, cool apps that show off the power/coolness/wicked abilities of Spring Boot. Characteristics the judges will evaluate the entries:
 
 * Stylish
 * Short and sweet
 * Custom auto-configurations are welcome
 * Custom health indicators, metrics, and fancy usage thereof
-* Nice on the server side OR cool frontends (You don't have to know JavaScript/CSS to build a cool interface)
+* Nice on the server side OR cool frontends (You don't have to build a cool web frontend to have a slick, elegeant, and original UI.)
+* Popularity. Tweet things up while you work on your submission. We will definitely look at stars on your forked repo of this contest as well as links you provide to blog entires.
 
 === How/when to submit
 
-WARNING: *NO SUBMISSIONS YET!*
+IMPORANT: Deadline is 11:59pm January 17th CST (UTC-6). (I hate midnight deadlines, since they're so ambiguous.)
 
-We aren't ready yet. The dates of the event as well as the rules are being put together right now. But when the time comes, we'll announce the event.
-
-To enter:
+To submit an entery:
 
 . Fork this repo.
-. Code your solution with your fork.
-. Submit a pull request.
+. Code your solution inside your fork.
+. Tweet/blog/reddit/facebook your efforts and gather evidence of your apps popularity (stars on your repo, total hits on your blog entry, total number of registered userse for your slick app, etc.)
+. Submit a pull request (before the deadline!!!)
 . Wait to see the announcement.
 . Collect your prize!
+
+Those of you that can't wait, use the holiday time as you wish. Those of you that are enjoying time with family and friends, we included enough time to stil get into the contest.
+
+NOTE: No member of Pivotal Inc. is permitted to enter this contest. Only one submission per person. If there is evidence of multiple "sock puppet" entries coming from the same person, the judges reserve the right to disqualify you. All decisions are final.
+
+Good luck!
