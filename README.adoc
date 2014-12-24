@@ -4,16 +4,16 @@ This is a contest based on _Learning Spring Boot_. The idea is to submit a small
 
 === Calling all Spring Boot apps
 
-Years ago, the http://www.ioccc.org/years.html[The International Obfuscated C Code Contest] was invented. The idea was to create the most impressive C application possible, within a given size limit. The idea is that no one should be able to glean what a given entry can do by reading the source code. Instead, they would have to run the app. Seeing http://blog.aerojockey.com/post/iocccsim[Carl Banks' flight simulator] forever impressed me as a neat, pithy little app. 
+Years ago, the http://www.ioccc.org/years.html[The International Obfuscated C Code Contest] was invented. Seeing http://blog.aerojockey.com/post/iocccsim[Carl Banks' flight simulator] forever impressed me as a neat, pithy little app. 
 
-Well, we aren't looking for obfuscated, complex, impossible to read apps. But we *ARE* looking for slick, cool apps that show off the power/coolness/wicked abilities of Spring Boot. Characteristics the judges will evaluate the entries:
+Well, we aren't looking for obfuscated, complex, impossible to read apps. But we *ARE* looking for slick, cool apps that show off the power/coolness/wicked abilities of Spring Boot mixed with your hackable creativity. Characteristics the judges evaluate include:
 
 * Stylish
 * Short and sweet
 * Custom auto-configurations are welcome
 * Custom health indicators, metrics, and fancy usage thereof
-* Nice on the server side OR cool frontends (You don't have to build a cool web frontend to have a slick, elegeant, and original UI.)
-* Popularity. Tweet things up while you work on your submission. We will definitely look at stars on your forked repo of this contest as well as links you provide to blog entires.
+* Nice on the server side OR cool frontends (You don't have to build a web frontend to have a slick, elegeant, and original UI.)
+* Popularity. Tweet things up while you work on your submission. We will definitely look at stars on your forked repo of this contest, volume of traffic your generate, and other evidence of popularity.
 
 === How/when to submit
 
@@ -24,11 +24,12 @@ To submit an entery:
 . Fork this repo.
 . Code your solution inside your fork.
 . Tweet/blog/reddit/facebook your efforts and gather evidence of your apps popularity (stars on your repo, total hits on your blog entry, total number of registered userse for your slick app, etc.)
+. Replace this README.adoc with your own documentation (cuteness rewarded!).
 . Submit a pull request (before the deadline!!!)
 . Wait to see the announcement.
 . Collect your prize!
 
-Those of you that can't wait, use the holiday time as you wish. Those of you that are enjoying time with family and friends, we included enough time to stil get into the contest.
+Those of you that can't wait, use the holiday time as you wish. Those of you that are enjoying time with family and friends, we included enough time so you can still get into the contest.
 
 NOTE: No member of Pivotal Inc. is permitted to enter this contest. Only one submission per person. If there is evidence of multiple "sock puppet" entries coming from the same person, the judges reserve the right to disqualify you. All decisions are final.
 
