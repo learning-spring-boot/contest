@@ -1,0 +1,40 @@
+buildscript {
+    ext {
+        springBootVersion = '1.2.0.RELEASE'
+    }
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
+apply plugin: 'groovy'
+apply plugin: 'idea'
+apply plugin: 'spring-boot'
+
+jar {
+    baseName = 'polaromatic'
+    version = '0.0.1-SNAPSHOT'
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    compile 'org.springframework.boot:spring-boot-starter-integration'
+    compile 'org.springframework.boot:spring-boot-starter-web'
+    compile 'org.springframework.boot:spring-boot-starter-websocket'
+    compile "org.codehaus.groovy:groovy-all:2.4.0-rc-1"
+
+    testCompile 'org.springframework.boot:spring-boot-starter-test'
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.2.1'
+}
