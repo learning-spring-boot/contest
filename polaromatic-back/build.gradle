@@ -32,6 +32,8 @@ dependencies {
     compile 'org.springframework.boot:spring-boot-starter-websocket'
     compile "org.codehaus.groovy:groovy-all:2.4.0-rc-1"
 
+    compile 'commons-lang:commons-lang:2.6'
+
     testCompile 'org.springframework.boot:spring-boot-starter-test'
 }
 
