@@ -33,6 +33,7 @@ dependencies {
     compile "org.codehaus.groovy:groovy-all:2.4.0-rc-1"
 
     compile 'commons-lang:commons-lang:2.6'
+    compile 'org.im4java:im4java:1.4.0'
 
     testCompile 'org.springframework.boot:spring-boot-starter-test'
 }
