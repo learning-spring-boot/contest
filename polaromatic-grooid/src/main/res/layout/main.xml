@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+              android:padding="@dimen/default_padding">
 
     <ImageView
             android:layout_width="wrap_content"
@@ -13,15 +14,15 @@
             android:minHeight="200dp"/>
 
     <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:textSize="24dp"
-        android:text="@string/main_1"/>
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/default_text_size"
+            android:text="@string/main_1"/>
 
     <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:textSize="24dp"
+            android:textSize="@dimen/default_text_size"
             android:text="@string/main_2"/>
 
 </LinearLayout>
