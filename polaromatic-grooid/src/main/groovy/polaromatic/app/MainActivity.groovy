@@ -10,7 +10,7 @@ import com.arasthel.swissknife.annotations.OnUIThread
 
 @CompileStatic
 class MainActivity extends Activity {
-      
+
     @Override
     void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState)
@@ -38,11 +38,11 @@ class MainActivity extends Activity {
     @OnUIThread
     void showAbout() {
          new AlertDialog.Builder(this)
-            .setIcon(R.drawable.ic_launcher)
+            .setIcon(R.drawable.polaromatic_logo)
             .setTitle(R.string.app_name)
             .setView(layoutInflater.inflate(R.layout.about, null, false))
             .create()
             .show()
     }
-    
+
 }

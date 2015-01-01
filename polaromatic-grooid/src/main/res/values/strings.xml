@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">polaromatic-grooid</string>
+    <string name="app_name">Polaromatic</string>
     <string name="hello">Groovy And Android :)</string>
     <string name="about">About</string>
     <string name="about_credits">Check http://www.groovy-lang.org</string>
