@@ -2,11 +2,12 @@ package polaromatic.app.activity
 
 import android.app.Activity
 import android.app.AlertDialog
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import groovy.transform.CompileStatic
 import com.arasthel.swissknife.annotations.OnUIThread
+import groovy.transform.CompileStatic
 import polaromatic.app.R
 
 @CompileStatic
@@ -50,7 +51,7 @@ class MainActivity extends Activity {
 
     @OnUIThread
     void showSettings() {
-
+        startActivity(new Intent(applicationContext, SettingsActivity))
     }
 
 }

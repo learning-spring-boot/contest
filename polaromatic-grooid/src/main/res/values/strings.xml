@@ -9,4 +9,12 @@
     <string name="about_credits">Check http://www.groovy-lang.org</string>
     <string name="about_descrip">This is an Android app written in Groovy</string>
 
+    <!-- Settings -->
+    <string name="title_activity_settings">Settings</string>
+    <string name="action_settings">Settings</string>
+    <string name="settings_text">Please configure the url of your Polaromatic Spring Boot Application</string>
+    <string name="settings_backend_url">http://polaromatic.noip.me</string>
+    <string name="settings_save_url">SAVE SETTINGS</string>
+    <string name="settings_saved_ok">Settings saved correctly</string>
+
 </resources>
