@@ -20,7 +20,7 @@ html {
         div(id: 'header') {
             div(class: 'center') {
                 a(href: 'https://github.com/lmivan/contest', target: 'blank') {
-                    img(src: 'images/spring-boot-logo.png')
+                    img(src: 'images/polaromatic-logo.png')
                 }
                 p('Polaromatic')
                 span('Powered by Spring Boot')

@@ -32,22 +32,25 @@ body {
     display: inline-block;
     font-family: 'Montserrat', sans-serif;
     font-size: 48px;
-    margin: 22px 0 0 25px;
+    margin: 26px 0 0 25px;
     padding: 0 15px;
     vertical-align: top;
     letter-spacing: -2px;
 }
 #header span {
-    background-color: #6db33f;
-    color: #fff;
+    color: #6db33f;
     display: inline-block;
     font-family: 'Montserrat', sans-serif;
     font-size: 24px;
-    margin-top: 51px;
+    margin-top: 55px;
     padding: 0 15px;
     vertical-align: top;
     letter-spacing: -2px;
     font-style: italic;
+}
+
+#header img {
+    margin: 4px 0 0 10px;
 }
 
 #timeline {
@@ -58,5 +61,5 @@ body {
     width: 30%;
     height: 350px;
     float: left;
-    margin: 0 10px 20px 0;
+    margin: 0 0 20px 20px;
 }

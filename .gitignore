@@ -5,3 +5,5 @@ build/
 .gradle/
 .idea/
 work
+.lazybones/
+local.properties
