@@ -1,4 +1,4 @@
-package polaromatic.app
+package polaromatic.app.activity
 
 import android.app.Activity
 import android.app.AlertDialog
@@ -7,6 +7,7 @@ import android.view.Menu
 import android.view.MenuItem
 import groovy.transform.CompileStatic
 import com.arasthel.swissknife.annotations.OnUIThread
+import polaromatic.app.R
 
 @CompileStatic
 class MainActivity extends Activity {
@@ -30,6 +31,8 @@ class MainActivity extends Activity {
         if (id == R.id.action_about) {
             showAbout()
             return true
+        } else if (id == R.id.action_settings) {
+            showSettings()
         }
 
         return super.onOptionsItemSelected(item)
@@ -43,6 +46,11 @@ class MainActivity extends Activity {
             .setView(layoutInflater.inflate(R.layout.about, null, false))
             .create()
             .show()
+    }
+
+    @OnUIThread
+    void showSettings() {
+
     }
 
 }
