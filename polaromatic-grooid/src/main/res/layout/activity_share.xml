@@ -4,9 +4,8 @@
 
     <LinearLayout
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
+            android:layout_height="wrap_content"
             android:padding="@dimen/default_padding"
-            android:weightSum="2"
             android:orientation="vertical">
 
         <LinearLayout
@@ -16,38 +15,36 @@
                 android:layout_marginBottom="20dp"
                 android:orientation="vertical">
 
-            <TextView
+            <ImageView
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/settings_text"
-                    android:textSize="@dimen/default_text_size"
-                    android:paddingBottom="10dp"/>
+                    android:minHeight="250dp"
+                    android:id="@+id/share_image"/>
 
             <EditText
-                    android:id="@+id/backendUrl"
-                    android:layout_width="fill_parent"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/settings_backend_url"
-                    />
+                    android:inputType="textMultiLine"
+                    android:ems="10"
+                    android:hint="@string/share_text_hint"
+                    android:id="@+id/share_text"
+                    android:paddingBottom="10dp"/>
         </LinearLayout>
 
         <LinearLayout
                 android:layout_width="fill_parent"
-                android:gravity="bottom"
                 android:layout_height="fill_parent"
-                android:layout_weight="1"
                 android:orientation="vertical">
 
             <Button
-                    android:id="@+id/settings_save_button"
+                    android:id="@+id/share_polaromatize_button"
                     android:background="@color/spring_boot_green"
                     android:textColor="@color/spring_boot_gray"
                     android:layout_width="fill_parent"
                     android:layout_height="60dp"
                     android:padding="@dimen/default_padding"
-                    android:text="@string/settings_save_url"/>
+                    android:text="@string/share_polaromatize"/>
         </LinearLayout>
-
 
     </LinearLayout>
 </ScrollView>

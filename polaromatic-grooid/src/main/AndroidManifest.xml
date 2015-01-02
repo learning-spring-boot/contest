@@ -19,6 +19,15 @@
                 android:name=".activity.SettingsActivity"
                 android:label="@string/title_activity_settings">
         </activity>
+        <activity
+                android:name=".activity.ShareActivity"
+                android:label="@string/title_activity_share">
+            <intent-filter>
+                <action android:name="android.intent.action.SEND"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:mimeType="image/*"/>
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
