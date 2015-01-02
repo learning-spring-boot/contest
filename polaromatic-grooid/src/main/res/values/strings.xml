@@ -2,12 +2,13 @@
 <resources>
 
     <string name="app_name">Polaromatic</string>
-    <string name="hello">Groovy And Android :)</string>
-    <string name="main_1">You can only use this application sharing a picture from another application</string>
-    <string name="main_2">Please check the settings</string>
+    <string name="main_1">You can only use this application sharing a picture from another application.</string>
+    <string name="main_2">Please check the settings.</string>
+
+    <!-- About -->
     <string name="about">About</string>
-    <string name="about_credits">Check http://www.groovy-lang.org</string>
-    <string name="about_descrip">This is an Android app written in Groovy</string>
+    <string name="about_credits">Check https://github.com/lmivan/contest</string>
+    <string name="about_descrip">This is an Android app written in Groovy for the #LearningSpringBoot contest</string>
 
     <!-- Settings -->
     <string name="title_activity_settings">Settings</string>
