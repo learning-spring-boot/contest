@@ -23,5 +23,6 @@
     <string name="title_activity_share">Polaromatic</string>
     <string name="share_text_hint">This is the text of your Polaromatic</string>
     <string name="share_polaromatize">POLAROMATIZE THIS!</string>
+    <string name="share_ok_msg">Your photo has been polaromatized!</string>
 
 </resources>
