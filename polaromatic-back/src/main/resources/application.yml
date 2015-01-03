@@ -1,3 +1,1 @@
 multipart.maxFileSize: 2048KB
-
-logging.level.polaromatic: DEBUG
