@@ -27,3 +27,4 @@
 }
 -dontwarn org.codehaus.groovy.**
 -dontwarn groovy**
+-dontwarn com.squareup.okhttp.**
