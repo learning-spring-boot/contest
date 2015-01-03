@@ -18,6 +18,8 @@
     <poller id="poller" default="true" fixed-rate="1000" task-executor="executor"/>
 
     <channel id="incommingFilesChannel"/>
+
+    <gateway id="polaromaticService" service-interface="polaromatic.service.PhotoToPolaromatize" default-request-channel="incommingFilesChannel" />
     <file:inbound-channel-adapter directory="work" channel="incommingFilesChannel"/>
 
     <chain input-channel="incommingFilesChannel">

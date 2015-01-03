@@ -20,11 +20,12 @@ class ImageConverterService {
         def outputFile = photo.output
 
         int polaroidRotation = rnd.nextInt(6)
+        String caption = photo.text ?: DEFAULT_CAPTION
 
         def op = new IMOperation()
         op.addImage(inputFile)
         op.thumbnail(300, 300)
-            .set("caption", DEFAULT_CAPTION)
+            .set("caption", caption)
             .gravity("center")
             .pointsize(20)
             .background("black")
@@ -37,7 +38,5 @@ class ImageConverterService {
         photo
     }
 }
-
-
 
 

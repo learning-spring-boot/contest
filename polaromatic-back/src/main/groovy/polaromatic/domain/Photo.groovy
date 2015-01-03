@@ -6,4 +6,5 @@ import groovy.transform.Immutable
 class Photo {
     String input
     String output
+    String text
 }
