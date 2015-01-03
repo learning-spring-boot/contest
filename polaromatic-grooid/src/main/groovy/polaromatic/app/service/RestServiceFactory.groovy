@@ -8,6 +8,7 @@ class RestServiceFactory {
 
         new RestAdapter.Builder()
             .setEndpoint(baseUrl)
+            .setErrorHandler(new PolaromaticErrorHandler())
             .build()
             .create(clazz)
     }

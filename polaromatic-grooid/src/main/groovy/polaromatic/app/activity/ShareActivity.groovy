@@ -14,9 +14,11 @@ import com.arasthel.swissknife.SwissKnife
 import com.arasthel.swissknife.annotations.InjectView
 import com.arasthel.swissknife.annotations.OnClick
 import com.squareup.picasso.Picasso
+import de.greenrobot.event.EventBus
 import groovy.transform.CompileStatic
 import polaromatic.app.R
 import polaromatic.app.common.Toastable
+import polaromatic.app.service.events.BackendEvent
 import polaromatic.app.service.PolaromaticRest
 import polaromatic.app.service.RestServiceFactory
 import retrofit.mime.TypedFile
@@ -38,6 +40,7 @@ public class ShareActivity extends Activity implements Toastable {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_share)
         SwissKnife.inject(this)
+        EventBus.default.register(this)
 
         Intent intent = intent
         String action = intent.action
@@ -54,6 +57,12 @@ public class ShareActivity extends Activity implements Toastable {
                     .into(shareImageView)
             }
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy()
+        EventBus.default.unregister(this)
     }
 
     @OnClick(R.id.share_polaromatize_button)
@@ -89,5 +98,10 @@ public class ShareActivity extends Activity implements Toastable {
         output?.close()
 
         return tempFile
+    }
+
+    void onEventBackgroundThread(BackendEvent backendError) {
+        showToastMessage(applicationContext, getString(R.string.share_backend_error))
+        finish()
     }
 }
