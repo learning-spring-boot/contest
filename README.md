@@ -96,7 +96,7 @@ Our first API draft looks like this:
 
 **But, ** when we start mocking, the first problem hit us, - How are we going to call our baby?
 
-We tought about the goal of the project (finding dates) in combination with the servers we are coupled with, - WhatApp. Since we use *doodle* to organize our LaserTag events (ya, thats we the nerds will joins and we can use tools like this, ...) we combined 1 and 1. *WhatsApp* and Doodle is:
+We tought about the goal of the project (finding dates) in combination with the servers we are coupled with, - WhatApp. Since we use *doodle* to organize our LaserTag events (ya, thats we the nerds will joins and we can use tools like this, ...) we combined 1 and 1. *WhatsApp* and Doodle is: Whoodle. Later we recongnized the Whoodle is a dog breed so we renamed it to:
 
 **-- VotesApp :)**
 
