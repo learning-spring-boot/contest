@@ -1,5 +1,6 @@
 package polaromatic.service
 
+import groovy.transform.CompileStatic
 import groovy.util.logging.Slf4j
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.messaging.simp.SimpMessagingTemplate
@@ -8,6 +9,7 @@ import polaromatic.domain.Photo
 
 @Slf4j
 @Service
+@CompileStatic
 class BrowserPushService {
 
     @Autowired

@@ -1,5 +1,6 @@
 package polaromatic.service
 
+import groovy.transform.CompileStatic
 import groovy.util.logging.Slf4j
 import org.apache.commons.lang.RandomStringUtils
 import org.springframework.stereotype.Service
@@ -10,6 +11,7 @@ import java.nio.file.Paths
 
 @Slf4j
 @Service
+@CompileStatic
 class FileService {
 
     Photo preprocessFile(File file) {
