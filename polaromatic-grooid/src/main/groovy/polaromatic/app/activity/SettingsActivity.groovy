@@ -10,12 +10,13 @@ import com.arasthel.swissknife.annotations.InjectView
 import com.arasthel.swissknife.annotations.OnClick
 import groovy.transform.CompileStatic
 import polaromatic.app.R
+import polaromatic.app.common.Toastable
 
 @CompileStatic
-class SettingsActivity extends Activity {
+class SettingsActivity extends Activity implements Toastable {
 
-    private static final String PREFS_NAME = "settings_pref"
-    private static final String BACKEND_URL = "backend_url"
+    static final String PREFS_NAME = "settings_pref"
+    static final String BACKEND_URL = "backend_url"
 
     @InjectView(R.id.backendUrl)
     EditText backendUrlEditText
@@ -40,9 +41,7 @@ class SettingsActivity extends Activity {
         editor.putString(BACKEND_URL, backendUrlEditText.text.toString())
         editor.commit()
 
-        Toast toast = Toast.makeText(this, R.string.settings_saved_ok, Toast.LENGTH_SHORT)
-        toast.show()
-
+        showToastMessage(applicationContext, getString(R.string.settings_saved_ok))
         finish()
     }
 }
