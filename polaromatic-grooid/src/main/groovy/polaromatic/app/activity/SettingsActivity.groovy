@@ -4,13 +4,12 @@ import android.app.Activity
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.widget.EditText
-import android.widget.Toast
 import com.arasthel.swissknife.SwissKnife
 import com.arasthel.swissknife.annotations.InjectView
 import com.arasthel.swissknife.annotations.OnClick
 import groovy.transform.CompileStatic
 import polaromatic.app.R
-import polaromatic.app.common.Toastable
+import polaromatic.app.util.Toastable
 
 @CompileStatic
 class SettingsActivity extends Activity implements Toastable {
@@ -41,8 +40,7 @@ class SettingsActivity extends Activity implements Toastable {
         editor.putString(BACKEND_URL, backendUrlEditText.text.toString())
         editor.commit()
 
-        showToastMessage(applicationContext, getString(R.string.settings_saved_ok))
+        showToastMessage(getString(R.string.settings_saved_ok))
         finish()
     }
 }
-
