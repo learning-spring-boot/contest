@@ -32,7 +32,9 @@ dependencies {
     compile("org.springframework.boot:spring-boot-starter-web")
     compile("org.springframework.boot:spring-boot-starter-actuator")
     compile("org.springframework.boot:spring-boot-starter-remote-shell")
+    compile("org.springframework.boot:spring-boot-starter-test")
     compile("org.projectlombok:lombok:1.14.8") // sollen wir die version auslagen, wie in maven?
+    compile("com.google.code.findbugs:jsr305:3.0.0")
     testCompile("org.springframework.boot:spring-boot-starter-test")
 }
 

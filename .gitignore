@@ -1,0 +1,13 @@
+release.properties
+.classpath
+.settings
+.project
+target
+*~
+*.swp
+.sonar
+.DS_Store
+.springBeans
+/bin
+/build/
+.gradle
