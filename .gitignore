@@ -7,3 +7,4 @@ build/
 work
 .lazybones/
 local.properties
+log/
