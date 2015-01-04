@@ -25,5 +25,6 @@
     <string name="share_polaromatize">POLAROMATIZE THIS!</string>
     <string name="share_ok_msg">Your photo has been polaromatized!</string>
     <string name="share_backend_error">There was an error uploading your photo</string>
+    <string name="share_waiting_spinner">Polaromatizing...</string>
 
 </resources>

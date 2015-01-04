@@ -1,6 +1,7 @@
 package polaromatic.app.activity
 
 import android.app.Activity
+import android.app.ProgressDialog
 import android.content.Intent
 import android.content.SharedPreferences
 import android.graphics.Bitmap
@@ -67,6 +68,8 @@ public class ShareActivity extends Activity implements Toastable {
 
     @OnClick(R.id.share_polaromatize_button)
     void polaromatize() {
+        ProgressDialog dialog = ProgressDialog.show(this, "", getString(R.string.share_waiting_spinner))
+
         Task.callInBackground {
             String textToShare = shareEditText.text.toString()
             File imageToShare = extractImage(shareImageView)
@@ -78,6 +81,7 @@ public class ShareActivity extends Activity implements Toastable {
 
             imageToShare.delete()
             showToastMessage(getString(R.string.share_ok_msg))
+            dialog.dismiss()
             finish()
         }
     }
