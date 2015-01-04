@@ -8,5 +8,5 @@ package de.votesapp.parser;
  * NO and OUT behind {@value #NEGATIVE} etc.
  */
 public enum Attitude {
-    POSITIVE, NEGATIVE, UNKOWN
+	POSITIVE, NEGATIVE, UNKOWN
 }

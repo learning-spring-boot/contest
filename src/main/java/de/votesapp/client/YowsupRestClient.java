@@ -14,43 +14,40 @@ import org.springframework.web.client.RestTemplate;
 @Component
 @Profile("yowsup")
 public class YowsupRestClient implements WhatsAppClient {
-    private final String baseUrl;
-    private final RestTemplate restTemplate;
+	private final String baseUrl;
+	private final RestTemplate restTemplate;
 
-    @Autowired
-    public YowsupRestClient(@Value("${yowsup.baseUrl}") String baseUrl,
-	    RestTemplate restTemplate) {
-	this.baseUrl = baseUrl;
-	this.restTemplate = restTemplate;
-    }
-
-    @Override
-    public void sendGroupMessage(String groupId, String text) {
-	GroupMessage messageToSend = GroupMessage.ownMessageOf(groupId, text);
-
-	// WhatsApp won't return the unique messages IDs, so we don't receive a
-	// resource ID for that.
-	restTemplate.postForEntity(baseUrl + "/groupMessage", messageToSend,
-		Void.class);
-    }
-
-    /**
-     * Receive all new messages and delete them from the inbox.
-     */
-    @Override
-    public GroupMessage[] fetchGroupMessages() {
-	GroupMessage[] messages = restTemplate.getForObject(baseUrl
-		+ "/groupMessage", GroupMessage[].class);
-
-	deleteMessages(messages);
-
-	return messages;
-    }
-
-    private void deleteMessages(GroupMessage... messages) {
-	for (GroupMessage msg : messages) {
-	    restTemplate.delete(baseUrl + "/groupMessage/{id}", msg.getId());
+	@Autowired
+	public YowsupRestClient(@Value("${yowsup.baseUrl}") final String baseUrl, final RestTemplate restTemplate) {
+		this.baseUrl = baseUrl;
+		this.restTemplate = restTemplate;
 	}
-    }
+
+	@Override
+	public void sendGroupMessage(final String groupId, final String text) {
+		final GroupMessage messageToSend = GroupMessage.ownMessageOf(groupId, text);
+
+		// WhatsApp won't return the unique messages IDs, so we don't receive a
+		// resource ID for that.
+		restTemplate.postForEntity(baseUrl + "/groupMessage", messageToSend, Void.class);
+	}
+
+	/**
+	 * Receive all new messages and delete them from the inbox.
+	 */
+	@Override
+	public GroupMessage[] fetchGroupMessages() {
+		final GroupMessage[] messages = restTemplate.getForObject(baseUrl + "/groupMessage", GroupMessage[].class);
+
+		deleteMessages(messages);
+
+		return messages;
+	}
+
+	private void deleteMessages(final GroupMessage... messages) {
+		for (final GroupMessage msg : messages) {
+			restTemplate.delete(baseUrl + "/groupMessage/{id}", msg.getId());
+		}
+	}
 
 }

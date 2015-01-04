@@ -16,30 +16,30 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class GroupMessage {
 
-    public static GroupMessage ownMessageOf(String groupId, String text) {
-	return new GroupMessage(null, groupId, null, text);
-    }
+	public static GroupMessage ownMessageOf(final String groupId, final String text) {
+		return new GroupMessage(null, groupId, null, text);
+	}
 
-    /**
-     * Unique messageId. 4917917413454-1, 2, 3, ...
-     *
-     * For messages we sent this can be <tt>null</tt>.
-     */
-    @Nullable
-    private String id;
+	/**
+	 * Unique messageId. 4917917413454-1, 2, 3, ...
+	 *
+	 * For messages we sent this can be <tt>null</tt>.
+	 */
+	@Nullable
+	private String id;
 
-    /**
-     * Unique Identifier of the group like: 491797529324-12812497
-     */
-    private String groupId;
+	/**
+	 * Unique Identifier of the group like: 491797529324-12812497
+	 */
+	private String groupId;
 
-    /**
-     * Phone Number of the Sender like: 491791287124
-     *
-     * For messages we sent this can be <tt>null</tt>.
-     */
-    @Nullable
-    private String sender;
+	/**
+	 * Phone Number of the Sender like: 491791287124
+	 *
+	 * For messages we sent this can be <tt>null</tt>.
+	 */
+	@Nullable
+	private String sender;
 
-    private String text;
+	private String text;
 }

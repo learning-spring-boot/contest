@@ -15,30 +15,26 @@ import lombok.Getter;
 @EqualsAndHashCode
 @Getter
 public class Command {
-    // TODO: Use inheritance here. StatusRequestCommand, AttitudeCommand, ...
-    private final Optional<StatusRequest> statusRequest;
-    private final Optional<Attitude> attitude;
-    private final Optional<Integer> additionals;
+	// TODO: Use inheritance here. StatusRequestCommand, AttitudeCommand, ...
+	private final Optional<StatusRequest> statusRequest;
+	private final Optional<Attitude> attitude;
+	private final Optional<Integer> additionals;
 
-    public static Command of(StatusRequest statusRequest) {
-	return new Command(Optional.of(statusRequest), Optional.empty(),
-		Optional.empty());
-    }
+	public static Command of(final StatusRequest statusRequest) {
+		return new Command(Optional.of(statusRequest), Optional.empty(), Optional.empty());
+	}
 
-    public static Command of(Attitude attitude) {
-	return new Command(Optional.empty(), Optional.of(attitude),
-		Optional.empty());
-    }
+	public static Command of(final Attitude attitude) {
+		return new Command(Optional.empty(), Optional.of(attitude), Optional.empty());
+	}
 
-    public static Command of(Integer additionals) {
-	return new Command(Optional.empty(), Optional.empty(),
-		Optional.of(additionals));
-    }
+	public static Command of(final Integer additionals) {
+		return new Command(Optional.empty(), Optional.empty(), Optional.of(additionals));
+	}
 
-    private Command(Optional<StatusRequest> statusRequest,
-	    Optional<Attitude> attitude, Optional<Integer> additionals) {
-	this.statusRequest = statusRequest;
-	this.attitude = attitude;
-	this.additionals = additionals;
-    }
+	private Command(final Optional<StatusRequest> statusRequest, final Optional<Attitude> attitude, final Optional<Integer> additionals) {
+		this.statusRequest = statusRequest;
+		this.attitude = attitude;
+		this.additionals = additionals;
+	}
 }

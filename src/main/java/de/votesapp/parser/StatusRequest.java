@@ -14,18 +14,18 @@ import lombok.Getter;
 @EqualsAndHashCode
 @Getter
 public class StatusRequest {
-    private final Optional<Attitude> attitude;
+	private final Optional<Attitude> attitude;
 
-    public static StatusRequest of(Attitude attitude) {
-	return new StatusRequest(Optional.of(attitude));
-    }
+	public static StatusRequest of(final Attitude attitude) {
+		return new StatusRequest(Optional.of(attitude));
+	}
 
-    public static StatusRequest plain() {
-	return new StatusRequest(Optional.empty());
-    }
+	public static StatusRequest plain() {
+		return new StatusRequest(Optional.empty());
+	}
 
-    private StatusRequest(Optional<Attitude> attitude) {
-	this.attitude = attitude;
-    }
+	private StatusRequest(final Optional<Attitude> attitude) {
+		this.attitude = attitude;
+	}
 
 }

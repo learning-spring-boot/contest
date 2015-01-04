@@ -11,13 +11,13 @@ import org.springframework.context.annotation.Profile;
 @Profile("!yowsup")
 public class ConsoleClient implements WhatsAppClient {
 
-    @Override
-    public void sendGroupMessage(String groupId, String text) {
-	log.info("Sent Message: group {}, text {}");
-    }
+	@Override
+	public void sendGroupMessage(final String groupId, final String text) {
+		log.info("Sent Message: group {}, text {}");
+	}
 
-    @Override
-    public GroupMessage[] fetchGroupMessages() {
-	return new GroupMessage[0];
-    }
+	@Override
+	public GroupMessage[] fetchGroupMessages() {
+		return new GroupMessage[0];
+	}
 }

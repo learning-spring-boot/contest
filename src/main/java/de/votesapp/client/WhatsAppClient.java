@@ -2,7 +2,7 @@ package de.votesapp.client;
 
 public interface WhatsAppClient {
 
-    public void sendGroupMessage(String groupId, String text);
+	public void sendGroupMessage(final String groupId, final String text);
 
-    public GroupMessage[] fetchGroupMessages();
+	public GroupMessage[] fetchGroupMessages();
 }
