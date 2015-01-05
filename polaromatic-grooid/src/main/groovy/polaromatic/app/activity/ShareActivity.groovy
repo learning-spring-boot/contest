@@ -88,7 +88,7 @@ public class ShareActivity extends Activity implements Toastable {
 
     PolaromaticRest getPolaromaticRest() {
         SharedPreferences preferences = getSharedPreferences(SettingsActivity.PREFS_NAME, 0)
-        RestServiceFactory.getService(preferences.getString(SettingsActivity.BACKEND_URL, ""), PolaromaticRest)
+        RestServiceFactory.getService(preferences.getString(SettingsActivity.BACKEND_URL_KEY, ""), PolaromaticRest)
     }
 
     private File extractImage(ImageView imageView) {
