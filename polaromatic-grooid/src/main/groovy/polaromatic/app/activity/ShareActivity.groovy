@@ -1,6 +1,7 @@
 package polaromatic.app.activity
 
 import android.app.Activity
+import android.app.AlertDialog
 import android.app.ProgressDialog
 import android.content.Intent
 import android.content.SharedPreferences
@@ -8,12 +9,15 @@ import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.EditText
 import android.widget.ImageView
 import bolts.Task
 import com.arasthel.swissknife.SwissKnife
 import com.arasthel.swissknife.annotations.InjectView
 import com.arasthel.swissknife.annotations.OnClick
+import com.arasthel.swissknife.annotations.OnUIThread
 import com.squareup.picasso.Picasso
 import de.greenrobot.event.EventBus
 import groovy.transform.CompileStatic
@@ -58,6 +62,26 @@ public class ShareActivity extends Activity implements Toastable {
                     .into(shareImageView)
             }
         }
+    }
+
+    @Override
+    boolean onCreateOptionsMenu(Menu menu) {
+        menuInflater.inflate(R.menu.menu_share, menu)
+        return true
+    }
+
+    @Override
+    boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.itemId
+
+        if (id == R.id.action_about) {
+            showAbout()
+            return true
+        } else if (id == R.id.action_settings) {
+            showSettings()
+        }
+
+        return super.onOptionsItemSelected(item)
     }
 
     @Override
@@ -107,5 +131,20 @@ public class ShareActivity extends Activity implements Toastable {
     void onEventBackgroundThread(BackendEvent backendError) {
         showToastMessage(getString(R.string.share_backend_error))
         finish()
+    }
+
+    @OnUIThread
+    void showAbout() {
+        new AlertDialog.Builder(this)
+            .setIcon(R.drawable.polaromatic_logo)
+            .setTitle(R.string.app_name)
+            .setView(layoutInflater.inflate(R.layout.about, null, false))
+            .create()
+            .show()
+    }
+
+    @OnUIThread
+    void showSettings() {
+        startActivity(new Intent(applicationContext, SettingsActivity))
     }
 }
