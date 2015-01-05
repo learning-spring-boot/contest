@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!-- Main -->
     <string name="app_name">Polaromatic</string>
-    <string name="main_1">You can only use this application sharing a picture from another application.</string>
-    <string name="main_2">Please check the settings.</string>
 
     <!-- About -->
     <string name="about">About</string>
@@ -19,7 +16,6 @@
     <string name="settings_saved_ok">Settings saved correctly</string>
 
     <!-- Share -->
-    <string name="title_activity_share">Polaromatic</string>
     <string name="share_text_hint">This is the text of your Polaromatic</string>
     <string name="share_polaromatize">POLAROMATIZE THIS!</string>
     <string name="share_ok_msg">Your photo has been polaromatized!</string>
