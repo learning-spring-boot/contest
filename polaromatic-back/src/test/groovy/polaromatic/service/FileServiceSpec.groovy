@@ -18,6 +18,7 @@ class FileServiceSpec extends Specification {
         then: 'the photo object is created correctly'
             photo.input.contains filePath
             photo.output != null
+            photo.output.endsWith('.png')
             photo.text == text
 
         where:
