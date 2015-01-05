@@ -17,6 +17,19 @@ This project was triggered because of the [Spring Boot Contest](https://github.c
 
 So if you are interested in the huzzle we had, have a look :)
 
+## 04.01.2015 - Parallelprogramming (!= Pairprogramming)
+Two days ago we met again on an epic go cart event and we had some time to discuss the next steps. We figured out that the yowsup architecture seems to be pretty nice (in terms of flexibility and readability). So we decided that we take the risk, drop Plan A (from 31.12.) and implement "only" a nice Rest-API on top off yowsup. With this the actual Java Code, what the contest is about, stays much cleaner.
+
+With this in mind we decided that one of us will put a ReST-Layer in Python and the other one will go for the Java Code.
+
+The result of today are a view java packages:
+
+![Image of our first packages](diary/firstPackages.png)
+
+They are far away from production-ready, but they show already the way it will go.
+
+On the python/yowsup side we know how to deal with the native events, we know how to send messages and where to register our own methods. The next step will to dig deeper into how to put the ReST-Layer on-top on it.
+
 ## 01.01.2015 - Make it public
 Today we decided to put our diary online. Also if there is no code yet, we hope it will be interesting enough :).
 
