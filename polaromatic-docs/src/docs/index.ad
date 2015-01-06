@@ -1,0 +1,20 @@
+= Polaromatic
+by Iván López
+
+:numbered:
+:imagesDir: images/
+:stem:
+
+image::polaromatic-logo.png[align=center]
+
+include::intro.ad[]
+
+<<<
+
+include::spring-boot-app.ad[]
+
+<<<
+
+include::android-app.ad[]
+
+<<<
