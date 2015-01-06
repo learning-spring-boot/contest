@@ -5,6 +5,7 @@ html {
         title "Polaromatic"
 
         link(rel: 'stylesheet', href: '/css/app.css')
+        link(rel: 'stylesheet', href: '/css/gh-fork-ribbon.css')
 
         ['webjars/sockjs-client/0.3.4-1/sockjs.min.js',
          'webjars/stomp-websocket/2.3.1-1/stomp.min.js',
@@ -17,6 +18,12 @@ html {
     }
 
     body {
+        div(class: 'github-fork-ribbon-wrapper right') {
+            div(class: 'github-fork-ribbon') {
+                a(href: 'https://github.com/lmivan/contest', 'Fork me on GitHub')
+            }
+        }
+
         div(id: 'header') {
             div(class: 'center') {
                 a(href: 'https://github.com/lmivan/contest', target: 'blank') {
