@@ -20,3 +20,7 @@ include::spring-boot-app.ad[]
 include::android-app.ad[]
 
 <<<
+
+include::tech-stack.ad[]
+
+<<<
