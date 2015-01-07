@@ -3,9 +3,11 @@ by Iván López
 
 :numbered:
 :imagesDir: images/
+:polaromaticBackResources: ../../../polaromatic-back/src/main/resources
 :stem:
 
-image::polaromatic-logo.png[align=center]
+
+image::polaromatic-logo.png[align=center,link=https://github.com/lmivan/contest,width=150]
 
 include::intro.ad[]
 

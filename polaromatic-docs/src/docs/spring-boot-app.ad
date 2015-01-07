@@ -1,4 +1,36 @@
 == Backend
 
-TODO
+=== Spring Boot Application
 
+The central part of the application is the *Polaromatic* App built with _Spring Boot_. We also use _Spring Integration_
+to decouple the application from all the unnecessary boilerplate code needed to read files from the file system and to
+define the flow of the information in the system.
+From our application point of view we define a POGO that is going to be called by the _infrastructure_
+(Spring Integration) and we are just going to receive a `File`.
+
+To achieve this we use a `File Inbound Channel Adapter` from Spring Integration that is going to monitor a directory
+(`work`) and for every file copied to that directory it's going to send a message to the channel `incommingFilesChannel`
+in which we define an _integration flow_.
+
+[source,xml,indent=0]
+.src/main/resources/resources.xml
+----
+include::{polaromaticBackResources}/resources.xml[tags=appFlow]
+----
+<1> Define the integration with the file system
+<2> Preprocess the file received
+<3> Apply the Polaroid effect
+<4> Send the new photo to the browser using Websockets
+<5> Delete all temporary files
+
+
+=== Spring Boot CLI
+
+We need to feed the system with nice photos to apply the _Polaroid_ effect to them. We've chosen
+https://www.flickr.com/explore/interesting/7days[Flickr Interesing page^] to get the photos.
+
+*FlickrDownloader* is a simple _Spring Boot CLI_ application that downloads the photos from the page every 30 seconds
+and copy them to the `work` directory to be processed by *Polaromatic*.
+
+We use http://jsoup.org/[jsoup^] to parse the page and extract the links of the photos and
+http://gpars.codehaus.org/[GPars^] to download all of them concurrently.

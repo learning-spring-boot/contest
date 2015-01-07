@@ -20,13 +20,16 @@
     <channel id="incommingFilesChannel"/>
 
     <gateway id="polaromaticService" service-interface="polaromatic.service.PhotoToPolaromatize" default-request-channel="incommingFilesChannel" />
-    <file:inbound-channel-adapter directory="work" channel="incommingFilesChannel"/>
+
+    <!-- tag::appFlow[] -->
+    <file:inbound-channel-adapter directory="work" channel="incommingFilesChannel"/> <!--1-->
 
     <chain input-channel="incommingFilesChannel">
-        <service-activator ref="fileService" method="preprocessFile"/>
-        <service-activator ref="imageConverterService" method="applyEffect"/>
-        <service-activator ref="browserPushService" method="pushToBrowser"/>
-        <service-activator ref="fileService" method="deleteTempFiles"/>
+        <service-activator ref="fileService" method="preprocessFile"/> <!--2-->
+        <service-activator ref="imageConverterService" method="applyEffect"/> <!--3-->
+        <service-activator ref="browserPushService" method="pushToBrowser"/> <!--4-->
+        <service-activator ref="fileService" method="deleteTempFiles"/> <!--5-->
     </chain>
+    <!-- end::appFlow[]-->
 
 </beans:beans>

@@ -3,16 +3,25 @@
 *Polaromatic* is a web application to show a photo wall in which photos appear automatically in the browser after
 applying a cool _Polaroid_ effect.
 
-This application has been created for the http://blog.greglturnquist.com/2014/12/announcing-learningspringboot-contest-cc-packtpub-springcentral.html[#LearningSpringBoot]
-contest by https://twitter.com/gregturn[Greg Turnquist].
+This application has been created for the
+http://blog.greglturnquist.com/2014/12/announcing-learningspringboot-contest-cc-packtpub-springcentral.html[#LearningSpringBoot^]
+contest by https://twitter.com/gregturn[Greg Turnquist^] and *Polaromatic* source code is available at my Github
+account: https://github.com/lmivan/contest[https://github.com/lmivan/contest^].
+
+image::polaromatic-app.jpg[align=center]
+
+
+
+=== Application flow
 
 There are two different ways to send a photo to the wall:
 
 - The first one is to copy some photo files (*.jpg, *.png,...) in the _work_ directory in the same level as the
 application.
-- The second one is to send a photo using the Android _Share image with Polaromatic_ Application.
+- The second one is to send a photo using the Android _Share image with Polaromatic_ Application. If you use this
+method you can also customize the text in the Polaroid.
 
-==== Application flow
+This flow is explained in detail in the following sections of the documentation.
 
 image::polaromatic-flow.png[align=center]
 
