@@ -18,9 +18,9 @@ This project was triggered because of the [Spring Boot Contest](https://github.c
 So if you are interested in the huzzle we had, have a look :)
 
 ## 07.01.2015 - Hello Reactor? Can we vote?
-As usual there is a good news and a bad news. Let's start with the bad, because we learned that the last thing you tell stays in our minds :)
+As usual there is a good news and a bad news. Let's start with the bad one, because we learned that the last thing you, tell stays in our minds :)
 
-Bad News: We are still some huzzle with the Python Backend. But we think we can finish it by tomorrow and then fully concentrate on the contest`s goal!
+Bad News: We still have some huzzle with the Python Backend. But we think we can finish it by tomorrow and then fully concentrate on the contest`s goal (Java/Spring Boot)!
 
 Good News: To avoid having nothing by now, we added a simple ["ConsoleClient"](src/main/java/de/votesapp/client/ConsoleClient.java) to fake the WhatsApp Service. That gets loaded when the "yowsup" Profile isn't active. For this we utilized the `!` operator within the `@Profile`-Annotation.
 
