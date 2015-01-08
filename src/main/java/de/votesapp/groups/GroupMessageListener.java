@@ -37,20 +37,21 @@ public class GroupMessageListener {
 	@Selector(value = "group.inbox", reactor = "@rootReactor")
 	public void onGroupReceiveMessage(final Event<GroupMessage> evt) {
 		final GroupMessage message = evt.getData();
-		final Optional<Command> command = parser.parse(message.getText());
-
-		if (command.isPresent() == false) {
-			log.debug("Found message we couldn't parse: ", message);
-			return;
-		}
 
 		final Group group = groupService.createOrLoadGroup(message.getGroupId());
+		group.addUserIfNotExists(message.getSender());
 
-		// That could be so much nicer with dedicated classes and a base class
-		// that has a method register()
-		command.get().getAttitude().ifPresent(a -> registerAttitude(a, message, group));
-		command.get().getAdditionals().ifPresent(a -> registerAdditionals(a, message, group));
-		command.get().getStatusRequest().ifPresent(sr -> registerStatusRequest(sr, message, group));
+		final Optional<Command> command = parser.parse(message.getText());
+		if (command.isPresent()) {
+			// That could be so much nicer with dedicated classes and a base
+			// class that has a method register()
+			command.get().getAttitude().ifPresent(a -> registerAttitude(a, message, group));
+			command.get().getAdditionals().ifPresent(a -> registerAdditionals(a, message, group));
+			command.get().getStatusRequest().ifPresent(sr -> registerStatusRequest(sr, message, group));
+		} else {
+			log.debug("Found message we couldn't parse: ", message);
+		}
+		groupService.save(group);
 	}
 
 	private void registerAttitude(final Attitude attitude, final GroupMessage message, final Group group) {

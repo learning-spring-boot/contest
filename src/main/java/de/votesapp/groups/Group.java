@@ -56,4 +56,9 @@ public class Group {
 
 		return sum;
 	}
+
+	public void addUserIfNotExists(final String user) {
+		userAttitude.putIfAbsent(user, Attitude.UNKOWN);
+		userAdditionals.putIfAbsent(user, 0);
+	}
 }
