@@ -37,6 +37,7 @@ public class GroupMessageListener {
 	@Selector(value = "group.inbox", reactor = "@rootReactor")
 	public void onGroupReceiveMessage(final Event<GroupMessage> evt) {
 		final GroupMessage message = evt.getData();
+		log.info("Process Message: {}", message);
 
 		final Group group = groupService.createOrLoadGroup(message.getGroupId());
 		group.addUserIfNotExists(message.getSender());
@@ -48,6 +49,9 @@ public class GroupMessageListener {
 			command.get().getAttitude().ifPresent(a -> registerAttitude(a, message, group));
 			command.get().getAdditionals().ifPresent(a -> registerAdditionals(a, message, group));
 			command.get().getStatusRequest().ifPresent(sr -> registerStatusRequest(sr, message, group));
+			if (command.get().isReset()) {
+				registerResetCommand(message, group);
+			}
 		} else {
 			log.debug("Found message we couldn't parse: ", message);
 		}
@@ -70,8 +74,14 @@ public class GroupMessageListener {
 		final Map<Attitude, Integer> sumAttitudes = group.sumAttitudes();
 		statusMessage.append("*thumb_up*: ").append(sumAttitudes.get(Attitude.POSITIVE)).append("\n");
 		statusMessage.append("*thumb_down*: ").append(sumAttitudes.get(Attitude.NEGATIVE)).append("\n");
-		statusMessage.append("*questionmark*: ").append(sumAttitudes.get(Attitude.UNKOWN)).append("\n");
+		statusMessage.append("*questionmark*: ").append(sumAttitudes.get(Attitude.UNKOWN));
 
-		reactor.notify("group.outbox", Event.wrap(GroupMessage.messageOf(group.getGroupId(), statusMessage.toString())));
+		reactor.notify("group.outbox", Event.wrap(GroupMessage.of(group.getGroupId(), statusMessage.toString())));
 	}
+
+	private void registerResetCommand(final GroupMessage message, final Group group) {
+		group.resetVotes();
+		groupService.save(group);
+	}
+
 }

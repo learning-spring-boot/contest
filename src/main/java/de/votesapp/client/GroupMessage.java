@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class GroupMessage {
 
-	public static GroupMessage messageOf(final String groupId, final String text) {
+	public static GroupMessage of(final String groupId, final String text) {
 		return new GroupMessage(null, groupId, null, text);
 	}
 

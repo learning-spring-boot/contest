@@ -61,4 +61,9 @@ public class Group {
 		userAttitude.putIfAbsent(user, Attitude.UNKOWN);
 		userAdditionals.putIfAbsent(user, 0);
 	}
+
+	public void resetVotes() {
+		userAttitude.replaceAll((k, v) -> Attitude.UNKOWN);
+		userAdditionals.replaceAll((k, v) -> 0);
+	}
 }

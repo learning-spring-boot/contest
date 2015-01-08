@@ -21,6 +21,8 @@ public class HumanMessageParser {
 
 	static final String[] DEFAULT_UNKOWN = { "maybe", "vielleicht" };
 
+	static final String[] DEFAULT_RESETS = { "reset", "neu", "zurücksetzten", "neustarten", "start", "starten", "begin" };
+
 	/**
 	 * Matches +1, +2, +42, -1, -40, but not 1, 2, 0, ...
 	 */
@@ -31,17 +33,20 @@ public class HumanMessageParser {
 	private final String[] positives;
 	private final String[] negatives;
 	private final String[] unkowns;
+	private final String[] resets;
 
 	public HumanMessageParser() {
 		this.positives = DEFAULT_POSITIVES;
 		this.negatives = DEFAULT_NEGATIVES;
 		this.unkowns = DEFAULT_UNKOWN;
+		this.resets = DEFAULT_RESETS;
 	}
 
-	public HumanMessageParser(final String[] positives, final String[] negatives, final String[] unkowns) {
+	public HumanMessageParser(final String[] positives, final String[] negatives, final String[] unkowns, final String[] resets) {
 		this.positives = positives;
 		this.negatives = negatives;
 		this.unkowns = unkowns;
+		this.resets = resets;
 	}
 
 	public Optional<Command> parse(final String rawText) {
@@ -60,6 +65,11 @@ public class HumanMessageParser {
 		final Optional<StatusRequest> statusRequest = extractStatusRequest(text);
 		if (statusRequest.isPresent()) {
 			return Optional.of(Command.of(statusRequest.get()));
+		}
+
+		final boolean requestCommand = extractResetCommand(text);
+		if (requestCommand) {
+			return Optional.of(Command.of(true));
 		}
 
 		return Optional.empty();
@@ -112,6 +122,13 @@ public class HumanMessageParser {
 		} else {
 			return Optional.of(StatusRequest.plain());
 		}
+	}
+
+	private boolean extractResetCommand(final String text) {
+		if (textEqualsOneOf(text, resets)) {
+			return true;
+		}
+		return false;
 	}
 
 	private boolean textEqualsOneOf(final String text, final String[] possibilities) {

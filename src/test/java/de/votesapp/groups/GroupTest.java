@@ -10,7 +10,6 @@ import java.util.Map;
 
 import org.junit.Test;
 
-import de.votesapp.groups.Group;
 import de.votesapp.parser.Attitude;
 
 public class GroupTest {
@@ -44,5 +43,23 @@ public class GroupTest {
 		assertThat(sumAttitudes.get(POSITIVE), is(3));
 		assertThat(sumAttitudes.get(NEGATIVE), is(1));
 		assertThat(sumAttitudes.get(UNKOWN), is(0));
+	}
+
+	@Test
+	public void should_reset_votes() throws Exception {
+		final Group group = new Group("foo");
+
+		group.registerAttitude("a", POSITIVE);
+		group.registerAttitude("b", NEGATIVE);
+		group.registerAttitude("c", UNKOWN);
+		group.registerAdditionals("a", 2);
+
+		group.resetVotes();
+
+		final Map<Attitude, Integer> sumAttitudes = group.sumAttitudes();
+
+		assertThat(sumAttitudes.get(POSITIVE), is(0));
+		assertThat(sumAttitudes.get(NEGATIVE), is(0));
+		assertThat(sumAttitudes.get(UNKOWN), is(3));
 	}
 }

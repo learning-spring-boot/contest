@@ -13,8 +13,9 @@ public class HumanMessageParserTest {
 	private final String[] positives = HumanMessageParser.DEFAULT_POSITIVES;
 	private final String[] negatives = HumanMessageParser.DEFAULT_NEGATIVES;
 	private final String[] unkowns = HumanMessageParser.DEFAULT_UNKOWN;
+	private final String[] resets = HumanMessageParser.DEFAULT_RESETS;
 
-	HumanMessageParser humanMessageParser = new HumanMessageParser(positives, negatives, unkowns);
+	HumanMessageParser humanMessageParser = new HumanMessageParser(positives, negatives, unkowns, resets);
 
 	@Test
 	public void should_be_quite_on_normal_test() throws Exception {
@@ -67,6 +68,16 @@ public class HumanMessageParserTest {
 		for (final String unkown : unkowns) {
 			assertThat(humanMessageParser.parse(unkown), //
 					is(Optional.of(Command.of(Attitude.UNKOWN))));
+		}
+	}
+
+	@Test
+	public void should_find_all_resets() throws Exception {
+		for (final String reset : resets) {
+			assertThat(humanMessageParser.parse(reset), //
+					is(Optional.of(Command.of(true))));
+			// true will be translated into an "reset"-command. That becomes
+			// more readable when we use inheritance
 		}
 	}
 
