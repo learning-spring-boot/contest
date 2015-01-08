@@ -5,7 +5,7 @@
 The central part of the application is the *Polaromatic* App built with _Spring Boot_. We also use _Spring Integration_
 to decouple the application from all the unnecessary boilerplate code needed to read files from the file system and to
 define the flow of the information in the system.
-From our application point of view we define a POGO that is going to be called by the _infrastructure_
+From our application's point of view we define a POGO that is going to be called by the _infrastructure_
 (Spring Integration) and we are just going to receive a `File`.
 
 To achieve this we use a `File Inbound Channel Adapter` from Spring Integration that is going to monitor a directory

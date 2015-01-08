@@ -29,7 +29,7 @@ image::polaromatic-flow.png[align=center, title=Application flow]
 . Then, if you just copy some photos into the work directory, they are processed by the Spring Integration flow
 inside the _Polaromatic_ application, converted to a cool Polaroid photo with a text and finally pushed to the
 browser using Websockets.
-. A _Flickr Interesing_ photos downloader as been created has a _Spring Boot CLI Application_ to download automatically
-photos every 60 seconds.
+. A _Flickr Interesing_ photos downloader as been created as a _Spring Boot CLI Application_ to download automatically
+photos every 30 seconds.
 . The other way to publish photos is using the _Polaromatic Android Application_ and share a photo using the application.
 
