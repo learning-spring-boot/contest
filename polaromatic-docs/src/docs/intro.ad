@@ -8,8 +8,8 @@ http://blog.greglturnquist.com/2014/12/announcing-learningspringboot-contest-cc-
 contest by https://twitter.com/gregturn[Greg Turnquist^] and *Polaromatic* source code is available at my Github
 account: https://github.com/lmivan/contest[https://github.com/lmivan/contest^].
 
-image::polaromatic-app.jpg[align=center]
 
+image::polaromatic-app.jpg[align=center, title=Polaromatic with some photos Polaromatized]
 
 
 === Application flow
@@ -23,7 +23,7 @@ method you can also customize the text in the Polaroid.
 
 This flow is explained in detail in the following sections of the documentation.
 
-image::polaromatic-flow.png[align=center]
+image::polaromatic-flow.png[align=center, title=Application flow]
 
 . From a browser you connect to _Polaromatic_ and just wait.
 . Then, if you just copy some photos into the work directory, they are processed by the Spring Integration flow

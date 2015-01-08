@@ -9,7 +9,7 @@ Polaromatic web.
 
 This is my first Android application and it has been fun to create it using Groovy.
 
-image::polaromatic-android.jpg[align=center]
+image::polaromatic-android.jpg[align=center, title=Sharing a photo from the Polaromatic Android app with the web]
 
 TIP: Please be sure to configure in the _Settings_ option the url in which you have deployed your Polaromatic server or
 use the default demo environment.
