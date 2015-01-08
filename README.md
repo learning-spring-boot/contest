@@ -17,6 +17,27 @@ This project was triggered because of the [Spring Boot Contest](https://github.c
 
 So if you are interested in the huzzle we had, have a look :)
 
+## 07.01.2015 - Hello Reactor? Can we vote?
+As usual there is a good news and a bad news. Let's start with the bad, because we learned that the last thing you tell stays in our minds :)
+
+Bad News: We are still some huzzle with the Python Backend. But we think we can finish it by tomorrow and then fully concentrate on the contest`s goal!
+
+Good News: To avoid having nothing by now, we added a simple ["ConsoleClient"](src/main/java/de/votesapp/client/ConsoleClient.java) to fake the WhatsApp Service. That gets loaded when the "yowsup" Profile isn't active. For this we utilized the `!` operator within the `@Profile`-Annotation.
+
+![Image of Not in Profiles](diary/notInProfile.png)
+
+With this we can have our first vote, which proofs that some logic is already working:
+
+![Image of our first vote](diary/succedInTheContest.png)
+
+To do so, we decided to remove the interfaces we had previously between our API and WhatsApp and use [reactor](https://github.com/reactor/reactor) instead.
+
+The ["Bridge"](src/main/java/de/votesapp/api/WhatsAppClientToReactorBridge.java) between our ["ConsoleClient"](src/main/java/de/votesapp/client/ConsoleClient.java) and Reactor looks like this:
+
+![Reactor Example](diary/reactorExample.png)
+
+We are looking forward to do more stuff on the Java site within the next days.
+
 ## 04.01.2015 - Parallelprogramming (!= Pairprogramming)
 Two days ago we met again on an epic go cart event and we had some time to discuss the next steps. We figured out that the yowsup architecture seems to be pretty nice (in terms of flexibility and readability). So we decided that we take the risk, drop Plan A (from 31.12.) and implement "only" a nice Rest-API on top off yowsup. With this the actual Java Code, what the contest is about, stays much cleaner.
 

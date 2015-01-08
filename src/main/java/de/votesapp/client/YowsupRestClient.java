@@ -24,9 +24,7 @@ public class YowsupRestClient implements WhatsAppClient {
 	}
 
 	@Override
-	public void sendGroupMessage(final String groupId, final String text) {
-		final GroupMessage messageToSend = GroupMessage.messageOf(groupId, text);
-
+	public void sendGroupMessage(final GroupMessage messageToSend) {
 		// WhatsApp won't return the unique messages IDs, so we don't receive a
 		// resource ID for that.
 		restTemplate.postForEntity(baseUrl + "/groupMessage", messageToSend, Void.class);

@@ -5,28 +5,38 @@ import java.util.Optional;
 
 import lombok.extern.slf4j.Slf4j;
 
-import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Autowired;
 
-import de.votesapp.api.VotesAppReceiveApi;
-import de.votesapp.api.VotesAppSendApi;
+import reactor.core.Reactor;
+import reactor.event.Event;
+import reactor.spring.annotation.Consumer;
+import reactor.spring.annotation.Selector;
 import de.votesapp.client.GroupMessage;
 import de.votesapp.parser.Attitude;
 import de.votesapp.parser.Command;
 import de.votesapp.parser.HumanMessageParser;
 import de.votesapp.parser.StatusRequest;
 
-@Component
+@Consumer
 @Slf4j
-public class GroupMessageListener implements VotesAppReceiveApi {
+public class GroupMessageListener {
 
-	private HumanMessageParser parser;
+	private final HumanMessageParser parser;
 
-	private VotesAppSendApi sender;
+	private final GroupService groupService;
 
-	private GroupService groupService;
+	private final Reactor reactor;
 
-	@Override
-	public void onGroupReceiveMessage(final GroupMessage message) {
+	@Autowired
+	public GroupMessageListener(final HumanMessageParser parser, final GroupService groupService, final Reactor reactor) {
+		this.parser = parser;
+		this.groupService = groupService;
+		this.reactor = reactor;
+	}
+
+	@Selector(value = "group.inbox", reactor = "@rootReactor")
+	public void onGroupReceiveMessage(final Event<GroupMessage> evt) {
+		final GroupMessage message = evt.getData();
 		final Optional<Command> command = parser.parse(message.getText());
 
 		if (command.isPresent() == false) {
@@ -57,11 +67,10 @@ public class GroupMessageListener implements VotesAppReceiveApi {
 		final StringBuilder statusMessage = new StringBuilder();
 
 		final Map<Attitude, Integer> sumAttitudes = group.sumAttitudes();
-		statusMessage.append("*thumb_up*: ").append(sumAttitudes.get(Attitude.POSITIVE));
-		statusMessage.append("*thumb_down*: ").append(sumAttitudes.get(Attitude.NEGATIVE));
-		statusMessage.append("*questionmark*: ").append(sumAttitudes.get(Attitude.UNKOWN));
+		statusMessage.append("*thumb_up*: ").append(sumAttitudes.get(Attitude.POSITIVE)).append("\n");
+		statusMessage.append("*thumb_down*: ").append(sumAttitudes.get(Attitude.NEGATIVE)).append("\n");
+		statusMessage.append("*questionmark*: ").append(sumAttitudes.get(Attitude.UNKOWN)).append("\n");
 
-		sender.sendGroupMessage(group.getGroupId(), statusMessage.toString());
+		reactor.notify("group.outbox", Event.wrap(GroupMessage.messageOf(group.getGroupId(), statusMessage.toString())));
 	}
-
 }
