@@ -37,7 +37,8 @@ dependencies {
     compile("com.google.code.findbugs:jsr305:3.0.0")
     compile("org.apache.commons:commons-lang3:3.3.2")
     compile("org.projectreactor:reactor-core:1.1.5.RELEASE")
-	compile("org.projectreactor:reactor-spring:1.0.1.RELEASE")    
+	compile("org.projectreactor:reactor-spring:1.0.1.RELEASE")
+	compile("com.github.fakemongo:fongo:1.5.9")    
     
     testCompile("org.springframework.boot:spring-boot-starter-test")
 }
