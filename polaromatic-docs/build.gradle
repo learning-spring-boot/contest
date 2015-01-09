@@ -1,8 +1,4 @@
 buildscript {
-    repositories {
-        jcenter()
-    }
-
     dependencies {
         classpath 'org.asciidoctor:asciidoctor-gradle-plugin:1.5.2'
     }
@@ -17,9 +13,4 @@ asciidoctor {
     attributes 'source-highlighter': 'coderay',
                 toc                : 'left',
                 icons              : 'font'
-}
-
-
-task wrapper(type: Wrapper) {
-    gradleVersion = '2.2.1'
 }
