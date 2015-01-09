@@ -1,4 +1,4 @@
-# ![Image of our Solution](diary/onair.png)[ON AIR] until 17.01.2015 -  √ote for S2-Team
+# ![Image of our Solution](diary/onair.png)[ON AIR] until 17.01.2015 -  √ote for S2
 The project is started for the [Spring Boot Contest](https://github.com/learning-spring-boot/contest). To support us please
 
 * "Star" the Repository and/or
