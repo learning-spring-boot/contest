@@ -25,6 +25,10 @@ include::android-app.ad[]
 
 <<<
 
+include::installation.ad[]
+
+<<<
+
 include::tech-stack.ad[]
 
 <<<

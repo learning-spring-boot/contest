@@ -2,14 +2,15 @@
 
 The technological stack of the *Polaromatic* applications has one thing in common: http://groovy-lang.org/[Groovy^].
 
-image::groovy-logo.png[align=center,link=http://groovy-lang.org/,width=250]
+image::groovy-logo.png[align=center,link=http://groovy-lang.org/,width=300]
 
 I'm a very big fan of Groovy so I used it for the whole stack :-)
 
 - *Polaromatic*: All the Spring Boot code is Groovy.
 - *FlickrDownloader:* A Spring Boot CLI Application can only be written with Groovy.
-- *Android app*: My first Android app, so the best way to built it is to use Groovy.
+- *Android app*: My first Android app, so the best way to built it is to use Groovy now that it's finally possible.
 - *Tests*: I use http://www.spockframework.org[Spock^] for the Polaromatic tests.
 - *HTML*: The html of Polaromatic web is built with the new
 http://beta.groovy-lang.org/docs/latest/html/documentation/markup-template-engine.html[MarkupTemplateEngine^]
 introduced in Groovy 2.3.
+- *Build Tool*: I've created a http://www.gradle.org/[Gradle^] multi-project to build the different projects: back, grooid and documentation.

@@ -1,0 +1,97 @@
+== Build and installation
+
+If you want to install Polaromatic in your own server, make some changes to the code, test some new things,... you need
+to build it.
+
+First please clone the repository (and if you like the project please star-it on Github):
+
+[source,bash]
+----
+git clone https://github.com/lmivan/contest.git
+cd contest
+----
+
+=== Polaromatic
+
+Polaromatic back is a standard Spring Boot application so the only thing you need to do is execute it:
+
+[source,bash]
+----
+./gradlew polaromatic-back:bootRun
+----
+
+Or if your prefer you can build it and create an executable jar file:
+
+[source,bash]
+----
+./gradlew polaromatic-back:build
+----
+
+WARNING: You need to have _ImageMagick_ installed in your system to pass the tests and to apply the Polaroid effect
+(see below).
+
+Or just build the jar file without execute the tests:
+
+[source,bash]
+----
+./gradlew polaromatic-back:build -x test
+----
+
+=== FlickDownloader
+
+You need to install Spring Boot CLI. The easy way to do this is with http://gvmtool.net/[GVM^]. Once you have it
+installed you can just run:
+
+[source,bash]
+----
+cd polaromatic-back
+spring run FlickrDownloader.groovy
+----
+
+
+=== Android
+
+If this is the first time you develop for Android or if you haven't installed the Android SDK, the easy way to setup
+everything is using http://developer.android.com/sdk/index.html[Android Studio^]. Download, install it and then import
+the `polaromatic-grooid/build.gradle` file as a _Non-Android Studio project_. This will download the necessary Sdk
+files and Android build tools.
+
+Once you have everything installed you can just set your android home and then build the .apk file (or just install it
+in your phone directly using Android Studio).
+
+[source,bash]
+----
+# Set your own path
+export ANDROID_HOME=/home/ivan/Android/Sdk/
+
+./gradlew polaromatic-grooid:build
+----
+
+=== Documentation
+
+This documentation is created using http://asciidoctor.org/[AsciiDoctor^]. To build the documentation just execute:
+
+[source,bash]
+----
+./gradlew polaromatic-docs:asciidoctor
+----
+
+The documentation is available in `polaromatic-docs/build/docs/html5/index.html`
+
+
+=== Dependencies
+
+For the image conversion you need to have _ImageMagick_ installed in your system. If you use Linux Mint/Debian/Ubuntu
+you only need to execute:
+
+[source,bash]
+----
+sudo apt-get install imagemagick
+----
+
+
+=== Tips & Tricks
+
+If you are not interested in developing the Android application and do not want to download and configure Android SDK
+you can exclude the project from the Gradle build.
+Edit `setting.gradle` and remove (or comment) the project `polaromatic-grooid`.
