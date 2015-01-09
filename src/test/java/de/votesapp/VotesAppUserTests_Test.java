@@ -16,6 +16,9 @@ import reactor.core.Reactor;
 import reactor.event.Event;
 import reactor.event.selector.Selectors;
 import de.votesapp.client.GroupMessage;
+import de.votesapp.groups.Group;
+import de.votesapp.groups.GroupService;
+import de.votesapp.parser.Attitude;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = VotesAppApplication.class)
@@ -26,6 +29,22 @@ public class VotesAppUserTests_Test {
 
 	@Autowired
 	Reactor reactor;
+
+	@Autowired
+	GroupService groupService;
+
+	@Test
+	public void should_regonize_a_vote() throws InterruptedException {
+
+		reactor.notify("group.inbox", Event.wrap(new GroupMessage("0", "Test", "490000", "Yes")));
+
+		// TODO: Don't know how to wait until the event is processed?
+		Thread.sleep(1000);
+
+		final Group group = groupService.createOrLoadGroup("Test");
+
+		assertThat(group.getUserAttitude().get("490000"), is(Attitude.POSITIVE));
+	}
 
 	@Test(timeout = 1_000)
 	public void some_positive_and_negative_votes() throws InterruptedException {

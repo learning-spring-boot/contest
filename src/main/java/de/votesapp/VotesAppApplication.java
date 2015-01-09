@@ -50,6 +50,5 @@ public class VotesAppApplication {
 		protected String getMappingBasePackage() {
 			return "de.votesapp";
 		}
-
 	}
 }
