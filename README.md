@@ -1,4 +1,21 @@
-# VotesApp [![Build Status](https://travis-ci.org/s2team/contest.svg?branch=master)](https://travis-ci.org/s2team/contest)
+# ![Image of our Solution](diary/onair.png)[ON AIR] until 17.01.2015 -  √ote for S2-Team
+The project is started for the [Spring Boot Contest](https://github.com/learning-spring-boot/contest). To support us please
+
+* "Star" the Repository and/or
+* Tweet about it using the #VotesApp HashTag
+
+It is submitted by [@d0x (Christian Schneider)](https://github.com/d0x) and [@walery (Walery Strauch)](https://github.com/walery). If you have any ideas or feedback, contact us on Twitter or open a ticket on github.
+
+During the contest we write a small [diary](https://github.com/s2team/contest#the-votesapp-diary) and maintain a [trello board for this project](https://trello.com/b/VzijoLhr/votesapp).
+If you are really interested in recent updates, you *could* add this `crontab` :)
+
+```bash
+crontab -l | { cat; echo "0 13 * * * firefox https://github.com/s2team/contest#the-votesapp-diary"; } | crontab -
+```
+
+Thank you for any kind of support! - S2.
+
+# About VotesApp [![Build Status](https://travis-ci.org/s2team/contest.svg?branch=master)](https://travis-ci.org/s2team/contest)
 **VotesApp** is a *WhatsApp* Bot that helps you and your friends to organize Votes in *WhatsApp* groups.
 
 As *WhatsApp* User the probability that you have a group together with some friends is quite huge. If not try it, it's a great feature. And when you are in a group like, it will happend that someone asks a question like, *Who likes to join Karting on Saturday?*, or *Whats about pizza today after work?*. Maybe you have such voting once a week for a fixed event like playing soccer in the evinig? Then it becomes quite hard to manage this.
@@ -16,6 +33,63 @@ To try it, add VotesApp (+4915xxxxx *will be listed when the service is ready*) 
 This project was triggered because of the [Spring Boot Contest](https://github.com/learning-spring-boot/contest). To keep the judges up to date and show them why we decided like this on some points, we try to keep the diary up to date.
 
 So if you are interested in the huzzle we had, have a look :)
+
+## 08.01.2015 - Ping? Pong! - Feature Request :)
+Today evening we meet again and summarized the current status.
+
+On the Python we still need to tune some things before releasing it to public. But I can tell you, there is already some nice communication going on.
+
+On the Java we can show already some new things. Since we are using Reactor we also like to use it for our integration tests. The idea is to "replay" incomming WhatsApp Messages and then check the result. In a simple scenario we would like to test that when sending "ping", "pong" should be returned.
+
+```java
+@RunWith(SpringJUnit4ClassRunner.class)
+@SpringApplicationConfiguration(classes = VotesAppApplication.class)
+@WebAppConfiguration
+public class VotesAppApplicationTest {
+
+  @Autowired
+  Reactor reactor;
+
+  @Test
+  public void ping_pong_test() throws InterruptedException {
+    reactor.notify("group.inbox", Event.wrap("Ping"));
+
+    // If the integration works well, the business logic should answer with "Pong" to "group.outbox"
+
+    // does not exist like this (yet :( )
+    assertThat(reactor, receives("Pong").in("group.outbox"));
+  }
+}
+```
+
+When doing so we haven't found an *elegant* way to `assertThat` a `GroupMessage`-Event was raised.
+The cool thing is that the authors @smaldini and @jbrisbin [liked the Idea](https://github.com/reactor/reactor/issues/415#issuecomment-69263171) and we will maybe see it in some time.
+Until then we are doing it with some `obj.notify()` and `obj.wait()` magic in our [integration test](src/test/java/de/votesapp/VotesAppUserTests_Test.java)
+
+Another neat experience we had was the integration of an embedded mongodb for our integration tests.
+
+The only change we need made was adding this dependency `com.github.fakemongo:fongo:1.5.9` and putting the following configuration for our tests:
+```java
+@Configuration
+static class MongoDbTestConfiguration extends AbstractMongoConfiguration {
+
+  @Override
+  protected String getDatabaseName() {
+    return "test";
+  }
+
+  @Override
+  public Mongo mongo() {
+    return new Fongo("mongo").getMongo();
+  }
+
+  @Override
+  protected String getMappingBasePackage() {
+    return "de.votesapp";
+  }
+}
+```
+Because we currently don't need a real database, we decided to put it into the main configuration as long as we haven't finished the database integration and deployed it to p.
 
 ## 07.01.2015 - Hello Reactor? Can we vote?
 As usual there is a good news and a bad news. Let's start with the bad one, because we learned that the last thing you, tell stays in our minds :)
