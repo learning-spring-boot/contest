@@ -31,6 +31,8 @@ Another cool thing about Spring Boot is that you can define you own custom metri
 see in the previous application flow, the step 5 is to update the metrics. We count the number of photos processed from
 Flickr and from the Android application and expose this numbers in the `/metrics` endpoint.
 
+You can check it using the demo environment: http://polaromatic.noip.me/metrics[http://polaromatic.noip.me/metrics^]
+
 [source,json,indent=0]
 ----
 {
