@@ -23,7 +23,9 @@ dependencies {
     compile 'org.springframework.boot:spring-boot-starter-integration'
     compile 'org.springframework.boot:spring-boot-starter-web'
     compile 'org.springframework.boot:spring-boot-starter-websocket'
-    compile "org.codehaus.groovy:groovy-all:2.4.0-rc-1"
+    compile 'org.springframework.boot:spring-boot-starter-actuator'
+
+    compile 'org.codehaus.groovy:groovy-all:2.4.0-rc-1'
     compile 'org.im4java:im4java:1.4.0'
 
     compile 'org.webjars:sockjs-client:0.3.4-1'
