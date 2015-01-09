@@ -21,7 +21,25 @@ include::{polaromaticBackResources}/resources.xml[tags=appFlow]
 <2> Preprocess the file received
 <3> Apply the Polaroid effect
 <4> Send the new photo to the browser using Websockets
-<5> Delete all temporary files
+<5> Update the metrics
+<6> Delete all temporary files
+
+
+==== Custom metrics
+
+Another cool thing about Spring Boot is that you can define you own custom metrics inside your application. As you can
+see in the previous application flow, the step 5 is to update the metrics. We count the number of photos processed from
+Flickr and from the Android application and expose this numbers in the `/metrics` endpoint.
+
+[source,json,indent=0]
+----
+{
+    ...
+    counter.polaromatized.photos.flickr: 152,
+    counter.polaromatized.photos.android: 42,
+    ...
+}
+----
 
 
 === Spring Boot CLI

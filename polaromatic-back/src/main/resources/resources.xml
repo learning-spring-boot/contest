@@ -28,7 +28,8 @@
         <service-activator ref="fileService" method="preprocessFile"/> <!--2-->
         <service-activator ref="imageConverterService" method="applyEffect"/> <!--3-->
         <service-activator ref="browserPushService" method="pushToBrowser"/> <!--4-->
-        <service-activator ref="fileService" method="deleteTempFiles"/> <!--5-->
+        <service-activator ref="metricsService" method="updateMetrics"/> <!--5-->
+        <service-activator ref="fileService" method="deleteTempFiles"/> <!--6-->
     </chain>
     <!-- end::appFlow[]-->
 
