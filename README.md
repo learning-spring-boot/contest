@@ -1,4 +1,4 @@
-# ![Image of our Solution](diary/onair.png)[ON AIR] until 17.01.2015 -  √ote for S2
+# ![Image of our Solution](diary/onair.png)[ON AIR] until 17.01.2015 -  √ote for s2
 The project is started for the [Spring Boot Contest](https://github.com/learning-spring-boot/contest). To support us please
 
 * "Star" the Repository and/or
@@ -13,7 +13,7 @@ If you are really interested in recent updates, you *could* add this `crontab` :
 crontab -l | { cat; echo "0 13 * * * firefox https://github.com/s2team/contest#the-votesapp-diary"; } | crontab -
 ```
 
-Thank you for any kind of support! - S2.
+Thank you for any kind of support! - s2.
 
 # About VotesApp [![Build Status](https://travis-ci.org/s2team/contest.svg?branch=master)](https://travis-ci.org/s2team/contest)
 **VotesApp** is a *WhatsApp* Bot that helps you and your friends to organize Votes in *WhatsApp* groups.
