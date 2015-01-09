@@ -11,7 +11,7 @@ html {
          'webjars/stomp-websocket/2.3.1-1/stomp.min.js',
          'webjars/jquery/2.1.3/jquery.min.js',
          'webjars/handlebars/2.0.0-1/handlebars.min.js',
-         'js/app.js']
+         'js/Connection.js']
         .each {
             yieldUnescaped "<script src='$it'></script>"
         }
@@ -44,5 +44,5 @@ html {
         }
     }
 
-    yieldUnescaped "<script>connect()</script>"
+    yieldUnescaped "<script>Connection().start()</script>"
 }

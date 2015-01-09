@@ -4,12 +4,14 @@ buildscript {
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath "org.grooscript:grooscript-gradle-plugin:0.9"
     }
 }
 
 apply plugin: 'groovy'
 apply plugin: 'idea'
 apply plugin: 'spring-boot'
+apply plugin: 'org.grooscript.conversion'
 
 jar {
     baseName = 'polaromatic'
@@ -33,8 +35,18 @@ dependencies {
     compile 'org.webjars:jquery:2.1.3'
     compile 'org.webjars:handlebars:2.0.0-1'
     compile 'org.codehaus.groovy:groovy-templates:2.4.0-rc-1'
+    compile 'org.grooscript:grooscript:1.0.0-rc-1'
 
     testCompile 'org.springframework.boot:spring-boot-starter-test'
     testCompile 'org.spockframework:spock-core:0.7-groovy-2.0'
     testCompile 'cglib:cglib-nodep:3.1'
 }
+
+grooscript {
+    source = ['src/main/grooscript/polaromatic']
+    destination = 'src/main/resources/static/js'
+    addGsLib = 'grooscript.min'
+    mainContextScope = ['$', 'gs']
+}
+
+bootRun.dependsOn convert
