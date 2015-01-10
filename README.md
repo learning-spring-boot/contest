@@ -34,6 +34,23 @@ This project was triggered because of the [Spring Boot Contest](https://github.c
 
 So if you are interested in the huzzle we had, have a look :)
 
+## 10.01.2015 - Python brings us back to the basics
+**Yes!** We made Yowsup ready to use from our java backend. Here is a screenshot of the communication we did today:
+
+![Image of our first messages](diary/yowsupFiler.png)
+
+We are not quite proud that we need to use FileIO to send and receive messages, but thats the limitation we have by yowsup and our python skills.
+
+In the last days we were learning some Python and understanding the Yowsup architecture (which is really great!). We tried to add a ReST Server to yowsup. Finally we regonized that the communication between WhatsApp and Yowsup stopped working when spinning up the [Bottle Rest Server](http://bottlepy.org/).
+
+Because we don't have more time to get more deep into python, we decided to use JSON-Files to instead of an REST server for now. The result should look like this:
+
+![Image of our file Solution](diary/fileSolution.jpeg)
+
+The goal is to keep the VotesApp solution (which we submit) on clean. It will not have anything todo with the file io that happens on the right side (because yowsup doesn't have the rest interface yet). If you are intereseted in the python code we added you can find it in [this](https://github.com/s2team/yowsup/commit/2b24d3fa4ea1b7f821924a48b7ef60084519553e) commit. But don't take it as an best practice example :).
+
+Now we "only" need to build the middle application what will be not that hard.
+
 ## 08.01.2015 - Ping? Pong! - Feature Request :)
 Today evening we meet again and summarized the current status.
 
