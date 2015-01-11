@@ -17,7 +17,13 @@ public class MercuryMessage<T extends Request> {
 	private Status status;
 	@JsonView(View.Summary.class)
 	private String errorMesssage;
-	private final T request;
+	private T request;
+
+	/**
+	 * Public no-arg controller required by Spring Hateoas
+	 */
+	public MercuryMessage() {
+	}
 
 	private MercuryMessage(Status status, T request) {
 		this.status = status;

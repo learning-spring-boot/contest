@@ -11,7 +11,8 @@ class SendMailRequest extends Request {
 	private final String subject;
 
 	@JsonCreator
-	public SendMailRequest(@JsonProperty("to") String to, @JsonProperty("content") String content,
+	public SendMailRequest(@JsonProperty("to") String to,
+						   @JsonProperty("content") String content,
 						   @JsonProperty("subject") String subject) {
 		this.to = to;
 		this.content = content;
@@ -33,6 +34,7 @@ class SendMailRequest extends Request {
 	public SimpleMailMessage toMailMessage() {
 		SimpleMailMessage msg = new SimpleMailMessage();
 		msg.setTo(to);
+		msg.setSubject(subject);
 		msg.setText(content);
 
 		return msg;
