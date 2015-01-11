@@ -50,3 +50,4 @@ grooscript {
 }
 
 bootRun.dependsOn convert
+build.dependsOn convert
