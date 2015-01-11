@@ -43,8 +43,8 @@ dependencies {
 }
 
 grooscript {
-    source = ['src/main/grooscript/polaromatic']
-    destination = 'src/main/resources/static/js'
+    source = ['polaromatic-back/src/main/grooscript/polaromatic']
+    destination = 'polaromatic-back/src/main/resources/static/js'
     addGsLib = 'grooscript.min'
     mainContextScope = ['$', 'gs']
 }
