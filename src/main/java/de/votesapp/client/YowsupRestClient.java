@@ -1,5 +1,8 @@
 package de.votesapp.client;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Profile;
@@ -27,7 +30,12 @@ public class YowsupRestClient implements WhatsAppClient {
 	public void sendGroupMessage(final GroupMessage messageToSend) {
 		// WhatsApp won't return the unique messages IDs, so we don't receive a
 		// resource ID for that.
-		restTemplate.postForEntity(baseUrl + "/groupMessage", messageToSend, Void.class);
+
+		final Map<String, String> message = new HashMap<>();
+		message.put("to", messageToSend.getGroupId());
+		message.put("text", messageToSend.getText());
+
+		restTemplate.postForEntity(baseUrl + "/messages/outbox", message, Void.class);
 	}
 
 	/**
@@ -35,7 +43,7 @@ public class YowsupRestClient implements WhatsAppClient {
 	 */
 	@Override
 	public GroupMessage[] fetchGroupMessages() {
-		final GroupMessage[] messages = restTemplate.getForObject(baseUrl + "/groupMessage", GroupMessage[].class);
+		final GroupMessage[] messages = restTemplate.getForObject(baseUrl + "/messages/inbox", GroupMessage[].class);
 
 		deleteMessages(messages);
 
@@ -44,7 +52,7 @@ public class YowsupRestClient implements WhatsAppClient {
 
 	private void deleteMessages(final GroupMessage... messages) {
 		for (final GroupMessage msg : messages) {
-			restTemplate.delete(baseUrl + "/groupMessage/{id}", msg.getId());
+			restTemplate.delete(baseUrl + "/messages/inbox/{id}", msg.getId());
 		}
 	}
 

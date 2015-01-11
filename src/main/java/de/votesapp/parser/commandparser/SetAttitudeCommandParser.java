@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import reactor.core.Reactor;
+import reactor.event.Event;
 import de.votesapp.client.GroupMessage;
 import de.votesapp.groups.Group;
 import de.votesapp.parser.Attitude;
@@ -46,6 +47,8 @@ public class SetAttitudeCommandParser extends AbstractCommandParser {
 		@Override
 		public void execute(final GroupMessage message, final Group group, final Reactor reactor) {
 			group.registerAttitude(message.getSender(), attitude);
+
+			reactor.notify("group.outbox", Event.wrap(GroupMessage.of(group.getGroupId(), "Added " + attitude + " vote")));
 		}
 	}
 }

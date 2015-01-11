@@ -6,6 +6,10 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * Represents a Messages that got sent inside a group.
  */
@@ -18,6 +22,13 @@ public class GroupMessage {
 
 	public static GroupMessage of(final String groupId, final String text) {
 		return new GroupMessage(null, groupId, null, text);
+	}
+
+	@JsonIgnoreProperties(ignoreUnknown = true)
+	@JsonCreator
+	public static GroupMessage of(@JsonProperty("_id") final String id, @JsonProperty("_from") final String groupId,
+			@JsonProperty("participant") final String sender, @JsonProperty("body") final String text) {
+		return new GroupMessage(id, groupId, sender, text);
 	}
 
 	/**

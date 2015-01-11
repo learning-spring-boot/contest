@@ -29,6 +29,10 @@ public class GroupMessageListenerTest {
 	}
 
 	@Test
+	public void testName() throws Exception {
+	}
+
+	@Test
 	public void should_save_to_db_when_no_command_is_given() {
 		when(groupService.createOrLoadGroup("TstGroup")).thenReturn(new Group("TstGroup"));
 		when(parser.parse("Hello World")).thenReturn(Optional.empty());

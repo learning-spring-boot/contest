@@ -1,2 +1,1 @@
-yowsup:
-	baseUrl: votesapp.de/api/
+yowsup.baseUrl: "http://localhost:8081/"

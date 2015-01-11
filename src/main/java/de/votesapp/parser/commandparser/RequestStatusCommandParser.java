@@ -60,9 +60,9 @@ public class RequestStatusCommandParser extends AbstractCommandParser {
 			final StringBuilder statusMessage = new StringBuilder();
 
 			final Map<Attitude, Integer> sumAttitudes = group.sumAttitudes();
-			statusMessage.append("*thumb_up*: ").append(sumAttitudes.get(Attitude.POSITIVE)).append("\n");
-			statusMessage.append("*thumb_down*: ").append(sumAttitudes.get(Attitude.NEGATIVE)).append("\n");
-			statusMessage.append("*questionmark*: ").append(sumAttitudes.get(Attitude.UNKOWN));
+			statusMessage.append("ð: ").append(sumAttitudes.get(Attitude.POSITIVE)).append("\n");
+			statusMessage.append("ð: ").append(sumAttitudes.get(Attitude.NEGATIVE)).append("\n");
+			statusMessage.append("â: ").append(sumAttitudes.get(Attitude.UNKOWN));
 
 			reactor.notify("group.outbox", Event.wrap(GroupMessage.of(group.getGroupId(), statusMessage.toString())));
 		}
