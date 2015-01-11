@@ -16,6 +16,6 @@ public class MailListenerTest {
 
 	@Test(expected = IllegalArgumentException.class)
 	public void should_throw_exception_for_null_message() {
-		mailListener.sendMail(null);
+		mailListener.onApplicationEvent(null);
 	}
 }

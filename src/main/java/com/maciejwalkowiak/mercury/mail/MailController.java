@@ -24,6 +24,6 @@ class MailController {
 
 	@RequestMapping(method = RequestMethod.POST)
 	public MercuryMessage send(@RequestBody SendMailRequest sendMailRequest) {
-		return messenger.publish(new SendMailMercuryMessage(MercuryMessage.Status.QUEUED, sendMailRequest));
+		return messenger.publish(sendMailRequest);
 	}
 }
