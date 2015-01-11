@@ -36,6 +36,7 @@ dependencies {
     compile("org.projectlombok:lombok:1.14.8") // sollen wir die version auslagen, wie in maven?
     compile("com.google.code.findbugs:jsr305:3.0.0")
     compile("org.apache.commons:commons-lang3:3.3.2")
+    compile("org.apache.httpcomponents:httpclient:4.3.6")
     compile("org.projectreactor:reactor-core:1.1.5.RELEASE")
 	compile("org.projectreactor:reactor-spring:1.0.1.RELEASE")
 	compile("com.github.fakemongo:fongo:1.5.9")    
