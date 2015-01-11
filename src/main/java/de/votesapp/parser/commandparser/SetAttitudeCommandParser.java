@@ -16,7 +16,7 @@ import de.votesapp.parser.Attitude;
 import de.votesapp.parser.Command;
 
 @Service
-public class SetAttitudeCommandParser extends AbstractCommandParser {
+public class SetAttitudeCommandParser extends AbstractCommandParser implements Describable {
 
 	public static final String[] DEFAULT_POSITIVES = { "in", "I'm in", "yes", "ja", "Bin dabei" };
 	public static final String[] DEFAULT_NEGATIVES = { "out", "no", "nope", "nein", "Bin nicht dabei", "Komme nicht" };
@@ -50,5 +50,25 @@ public class SetAttitudeCommandParser extends AbstractCommandParser {
 
 			reactor.notify("group.outbox", Event.wrap(GroupMessage.of(group.getGroupId(), "Added " + attitude + " vote")));
 		}
+	}
+
+	@Override
+	public String getName() {
+		return "Give a vote";
+	}
+
+	@Override
+	public String[] getTriggers() {
+		return new String[] { "yes", "no", "maybe", "..." };
+	}
+
+	@Override
+	public String getDescription() {
+		return "Either you give a vote or it will be counted as maybe.";
+	}
+
+	@Override
+	public int getPriority() {
+		return VOTE + 1;
 	}
 }

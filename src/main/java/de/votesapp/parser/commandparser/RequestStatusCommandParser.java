@@ -18,7 +18,7 @@ import de.votesapp.parser.Attitude;
 import de.votesapp.parser.Command;
 
 @Service
-public class RequestStatusCommandParser extends AbstractCommandParser {
+public class RequestStatusCommandParser extends AbstractCommandParser implements Describable {
 
 	private static Pattern STATUS = Pattern.compile("status ?(.+)?", Pattern.CASE_INSENSITIVE);
 
@@ -66,5 +66,25 @@ public class RequestStatusCommandParser extends AbstractCommandParser {
 
 			reactor.notify("group.outbox", Event.wrap(GroupMessage.of(group.getGroupId(), statusMessage.toString())));
 		}
+	}
+
+	@Override
+	public String getName() {
+		return "Status";
+	}
+
+	@Override
+	public String[] getTriggers() {
+		return new String[] { "Status" };
+	}
+
+	@Override
+	public String getDescription() {
+		return "Displays the status of the current vote";
+	}
+
+	@Override
+	public int getPriority() {
+		return VOTE + 3;
 	}
 }
