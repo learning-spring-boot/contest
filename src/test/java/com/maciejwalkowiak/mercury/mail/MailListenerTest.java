@@ -2,6 +2,7 @@ package com.maciejwalkowiak.mercury.mail;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.mail.MailSender;
 
 import static org.mockito.Mockito.mock;
@@ -11,7 +12,7 @@ public class MailListenerTest {
 
 	@Before
 	public void setUp() {
-		mailListener = new MailListener(mock(MailSender.class));
+		mailListener = new MailListener(mock(MailSender.class), mock(ApplicationEventPublisher.class));
 	}
 
 	@Test(expected = IllegalArgumentException.class)

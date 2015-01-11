@@ -12,7 +12,6 @@ class MessengerImpl implements Messenger {
 	@Autowired
 	MessengerImpl(ApplicationEventPublisher applicationEventPublisher, MercuryMessageRepository mercuryMessageRepository) {
 		this.applicationEventPublisher = applicationEventPublisher;
-
 		this.mercuryMessageRepository = mercuryMessageRepository;
 	}
 

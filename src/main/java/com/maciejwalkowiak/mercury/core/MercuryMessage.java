@@ -10,16 +10,20 @@ public class MercuryMessage<T extends Request> {
 
 	@Id
 	private String id;
-	private final Status status;
+	private Status status;
 	private final T request;
 
-	protected MercuryMessage(Status status, T request) {
+	private MercuryMessage(Status status, T request) {
 		this.status = status;
 		this.request = request;
 	}
 
 	public static <T extends Request> MercuryMessage queued(T request) {
 		return new MercuryMessage<>(Status.QUEUED, request);
+	}
+
+	public void sent() {
+		this.status = Status.SENT;
 	}
 
 	public Status getStatus() {

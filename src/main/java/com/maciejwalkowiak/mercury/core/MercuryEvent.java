@@ -13,4 +13,8 @@ public class MercuryEvent<T extends Request> extends ApplicationEvent {
 	public T getRequest() {
 		return mercuryMessage.getRequest();
 	}
+
+	public MercuryMessage<T> getMessage() {
+		return mercuryMessage;
+	}
 }

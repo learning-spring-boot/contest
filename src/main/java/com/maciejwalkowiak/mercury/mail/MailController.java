@@ -2,8 +2,6 @@ package com.maciejwalkowiak.mercury.mail;
 
 import com.maciejwalkowiak.mercury.core.MercuryMessage;
 import com.maciejwalkowiak.mercury.core.Messenger;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,8 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/mail")
 class MailController {
-	private static final Logger LOG = LoggerFactory.getLogger(MailController.class);
-
 	private final Messenger messenger;
 
 	@Autowired

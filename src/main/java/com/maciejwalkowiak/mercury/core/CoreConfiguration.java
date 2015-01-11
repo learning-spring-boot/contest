@@ -11,6 +11,9 @@ import org.springframework.core.task.SimpleAsyncTaskExecutor;
 @ComponentScan
 class CoreConfiguration {
 
+	/**
+	 * Provides asynchronous application event processing
+	 */
 	@Bean
 	ApplicationEventMulticaster applicationEventMulticaster() {
 		SimpleApplicationEventMulticaster eventMulticaster = new SimpleApplicationEventMulticaster();
