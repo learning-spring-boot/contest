@@ -54,7 +54,7 @@ public class VotesAppUserTests_Test {
 		// expect
 		reactor.on(Selectors.$("group.outbox"), e -> {
 			synchronized (reactor) {
-				success.compareAndSet(false, GroupMessage.of("Test", "*thumb_up*: 1\n*thumb_down*: 1\n*questionmark*: 2").equals(e.getData()));
+				success.compareAndSet(false, GroupMessage.of("Test", "ð: 1\nð: 1\nâ: 2").equals(e.getData()));
 				reactor.notifyAll();
 			}
 		});
@@ -83,7 +83,7 @@ public class VotesAppUserTests_Test {
 		// expect
 		reactor.on(Selectors.$("group.outbox"), e -> {
 			synchronized (reactor) {
-				success.compareAndSet(false, GroupMessage.of("Test", "*thumb_up*: 1\n*thumb_down*: 0\n*questionmark*: 3").equals(e.getData()));
+				success.compareAndSet(false, GroupMessage.of("Test", "ð: 1\nð: 0\nâ: 3").equals(e.getData()));
 				reactor.notifyAll();
 			}
 		});
@@ -92,7 +92,7 @@ public class VotesAppUserTests_Test {
 		reactor.notify("group.inbox", Event.wrap(new GroupMessage("0", "Test", "490000", "Hello There")));
 		reactor.notify("group.inbox", Event.wrap(new GroupMessage("1", "Test", "491111", "Yes")));
 		reactor.notify("group.inbox", Event.wrap(new GroupMessage("2", "Test", "492222", "No")));
-		reactor.notify("group.inbox", Event.wrap(new GroupMessage("3", "Test", "492222", "Reset")));
+		reactor.notify("group.inbox", Event.wrap(new GroupMessage("3", "Test", "492222", "Vote")));
 		reactor.notify("group.inbox", Event.wrap(new GroupMessage("4", "Test", "492222", "Yes")));
 		reactor.notify("group.inbox", Event.wrap(new GroupMessage("5", "Test", "493333", "Status")));
 

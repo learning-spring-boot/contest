@@ -21,18 +21,18 @@ public class YowsupRestClientTest {
 	public void should_delete_message_after_fetching() {
 		final MockRestServiceServer mockServer = MockRestServiceServer.createServer(restTemplate);
 
-		mockServer.expect(MockRestRequestMatchers.requestTo("base/groupMessage")) //
-		.andExpect(MockRestRequestMatchers.method(HttpMethod.GET)) //
-		.andRespond(MockRestResponseCreators.withSuccess("[{" + //
-				" \"id\" : \"42\", " + //
-				"\"group\" : \"41214214\", " + //
-				"\"sender\" : \"41214214\", " + //
-				"\"text\" : \"41214214\" " + //
-				"}]", MediaType.APPLICATION_JSON));
+		mockServer.expect(MockRestRequestMatchers.requestTo("base/messages/inbox")) //
+				.andExpect(MockRestRequestMatchers.method(HttpMethod.GET)) //
+				.andRespond(MockRestResponseCreators.withSuccess("[{" + //
+						" \"_id\" : \"42\", " + //
+						"\"_from\" : \"41214214\", " + //
+						"\"participant\" : \"41214214\", " + //
+						"\"body\" : \"41214214\" " + //
+						"}]", MediaType.APPLICATION_JSON));
 
-		mockServer.expect(MockRestRequestMatchers.requestTo("base/groupMessage/42")) //
-		.andExpect(MockRestRequestMatchers.method(HttpMethod.DELETE)) //
-		.andRespond(MockRestResponseCreators.withSuccess("", MediaType.APPLICATION_JSON));
+		mockServer.expect(MockRestRequestMatchers.requestTo("base/messages/inbox/42")) //
+				.andExpect(MockRestRequestMatchers.method(HttpMethod.DELETE)) //
+				.andRespond(MockRestResponseCreators.withSuccess("", MediaType.APPLICATION_JSON));
 
 		final GroupMessage[] messages = cut.fetchGroupMessages();
 

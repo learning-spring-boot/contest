@@ -26,8 +26,11 @@ public class GroupMessage {
 
 	@JsonIgnoreProperties(ignoreUnknown = true)
 	@JsonCreator
-	public static GroupMessage of(@JsonProperty("_id") final String id, @JsonProperty("_from") final String groupId,
-			@JsonProperty("participant") final String sender, @JsonProperty("body") final String text) {
+	public static GroupMessage of( //
+			@JsonProperty("_id") final String id, //
+			@JsonProperty("_from") final String groupId, //
+			@JsonProperty("participant") final String sender, //
+			@JsonProperty("body") final String text) {
 		return new GroupMessage(id, groupId, sender, text);
 	}
 
