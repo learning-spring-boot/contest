@@ -22,8 +22,8 @@ class CoreConfiguration {
 	private List<Object> listeners;
 
 	@Bean
-	MBassador<Request> bus() {
-		MBassador<Request> bus = new MBassador<>(new BusConfiguration()
+	MBassador<MercuryMessage> bus() {
+		MBassador<MercuryMessage> bus = new MBassador<>(new BusConfiguration()
 				.addFeature(Feature.SyncPubSub.Default())
 				.addFeature(Feature.AsynchronousHandlerInvocation.Default())
 				.addFeature(Feature.AsynchronousMessageDispatch.Default()));

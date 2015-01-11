@@ -1,4 +1,5 @@
 package com.maciejwalkowiak.mercury.core;
 
-public class Request {
+public abstract class Request {
+
 }

@@ -6,17 +6,21 @@ import org.springframework.stereotype.Component;
 
 @Component
 class MessengerImpl implements Messenger {
-	private final MBassador<Request> bus;
+	private final MBassador<MercuryMessage> bus;
+	private final MercuryMessageRepository mercuryMessageRepository;
 
 	@Autowired
-	MessengerImpl(MBassador<Request> bus) {
+	MessengerImpl(MBassador<MercuryMessage> bus, MercuryMessageRepository mercuryMessageRepository) {
 		this.bus = bus;
+		this.mercuryMessageRepository = mercuryMessageRepository;
 	}
 
 	@Override
-	public MercuryMessage publish(Request request) {
-		bus.publishAsync(request);
+	public MercuryMessage publish(MercuryMessage mercuryMessage) {
+		mercuryMessageRepository.save(mercuryMessage);
 
-		return MercuryMessage.queued(request);
+		bus.publishAsync(mercuryMessage);
+
+		return mercuryMessage;
 	}
 }

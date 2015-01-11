@@ -11,7 +11,7 @@ import org.springframework.util.Assert;
 
 @Component
 @Listener
-class MailListener {
+public class MailListener {
 	private static final Logger LOG = LoggerFactory.getLogger(MailListener.class);
 	private final MailSender mailSender;
 
@@ -21,11 +21,11 @@ class MailListener {
 	}
 
 	@Handler
-	void sendMail(SendMailRequest sendMailRequest) {
-		Assert.notNull(sendMailRequest);
+	public void sendMail(SendMailMercuryMessage mercuryMessage) {
+		Assert.notNull(mercuryMessage);
 
-		LOG.info("Received send mail request: {}", sendMailRequest);
+		LOG.info("Received send mail request: {}", mercuryMessage.getRequest());
 
-		mailSender.send(sendMailRequest.toMailMessage());
+		mailSender.send(mercuryMessage.getRequest().toMailMessage());
 	}
 }
