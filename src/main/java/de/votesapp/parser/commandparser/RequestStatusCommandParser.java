@@ -1,5 +1,12 @@
 package de.votesapp.parser.commandparser;
 
+import static de.votesapp.parser.Attitude.NEGATIVE;
+import static de.votesapp.parser.Attitude.POSITIVE;
+import static de.votesapp.parser.Attitude.UNKOWN;
+import static org.apache.commons.lang3.StringUtils.trim;
+
+import java.text.MessageFormat;
+import java.util.Arrays;
 import java.util.Map;
 import java.util.Optional;
 import java.util.regex.Matcher;
@@ -8,11 +15,13 @@ import java.util.regex.Pattern;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import reactor.core.Reactor;
 import reactor.event.Event;
 import de.votesapp.client.GroupMessage;
+import de.votesapp.client.User;
 import de.votesapp.groups.Group;
 import de.votesapp.parser.Attitude;
 import de.votesapp.parser.Command;
@@ -57,14 +66,19 @@ public class RequestStatusCommandParser extends AbstractCommandParser implements
 
 		@Override
 		public void execute(final GroupMessage message, final Group group, final Reactor reactor) {
-			final StringBuilder statusMessage = new StringBuilder();
+			final StringBuilder sb = new StringBuilder();
 
 			final Map<Attitude, Integer> sumAttitudes = group.sumAttitudes();
-			statusMessage.append("ð: ").append(sumAttitudes.get(Attitude.POSITIVE)).append("\n");
-			statusMessage.append("ð: ").append(sumAttitudes.get(Attitude.NEGATIVE)).append("\n");
-			statusMessage.append("â: ").append(sumAttitudes.get(Attitude.UNKOWN));
 
-			reactor.notify("group.outbox", Event.wrap(GroupMessage.of(group.getGroupId(), statusMessage.toString())));
+			for (final Attitude attitude : Arrays.asList(POSITIVE, NEGATIVE, UNKOWN)) {
+				sb.append(MessageFormat.format("{0}: {1}\n", attitude.getIcon(), sumAttitudes.get(attitude)));
+
+				for (final User user : group.usersWithAttitude(attitude)) {
+					sb.append("- " + user.nameOrPhone() + "\n");
+				}
+			}
+
+			reactor.notify("group.outbox", Event.wrap(GroupMessage.of(group.getGroupId(), trim(sb.toString()))));
 		}
 	}
 

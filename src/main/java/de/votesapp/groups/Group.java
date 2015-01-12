@@ -1,18 +1,24 @@
 package de.votesapp.groups;
 
+import static java.util.stream.Collectors.toList;
+
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import lombok.Data;
 
 import org.springframework.data.annotation.Id;
 
+import de.votesapp.client.User;
 import de.votesapp.parser.Attitude;
 
 @Data
 public class Group {
 	@Id
 	private final String groupId;
+
+	private final Map<String, User> users = new HashMap<>();
 
 	private final Map<String, Attitude> userAttitude = new HashMap<>();
 
@@ -23,8 +29,8 @@ public class Group {
 	 *
 	 * @return the old attitude or null
 	 */
-	public Attitude registerAttitude(final String user, final Attitude attitude) {
-		return userAttitude.put(user, attitude);
+	public Attitude registerAttitude(final String userPhone, final Attitude attitude) {
+		return userAttitude.put(userPhone, attitude);
 	}
 
 	/**
@@ -32,8 +38,8 @@ public class Group {
 	 *
 	 * @return the old additionals or null
 	 */
-	public Integer registerAdditionals(final String user, final Integer additionals) {
-		return userAdditionals.put(user, additionals);
+	public Integer registerAdditionals(final String userPhone, final Integer additionals) {
+		return userAdditionals.put(userPhone, additionals);
 	}
 
 	public Map<Attitude, Integer> sumAttitudes() {
@@ -57,13 +63,21 @@ public class Group {
 		return sum;
 	}
 
-	public void addUserIfNotExists(final String user) {
-		userAttitude.putIfAbsent(user, Attitude.UNKOWN);
-		userAdditionals.putIfAbsent(user, 0);
+	public void addUserIfNotExists(final User user) {
+		users.putIfAbsent(user.getPhone(), user);
+		userAttitude.putIfAbsent(user.getPhone(), Attitude.UNKOWN);
+		userAdditionals.putIfAbsent(user.getPhone(), 0);
 	}
 
 	public void resetVotes() {
 		userAttitude.replaceAll((k, v) -> Attitude.UNKOWN);
 		userAdditionals.replaceAll((k, v) -> 0);
+	}
+
+	public List<User> usersWithAttitude(final Attitude attitude) {
+		return userAttitude.entrySet().stream()//
+				.filter((entry) -> entry.getValue() == attitude) //
+				.map((entry) -> users.get(entry.getKey())) //
+				.collect(toList());
 	}
 }

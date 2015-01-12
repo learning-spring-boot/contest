@@ -21,7 +21,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class GroupMessage {
 
 	public static GroupMessage of(final String groupId, final String text) {
-		return new GroupMessage(null, groupId, null, text);
+		return new GroupMessage(null, groupId, null, null, text);
 	}
 
 	@JsonIgnoreProperties(ignoreUnknown = true)
@@ -29,9 +29,10 @@ public class GroupMessage {
 	public static GroupMessage of( //
 			@JsonProperty("_id") final String id, //
 			@JsonProperty("_from") final String groupId, //
-			@JsonProperty("participant") final String sender, //
+			@JsonProperty("participant") final String senderPhone, //
+			@JsonProperty(value = "notify", required = false) final String senderName, //
 			@JsonProperty("body") final String text) {
-		return new GroupMessage(id, groupId, sender, text);
+		return new GroupMessage(id, groupId, senderPhone, senderName, text);
 	}
 
 	/**
@@ -53,7 +54,15 @@ public class GroupMessage {
 	 * For messages we sent this can be <tt>null</tt>.
 	 */
 	@Nullable
-	private String sender;
+	private String senderPhone;
+
+	@Nullable
+	private String senderName;
 
 	private String text;
+
+	public User sender() {
+		// TODO: That should be done lazy
+		return new User(senderPhone, senderName);
+	}
 }

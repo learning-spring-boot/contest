@@ -29,15 +29,11 @@ public class GroupMessageListenerTest {
 	}
 
 	@Test
-	public void testName() throws Exception {
-	}
-
-	@Test
 	public void should_save_to_db_when_no_command_is_given() {
 		when(groupService.createOrLoadGroup("TstGroup")).thenReturn(new Group("TstGroup"));
 		when(parser.parse("Hello World")).thenReturn(Optional.empty());
 
-		groupMessageListener.onGroupReceiveMessage(Event.wrap(new GroupMessage("1", "TstGroup", "491234", "Hello World")));
+		groupMessageListener.onGroupReceiveMessage(Event.wrap(new GroupMessage("1", "TstGroup", "491234", null, "Hello World")));
 
 		verify(groupService).save(anyObject());
 	}
@@ -50,8 +46,9 @@ public class GroupMessageListenerTest {
 		when(groupService.createOrLoadGroup("TstGroup")).thenReturn(group);
 		when(parser.parse("Hello World")).thenReturn(Optional.empty());
 
-		groupMessageListener.onGroupReceiveMessage(Event.wrap(new GroupMessage("1", "TstGroup", "491234", "Hello World")));
+		final GroupMessage message = new GroupMessage("1", "TstGroup", "491234", null, "Hello World");
+		groupMessageListener.onGroupReceiveMessage(Event.wrap(message));
 
-		verify(group).addUserIfNotExists("491234");
+		verify(group).addUserIfNotExists(message.sender());
 	}
 }

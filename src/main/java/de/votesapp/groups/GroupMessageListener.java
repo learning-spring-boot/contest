@@ -37,7 +37,7 @@ public class GroupMessageListener {
 		log.info("Process Message: {}", message);
 
 		final Group group = groupService.createOrLoadGroup(message.getGroupId());
-		group.addUserIfNotExists(message.getSender());
+		group.addUserIfNotExists(message.sender());
 
 		final Optional<Command> command = parser.parse(message.getText());
 		if (command.isPresent()) {

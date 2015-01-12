@@ -82,7 +82,7 @@ public class ConsoleClient implements WhatsAppClient {
 				}
 
 				synchronized (groupMessages) {
-					final GroupMessage generatedMessage = new GroupMessage(UUID.randomUUID().toString(), lastGroup, lastPhone, lastText);
+					final GroupMessage generatedMessage = new GroupMessage(UUID.randomUUID().toString(), lastGroup, lastPhone, null, lastText);
 					System.out.println("<<< " + generatedMessage);
 					groupMessages.add(generatedMessage);
 				}

@@ -46,9 +46,9 @@ public class SetAttitudeCommandParser extends AbstractCommandParser implements D
 
 		@Override
 		public void execute(final GroupMessage message, final Group group, final Reactor reactor) {
-			group.registerAttitude(message.getSender(), attitude);
+			group.registerAttitude(message.getSenderPhone(), attitude);
 
-			reactor.notify("group.outbox", Event.wrap(GroupMessage.of(group.getGroupId(), "Added " + attitude + " vote")));
+			reactor.notify("group.outbox", Event.wrap(GroupMessage.of(group.getGroupId(), "Added " + attitude + " vote for " + message.sender().nameOrPhone())));
 		}
 	}
 

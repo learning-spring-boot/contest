@@ -1,5 +1,6 @@
 package de.votesapp.parser.commandparser;
 
+import java.text.MessageFormat;
 import java.util.Optional;
 import java.util.regex.Pattern;
 
@@ -9,6 +10,7 @@ import lombok.EqualsAndHashCode;
 import org.springframework.stereotype.Service;
 
 import reactor.core.Reactor;
+import reactor.event.Event;
 import de.votesapp.client.GroupMessage;
 import de.votesapp.groups.Group;
 import de.votesapp.parser.Command;
@@ -42,7 +44,11 @@ public class SetAdditionalsCommandParser extends AbstractCommandParser implement
 
 		@Override
 		public void execute(final GroupMessage message, final Group group, final Reactor reactor) {
-			group.registerAdditionals(message.getSender(), additionals);
+			group.registerAdditionals(message.getSenderPhone(), additionals);
+
+			final String answerText = MessageFormat.format("Set {0} additionals for {1}", additionals, message.sender().nameOrPhone());
+			final GroupMessage answer = GroupMessage.of(group.getGroupId(), answerText);
+			reactor.notify("group.outbox", Event.wrap(answer));
 		}
 	}
 

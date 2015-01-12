@@ -1,5 +1,7 @@
 package de.votesapp.client;
 
+import static org.apache.commons.lang3.StringUtils.trim;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -31,7 +33,9 @@ public class YowsupRestClient implements WhatsAppClient {
 		// resource ID for that.
 		final Map<String, String> message = new HashMap<>();
 		message.put("to", messageToSend.getGroupId());
-		message.put("text", messageToSend.getText());
+		// TODO: Add test that the text is trimmed. WhatsApp doesn't accept
+		// messages ending with \n!
+		message.put("text", trim(messageToSend.getText()));
 
 		restTemplate.postForEntity(yowsupRestConfig.getBaseUrl() + "/messages/outbox", message, Void.class);
 	}

@@ -3,6 +3,7 @@ package de.votesapp;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
+import java.text.MessageFormat;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.junit.Test;
@@ -36,7 +37,7 @@ public class VotesAppUserTests_Test {
 	@Test
 	public void should_regonize_a_vote() throws InterruptedException {
 
-		reactor.notify("group.inbox", Event.wrap(new GroupMessage("0", "Test", "490000", "Yes")));
+		reactor.notify("group.inbox", Event.wrap(new GroupMessage("0", "Test", "490000", null, "Yes")));
 
 		// TODO: Don't know how to wait until the event is processed?
 		Thread.sleep(1000);
@@ -54,16 +55,23 @@ public class VotesAppUserTests_Test {
 		// expect
 		reactor.on(Selectors.$("group.outbox"), e -> {
 			synchronized (reactor) {
-				success.compareAndSet(false, GroupMessage.of("Test", "ð: 1\nð: 1\nâ: 2").equals(e.getData()));
+				success.compareAndSet(false, GroupMessage.of("Test", //
+						MessageFormat.format("{0}: 1\n" //
+								+ "- 491111\n" //
+								+ "{1}: 1\n" //
+								+ "- 492222\n" //
+								+ "{2}: 2\n" //
+								+ "- 490000\n" //
+								+ "- 493333", Attitude.POSITIVE.getIcon(), Attitude.NEGATIVE.getIcon(), Attitude.UNKOWN.getIcon())).equals(e.getData()));
 				reactor.notifyAll();
 			}
 		});
 
 		// given
-		reactor.notify("group.inbox", Event.wrap(new GroupMessage("0", "Test", "490000", "Hello There")));
-		reactor.notify("group.inbox", Event.wrap(new GroupMessage("1", "Test", "491111", "Yes")));
-		reactor.notify("group.inbox", Event.wrap(new GroupMessage("2", "Test", "492222", "No")));
-		reactor.notify("group.inbox", Event.wrap(new GroupMessage("3", "Test", "493333", "Status")));
+		reactor.notify("group.inbox", Event.wrap(new GroupMessage("0", "Test", "490000", null, "Hello There")));
+		reactor.notify("group.inbox", Event.wrap(new GroupMessage("1", "Test", "491111", null, "Yes")));
+		reactor.notify("group.inbox", Event.wrap(new GroupMessage("2", "Test", "492222", null, "No")));
+		reactor.notify("group.inbox", Event.wrap(new GroupMessage("3", "Test", "493333", null, "Status")));
 
 		// wait
 		synchronized (reactor) {
@@ -83,18 +91,25 @@ public class VotesAppUserTests_Test {
 		// expect
 		reactor.on(Selectors.$("group.outbox"), e -> {
 			synchronized (reactor) {
-				success.compareAndSet(false, GroupMessage.of("Test", "ð: 1\nð: 0\nâ: 3").equals(e.getData()));
+				success.compareAndSet(false, GroupMessage.of("Test", MessageFormat.format("{0}: 1\n" //
+						+ "- 492222\n" //
+						+ "{1}: 0\n" //
+						+ "{2}: 3\n" //
+						+ "- 490000\n" //
+						+ "- 491111\n" //
+						+ "- 493333", Attitude.POSITIVE.getIcon(), Attitude.NEGATIVE.getIcon(), Attitude.UNKOWN.getIcon())).equals(e.getData()));
+
 				reactor.notifyAll();
 			}
 		});
 
 		// given
-		reactor.notify("group.inbox", Event.wrap(new GroupMessage("0", "Test", "490000", "Hello There")));
-		reactor.notify("group.inbox", Event.wrap(new GroupMessage("1", "Test", "491111", "Yes")));
-		reactor.notify("group.inbox", Event.wrap(new GroupMessage("2", "Test", "492222", "No")));
-		reactor.notify("group.inbox", Event.wrap(new GroupMessage("3", "Test", "492222", "Vote")));
-		reactor.notify("group.inbox", Event.wrap(new GroupMessage("4", "Test", "492222", "Yes")));
-		reactor.notify("group.inbox", Event.wrap(new GroupMessage("5", "Test", "493333", "Status")));
+		reactor.notify("group.inbox", Event.wrap(new GroupMessage("0", "Test", "490000", null, "Hello There")));
+		reactor.notify("group.inbox", Event.wrap(new GroupMessage("1", "Test", "491111", null, "Yes")));
+		reactor.notify("group.inbox", Event.wrap(new GroupMessage("2", "Test", "492222", null, "No")));
+		reactor.notify("group.inbox", Event.wrap(new GroupMessage("3", "Test", "492222", null, "Reset")));
+		reactor.notify("group.inbox", Event.wrap(new GroupMessage("4", "Test", "492222", null, "Yes")));
+		reactor.notify("group.inbox", Event.wrap(new GroupMessage("5", "Test", "493333", null, "Status")));
 
 		// wait
 		synchronized (reactor) {
