@@ -11,7 +11,7 @@ import reactor.event.Event;
 import reactor.function.Consumer;
 
 @Component
-public class MailConsumer implements Consumer<Event<MercuryMessage<SendMailRequest>>> {
+class MailConsumer implements Consumer<Event<MercuryMessage<SendMailRequest>>> {
 	private static final Logger LOG = LoggerFactory.getLogger(MailConsumer.class);
 	private final MailSender mailSender;
 	private final Messenger messenger;

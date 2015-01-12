@@ -31,7 +31,7 @@ class ApiController {
 			controllers.get().forEach(c ->
 					apiResource.add(
 							c.links().stream()
-									.map(link -> new BracketsLink(link.getHref(), link.getRel()))
+									.map(link -> new BracketsLink(link))
 									.collect(Collectors.toList())
 					)
 			);
