@@ -1,11 +1,10 @@
-package com.maciejwalkowiak.mercury.mail;
+package com.maciejwalkowiak.mercury.mail.common;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.maciejwalkowiak.mercury.core.Request;
-import org.springframework.mail.SimpleMailMessage;
 
-class SendMailRequest extends Request {
+public class SendMailRequest extends Request {
 	private final String to;
 	private final String content;
 	private final String subject;
@@ -29,15 +28,6 @@ class SendMailRequest extends Request {
 
 	public String getSubject() {
 		return subject;
-	}
-
-	public SimpleMailMessage toMailMessage() {
-		SimpleMailMessage msg = new SimpleMailMessage();
-		msg.setTo(to);
-		msg.setSubject(subject);
-		msg.setText(content);
-
-		return msg;
 	}
 
 	@Override

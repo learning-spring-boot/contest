@@ -1,4 +1,4 @@
-package com.maciejwalkowiak.mercury.mail;
+package com.maciejwalkowiak.mercury.mail.common;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.maciejwalkowiak.mercury.core.MercuryMessage;

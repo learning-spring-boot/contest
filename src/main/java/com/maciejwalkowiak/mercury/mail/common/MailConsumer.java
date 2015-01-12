@@ -1,11 +1,10 @@
-package com.maciejwalkowiak.mercury.mail;
+package com.maciejwalkowiak.mercury.mail.common;
 
 import com.maciejwalkowiak.mercury.core.MercuryMessage;
 import com.maciejwalkowiak.mercury.core.Messenger;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.MailSender;
 import org.springframework.stereotype.Component;
 import reactor.event.Event;
 import reactor.function.Consumer;
@@ -13,12 +12,12 @@ import reactor.function.Consumer;
 @Component
 class MailConsumer implements Consumer<Event<MercuryMessage<SendMailRequest>>> {
 	private static final Logger LOG = LoggerFactory.getLogger(MailConsumer.class);
-	private final MailSender mailSender;
+	private final MailingService mailingService;
 	private final Messenger messenger;
 
 	@Autowired
-	public MailConsumer(MailSender mailSender, Messenger messenger) {
-		this.mailSender = mailSender;
+	public MailConsumer(MailingService mailingService, Messenger messenger) {
+		this.mailingService = mailingService;
 		this.messenger = messenger;
 	}
 
@@ -28,9 +27,9 @@ class MailConsumer implements Consumer<Event<MercuryMessage<SendMailRequest>>> {
 		LOG.info("Received send mail request: {}", message.getRequest());
 
 		try {
-			mailSender.send(message.getRequest().toMailMessage());
+			mailingService.send(message.getRequest());
 			messenger.messageSent(message);
-		} catch (Exception e) {
+		} catch (SendMailException e) {
 			messenger.deliveryFailed(message, e.getMessage());
 		}
 	}
