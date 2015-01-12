@@ -18,7 +18,7 @@ public class MercuryMessage<T extends Request> {
 	@JsonView(View.Summary.class)
 	private Status status;
 	@JsonView(View.Summary.class)
-	private String errorMesssage;
+	private String errorMessage;
 	private T request;
 
 	/**
@@ -42,7 +42,7 @@ public class MercuryMessage<T extends Request> {
 
 	public void failed(String errorMessage) {
 		this.status = Status.FAILED;
-		this.errorMesssage = errorMessage;
+		this.errorMessage = errorMessage;
 	}
 
 	public Status getStatus() {
@@ -55,6 +55,10 @@ public class MercuryMessage<T extends Request> {
 
 	public String getId() {
 		return id;
+	}
+
+	public String getErrorMessage() {
+		return errorMessage;
 	}
 
 	public static class View {

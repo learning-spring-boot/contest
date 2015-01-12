@@ -8,14 +8,14 @@ import reactor.event.Event;
 @Component
 class MessengerImpl implements Messenger {
 	private final MercuryMessageRepository repository;
-	private final Reactor rootReactor;
 	private final QueueNameObtainer queueNameObtainer;
+	private final Reactor rootReactor;
 
 	@Autowired
-	MessengerImpl(MercuryMessageRepository repository, Reactor rootReactor, QueueNameObtainer queueNameObtainer) {
+	MessengerImpl(MercuryMessageRepository repository, QueueNameObtainer queueNameObtainer, Reactor rootReactor) {
 		this.repository = repository;
-		this.rootReactor = rootReactor;
 		this.queueNameObtainer = queueNameObtainer;
+		this.rootReactor = rootReactor;
 	}
 
 	@Override

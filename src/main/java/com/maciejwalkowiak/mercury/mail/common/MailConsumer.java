@@ -9,14 +9,16 @@ import org.springframework.stereotype.Component;
 import reactor.event.Event;
 import reactor.function.Consumer;
 
+import java.util.Optional;
+
 @Component
 class MailConsumer implements Consumer<Event<MercuryMessage<SendMailRequest>>> {
 	private static final Logger LOG = LoggerFactory.getLogger(MailConsumer.class);
-	private final MailingService mailingService;
+	private final Optional<MailingService> mailingService;
 	private final Messenger messenger;
 
 	@Autowired
-	public MailConsumer(MailingService mailingService, Messenger messenger) {
+	public MailConsumer(Optional<MailingService> mailingService, Messenger messenger) {
 		this.mailingService = mailingService;
 		this.messenger = messenger;
 	}
@@ -26,11 +28,15 @@ class MailConsumer implements Consumer<Event<MercuryMessage<SendMailRequest>>> {
 		MercuryMessage<SendMailRequest> message = mercuryMessageEvent.getData();
 		LOG.info("Received send mail request: {}", message.getRequest());
 
-		try {
-			mailingService.send(message.getRequest());
-			messenger.messageSent(message);
-		} catch (SendMailException e) {
-			messenger.deliveryFailed(message, e.getMessage());
+		if (mailingService.isPresent()) {
+			try {
+				mailingService.get().send(message.getRequest());
+				messenger.messageSent(message);
+			} catch (SendMailException e) {
+				messenger.deliveryFailed(message, e.getMessage());
+			}
+		} else {
+			messenger.deliveryFailed(message, "Mailing provider is not configured");
 		}
 	}
 }
