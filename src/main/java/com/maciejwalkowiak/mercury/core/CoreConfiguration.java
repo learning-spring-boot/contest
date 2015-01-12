@@ -3,21 +3,16 @@ package com.maciejwalkowiak.mercury.core;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.event.ApplicationEventMulticaster;
-import org.springframework.context.event.SimpleApplicationEventMulticaster;
-import org.springframework.core.task.SimpleAsyncTaskExecutor;
+import reactor.core.Environment;
+import reactor.core.Reactor;
+import reactor.core.spec.Reactors;
 
 @Configuration
 @ComponentScan
 class CoreConfiguration {
 
-	/**
-	 * Provides asynchronous application event processing
-	 */
 	@Bean
-	ApplicationEventMulticaster applicationEventMulticaster() {
-		SimpleApplicationEventMulticaster eventMulticaster = new SimpleApplicationEventMulticaster();
-		eventMulticaster.setTaskExecutor(new SimpleAsyncTaskExecutor());
-		return eventMulticaster;
+	public Reactor rootReactor(Environment env) {
+		return Reactors.reactor().env(env).get();
 	}
 }

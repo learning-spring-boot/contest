@@ -1,26 +1,28 @@
 package com.maciejwalkowiak.mercury.core;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Component;
+import reactor.core.Reactor;
+import reactor.event.Event;
 
 @Component
 class MessengerImpl implements Messenger {
-	private final ApplicationEventPublisher eventPublisher;
 	private final MercuryMessageRepository repository;
+	private final Reactor rootReactor;
+	private final QueueNameObtainer queueNameObtainer;
 
 	@Autowired
-	MessengerImpl(ApplicationEventPublisher eventPublisher, MercuryMessageRepository repository) {
-		this.eventPublisher = eventPublisher;
+	MessengerImpl(MercuryMessageRepository repository, Reactor rootReactor, QueueNameObtainer queueNameObtainer) {
 		this.repository = repository;
+		this.rootReactor = rootReactor;
+		this.queueNameObtainer = queueNameObtainer;
 	}
 
 	@Override
 	public MercuryMessage publish(Request request) {
 		MercuryMessage message = MercuryMessage.queued(request);
 		repository.save(message);
-
-		eventPublisher.publishEvent(new MercuryEvent<>(message));
+		rootReactor.notify(queueNameObtainer.getQueueName(request), Event.wrap(message));
 
 		return message;
 	}

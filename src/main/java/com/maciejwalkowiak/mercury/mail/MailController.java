@@ -1,5 +1,6 @@
 package com.maciejwalkowiak.mercury.mail;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import com.maciejwalkowiak.mercury.core.MercuryMessage;
 import com.maciejwalkowiak.mercury.core.Messenger;
 import com.maciejwalkowiak.mercury.core.api.HateoasController;
@@ -26,6 +27,7 @@ class MailController implements HateoasController {
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
+	@JsonView(MercuryMessage.View.Summary.class)
 	public MercuryMessage send(@RequestBody SendMailRequest sendMailRequest) {
 		return messenger.publish(sendMailRequest);
 	}

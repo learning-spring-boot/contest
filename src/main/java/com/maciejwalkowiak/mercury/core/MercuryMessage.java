@@ -1,8 +1,10 @@
 package com.maciejwalkowiak.mercury.core;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.data.annotation.Id;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class MercuryMessage<T extends Request> {
 	public enum Status {
 		QUEUED,
@@ -56,6 +58,6 @@ public class MercuryMessage<T extends Request> {
 	}
 
 	public static class View {
-		interface Summary {}
+		public interface Summary {}
 	}
 }
