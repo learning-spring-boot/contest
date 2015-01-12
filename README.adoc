@@ -31,6 +31,8 @@ Currently following features are implemented:
 
 == Build & Install
 
+*Mercury* uses MongoDB to store messages data. Make sure you have running MongoDB instance and appropriate configuration.
+
 Currently in order to use **Mercury** you need to build it first.
 
 . `git clone https://github.com/maciejwalkowiak/contest.git`
@@ -42,8 +44,14 @@ Currently in order to use **Mercury** you need to build it first.
 
 == Configuration options
 
-*Mercury* supports sending emails through Java Mail API by connecting to
-SMTP server or using SendGrid.
+== MongoDB configuration
+
+------------------------------------------------------------------------
+spring.data.mongodb.uri=mongodb://localhost/test # connection URL
+spring.data.mongodb.database=
+spring.data.mongodb.username=
+spring.data.mongodb.password=
+------------------------------------------------------------------------
 
 === Java Mail configuration
 
