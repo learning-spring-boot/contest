@@ -1,6 +1,8 @@
 = Mercury
 -----------
 
+image:https://drone.io/github.com/maciejwalkowiak/contest/status.png[link=https://drone.io/github.com/maciejwalkowiak/contest/latest]
+
 ____
 In Roman mythology *Mercury* is the patron god of messages and communication.
 ____
