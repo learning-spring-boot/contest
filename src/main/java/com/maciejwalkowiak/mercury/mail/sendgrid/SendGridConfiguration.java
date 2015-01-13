@@ -10,6 +10,11 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.client.SimpleClientHttpRequestFactory;
+import org.springframework.web.client.RestTemplate;
+
+import java.net.InetSocketAddress;
+import java.net.Proxy;
 
 @Configuration
 @ConditionalOnProperty(name = "sendgrid.username")
@@ -34,5 +39,19 @@ class SendGridConfiguration {
 		}
 
 		return sendGrid;
+	}
+
+	@Bean(name = "sendGridRestTemplate")
+	public RestTemplate restTemplate() {
+		if (properties.isProxyConfigured()) {
+			SimpleClientHttpRequestFactory requestFactory = new SimpleClientHttpRequestFactory();
+
+			Proxy proxy= new Proxy(Proxy.Type.HTTP, new InetSocketAddress(properties.getProxy().getHost(), properties.getProxy().getPort()));
+			requestFactory.setProxy(proxy);
+
+			return new RestTemplate(requestFactory);
+		} else {
+			return new RestTemplate();
+		}
 	}
 }
