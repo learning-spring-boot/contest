@@ -1,6 +1,7 @@
 package com.maciejwalkowiak.mercury.core;
 
 import com.maciejwalkowiak.mercury.mail.common.SendMailRequest;
+import com.maciejwalkowiak.mercury.mail.common.SendMailRequestBuilder;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -16,7 +17,12 @@ public class QueueNameObtainerTest {
 
 	@Test
 	public void testQueueNameForInstance() {
-		assertThat(queueNameObtainer.getQueueName(new SendMailRequest("to", "text", "subject"))).isEqualTo(QUEUE_NAME);
+		SendMailRequest sendMailRequest = new SendMailRequestBuilder()
+				.to("foo@bar.com")
+				.subject("subject")
+				.text("content")
+				.build();
+		assertThat(queueNameObtainer.getQueueName(sendMailRequest)).isEqualTo(QUEUE_NAME);
 	}
 
 }

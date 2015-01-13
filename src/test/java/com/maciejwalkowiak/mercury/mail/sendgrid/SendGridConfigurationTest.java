@@ -2,6 +2,7 @@ package com.maciejwalkowiak.mercury.mail.sendgrid;
 
 import com.maciejwalkowiak.mercury.MercuryApplication;
 import com.maciejwalkowiak.mercury.mail.common.MailingService;
+import org.junit.After;
 import org.junit.Test;
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 import org.springframework.boot.test.EnvironmentTestUtils;
@@ -11,11 +12,15 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class SendGridConfigurationTest {
 
-	private AnnotationConfigApplicationContext context;
+	private AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
+
+	@After
+	public void closeContext() {
+		this.context.close();
+	}
 
 	@Test
 	public void sendGridMailSenderIsCreatedOnProperty() {
-		this.context = new AnnotationConfigApplicationContext();
 		EnvironmentTestUtils.addEnvironment(context, "sendgrid.username");
 		this.context.register(MercuryApplication.class);
 		this.context.refresh();
@@ -25,7 +30,6 @@ public class SendGridConfigurationTest {
 
 	@Test(expected = NoSuchBeanDefinitionException.class)
 	public void sendGridMailSenderIsNotDefinedByDefault() {
-		this.context = new AnnotationConfigApplicationContext();
 		this.context.register(MercuryApplication.class);
 		this.context.refresh();
 
@@ -34,7 +38,6 @@ public class SendGridConfigurationTest {
 
 	@Test
 	public void sendGridMailSenderIsDefinedWhenBothProvidersAreDefined() {
-		this.context = new AnnotationConfigApplicationContext();
 		EnvironmentTestUtils.addEnvironment(context, "sendgrid.username");
 		EnvironmentTestUtils.addEnvironment(context, "spring.mail.host");
 		this.context.register(MercuryApplication.class);

@@ -1,6 +1,7 @@
 package com.maciejwalkowiak.mercury.core;
 
 import com.maciejwalkowiak.mercury.mail.common.SendMailRequest;
+import com.maciejwalkowiak.mercury.mail.common.SendMailRequestBuilder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -26,7 +27,11 @@ public class MessengerImplTest {
 	@Mock
 	private Reactor rootReactor;
 
-	private final SendMailRequest request = new SendMailRequest("foo@bar.com", "content", "subject");
+	private final SendMailRequest request = new SendMailRequestBuilder()
+			.to("foo@bar.com")
+			.subject("subject")
+			.text("content")
+			.build();
 
 	@Test
 	public void shouldSaveMessage() {

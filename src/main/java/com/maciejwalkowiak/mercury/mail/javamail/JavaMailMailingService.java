@@ -34,9 +34,11 @@ class JavaMailMailingService implements MailingService {
 
 	SimpleMailMessage toMailMessage(SendMailRequest sendMailRequest) {
 		SimpleMailMessage msg = new SimpleMailMessage();
-		msg.setTo(sendMailRequest.getTo());
+		msg.setTo(sendMailRequest.getTo().stream().toArray(String[]::new));
+		msg.setCc(sendMailRequest.getCc().stream().toArray(String[]::new));
+		msg.setBcc(sendMailRequest.getBcc().stream().toArray(String[]::new));
 		msg.setSubject(sendMailRequest.getSubject());
-		msg.setText(sendMailRequest.getContent());
+		msg.setText(sendMailRequest.getText());
 
 		return msg;
 	}

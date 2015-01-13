@@ -4,15 +4,12 @@ import com.maciejwalkowiak.mercury.core.MercuryMessage;
 import com.maciejwalkowiak.mercury.core.Messenger;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
-import org.springframework.mail.SimpleMailMessage;
 import reactor.event.Event;
 
 import java.util.Optional;
 
-import static org.mockito.Matchers.anyObject;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.*;

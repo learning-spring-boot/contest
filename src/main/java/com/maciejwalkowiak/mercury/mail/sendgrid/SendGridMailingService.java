@@ -42,8 +42,10 @@ class SendGridMailingService implements MailingService {
 
 	SendGrid.Email toSendGridEmail(SendMailRequest sendMailRequest) {
 		return new SendGrid.Email()
-				.setText(sendMailRequest.getContent())
-				.setTo(new String[] { sendMailRequest.getTo() })
+				.setText(sendMailRequest.getText())
+				.setTo(sendMailRequest.getTo().toArray(new String[]{}))
+				.setCc(sendMailRequest.getCc().toArray(new String[]{}))
+				.setBcc(sendMailRequest.getBcc().toArray(new String[]{}))
 				.setSubject(sendMailRequest.getSubject());
 	}
 }
