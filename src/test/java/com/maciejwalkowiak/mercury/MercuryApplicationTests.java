@@ -17,7 +17,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = MercuryApplication.class)
-@WebIntegrationTest(value = { "sendgrid.username=foo" , "sendgrid.password=bar"}, randomPort = true)
+@WebIntegrationTest(randomPort = true)
 public class MercuryApplicationTests {
 
 	@Autowired
