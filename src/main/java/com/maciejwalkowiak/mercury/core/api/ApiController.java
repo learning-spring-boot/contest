@@ -1,6 +1,7 @@
 package com.maciejwalkowiak.mercury.core.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.ResourceSupport;
 import org.springframework.http.HttpEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,6 +13,12 @@ import java.util.stream.Collectors;
 
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 
+/**
+ * In Mercury API is dynamic and depending how application is configured some URLs are available and some are not.
+ * {@link com.maciejwalkowiak.mercury.core.api.ApiController} exposes an array of all available URLs with current configuration
+ *
+ * @author Maciej Walkowiak
+ */
 @Controller
 @RequestMapping(value = "/api")
 class ApiController {
@@ -38,5 +45,8 @@ class ApiController {
 		}
 
 		return new HttpEntity<>(apiResource);
+	}
+
+	private static class ApiResource extends ResourceSupport {
 	}
 }

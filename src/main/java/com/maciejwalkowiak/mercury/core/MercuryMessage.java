@@ -4,6 +4,18 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.data.annotation.Id;
 
+/**
+ * Keeps all information about message:
+ * - original request
+ * - status
+ * - and error message if sending failed
+ *
+ * It's instances are saved in MongoDB by {@link com.maciejwalkowiak.mercury.core.MercuryMessageRepository}
+ *
+ * @param <T> - request class
+ *
+ * @author Maciej Walkowiak
+ */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class MercuryMessage<T extends Request> {
 	public enum Status {
@@ -36,11 +48,11 @@ public class MercuryMessage<T extends Request> {
 		return new MercuryMessage<>(Status.QUEUED, request);
 	}
 
-	public void sent() {
+	void sent() {
 		this.status = Status.SENT;
 	}
 
-	public void failed(String errorMessage) {
+	void failed(String errorMessage) {
 		this.status = Status.FAILED;
 		this.errorMessage = errorMessage;
 	}

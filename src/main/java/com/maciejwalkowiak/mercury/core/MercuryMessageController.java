@@ -15,6 +15,13 @@ import java.util.List;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 
+/**
+ * Exposes message details through REST interface.
+ *
+ * Used to check message if message has been successfully saved.
+ *
+ * @author Maciej Walkowiak
+ */
 @RestController
 @RequestMapping("/api/message/")
 class MercuryMessageController implements HateoasController {

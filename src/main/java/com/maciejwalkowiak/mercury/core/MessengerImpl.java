@@ -5,6 +5,11 @@ import org.springframework.stereotype.Component;
 import reactor.core.Reactor;
 import reactor.event.Event;
 
+/**
+ * http://reactor.github.io/ based {@link com.maciejwalkowiak.mercury.core.Messenger} implementation
+ *
+ * @author Maciej Walkowiak
+ */
 @Component
 class MessengerImpl implements Messenger {
 	private final MercuryMessageRepository repository;
