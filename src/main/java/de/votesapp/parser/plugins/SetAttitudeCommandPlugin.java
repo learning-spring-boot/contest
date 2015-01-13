@@ -18,9 +18,9 @@ import de.votesapp.parser.Command;
 @Service
 public class SetAttitudeCommandPlugin extends AbstractCommandPlugin implements Describable {
 
-	public static final String[] DEFAULT_POSITIVES = { "in", "I'm in", "yes", "ja", "Bin dabei" };
-	public static final String[] DEFAULT_NEGATIVES = { "out", "no", "nope", "nein", "Bin nicht dabei", "Komme nicht" };
-	public static final String[] DEFAULT_UNKOWN = { "maybe", "vielleicht" };
+	public static final String[] DEFAULT_POSITIVES = { "in", "I'm in", "yes", "ja", "Bin dabei", Attitude.POSITIVE.getIcon() };
+	public static final String[] DEFAULT_NEGATIVES = { "out", "no", "nope", "nein", "Bin nicht dabei", "Komme nicht", Attitude.NEGATIVE.getIcon() };
+	public static final String[] DEFAULT_UNKOWN = { "maybe", "vielleicht", Attitude.UNKOWN.getIcon() };
 
 	private final TextEqualsWordPlugin parser;
 
