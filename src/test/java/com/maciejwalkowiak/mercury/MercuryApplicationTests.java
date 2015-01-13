@@ -32,7 +32,7 @@ public class MercuryApplicationTests {
 
 	@Test
 	public void testSendingMailRequest() throws Exception {
-		this.mockMvc.perform(post("/api/mail").content("{ \"to\":[\"foo@bar.com\"],\"text\":\"bar\" }").contentType(MediaType.APPLICATION_JSON))
+		this.mockMvc.perform(post("/api/mail").content("{ \"to\":[\"foo@bar.com\"],\"text\":\"bar\", \"subject\":\"subject\" }").contentType(MediaType.APPLICATION_JSON))
 				.andExpect(status().isOk())
 				.andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
 				.andExpect(jsonPath("$.id").exists())

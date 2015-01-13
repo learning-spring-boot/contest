@@ -3,7 +3,10 @@ package com.maciejwalkowiak.mercury.mail.common;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.maciejwalkowiak.mercury.core.Request;
+import org.hibernate.validator.constraints.NotEmpty;
 
+import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -12,10 +15,13 @@ import java.util.List;
  * @author Maciej Walkowiak
  */
 public class SendMailRequest extends Request {
+	@NotEmpty
 	private final List<String> to;
 	private final List<String> cc;
 	private final List<String> bcc;
+	@NotNull
 	private final String text;
+	@NotNull
 	private final String subject;
 
 	@JsonCreator
@@ -32,7 +38,7 @@ public class SendMailRequest extends Request {
 	}
 
 	public List<String> getTo() {
-		return to;
+		return to == null ? new ArrayList<>() : to;
 	}
 
 	public String getText() {
@@ -44,17 +50,19 @@ public class SendMailRequest extends Request {
 	}
 
 	public List<String> getCc() {
-		return cc;
+		return cc == null ? new ArrayList<>() : cc;
 	}
 
 	public List<String> getBcc() {
-		return bcc;
+		return bcc == null ? new ArrayList<>() : bcc;
 	}
 
 	@Override
 	public String toString() {
 		return "SendMailRequest{" +
-				"to='" + to + '\'' +
+				"to=" + to +
+				", cc=" + cc +
+				", bcc=" + bcc +
 				", text='" + text + '\'' +
 				", subject='" + subject + '\'' +
 				'}';

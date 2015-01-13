@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.util.Arrays;
 import java.util.List;
 
@@ -33,7 +34,7 @@ class MailController implements HateoasController {
 
 	@RequestMapping(method = RequestMethod.POST)
 	@JsonView(MercuryMessage.View.Summary.class)
-	public MercuryMessage send(@RequestBody SendMailRequest sendMailRequest) {
+	public MercuryMessage send(@RequestBody @Valid SendMailRequest sendMailRequest) {
 		return messenger.publish(sendMailRequest);
 	}
 
