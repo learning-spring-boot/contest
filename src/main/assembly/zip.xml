@@ -9,14 +9,14 @@
 	<fileSets>
 		<fileSet>
 			<directory>${project.basedir}/etc</directory>
-			<outputDirectory>config</outputDirectory>
+			<outputDirectory>${project.artifactId}-${project.version}/config</outputDirectory>
 			<includes>
 				<include>*</include>
 			</includes>
 		</fileSet>
 		<fileSet>
 			<directory>${project.build.directory}</directory>
-			<outputDirectory/>
+			<outputDirectory>${project.artifactId}-${project.version}</outputDirectory>
 			<includes>
 				<include>*.jar</include>
 			</includes>
