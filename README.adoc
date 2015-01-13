@@ -1,33 +1,49 @@
-= mercury-app
+= Mercury
 -----------
+
+____
+In Roman mythology *Mercury* is the patron god of messages and communication.
+____
 
 *Mercury* is an application initially created for _Learning Spring Boot_
 contest.
 
-It's purpose is to provide single entry point for sending
-*notifications* in a company with internal applications in mind.
-
-_______________________________________________________________________________________________________________
-If you like the application *please star* this Github repository and
+TIP: If you like the application *star* this Github repository and
 *tweet* about it with #mercuryapp hashtag.
-_______________________________________________________________________________________________________________
+
+Mercury goal is to provide single **HTTP API** to send notifications in a company with internal applications in mind.
+
+== Use case
+
+Quite often there are many custom internal applications used in companies: HR, accounting, business trips, bug trackers and so on.
+Each one of them sends some notification to employees and developers have to solve same problems:
+- mail server connection configuration
+- sending emails in async manner
+- queue
+
+If mail server location or account changes it's details each application has to be reconfigured.
 
 == Features
 
-*Notifications* may mean many things. In reality most of notifications
-are being sent as an *email* or to applications trying to replace
-emails, like **Slack**.
-
-Currently following features are implemented:
-
 * sending email through *Java Mail*
 * sending email through *SendGrid*
+* asynchronous message processing - all incoming requests are saved in queue and processed by consumers
+* messages are stored in *MongoDB* - you can anytime check if notification has been sent or not and what's the error message if there is any
+* health checks - you can easily check if mail server/SendGrid connection is not misconfigured
+
+Upcoming features:
+
+* *Slack* integration
+* metrics
 
 == API
 
-* `GET http://<host>:<port>/api/` - lists all API methods
-* `POST http://<host>:<port>/api/mail` - sends mail message
+Exposed API is dynamic - meaning that depending on what notifications provider is configured - corresponding endpoint is available.
+For example if properties `slack.url` is not set handler for URL `http://<host>:<port>/api/slack` is not created.
+
+* `GET http://<host>:<port>/api/` - lists all available API methods in current configuration
 * `GET http://<host>:<port>/api/message/{id}` - get message status
+* `POST http://<host>:<port>/api/mail` - sends mail message - available only if *Java Mail* or *SendGrid* is configured
 
 == Build & Install
 
@@ -44,7 +60,7 @@ Currently in order to use **Mercury** you need to build it first.
 
 == Configuration options
 
-== MongoDB configuration
+=== MongoDB configuration
 
 ------------------------------------------------------------------------
 spring.data.mongodb.uri=mongodb://localhost/test # connection URL
