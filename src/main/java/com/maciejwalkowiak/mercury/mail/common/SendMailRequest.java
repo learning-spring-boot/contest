@@ -4,6 +4,11 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.maciejwalkowiak.mercury.core.Request;
 
+/**
+ * Data structure containing all data needed to send email
+ *
+ * @author Maciej Walkowiak
+ */
 public class SendMailRequest extends Request {
 	private final String to;
 	private final String content;

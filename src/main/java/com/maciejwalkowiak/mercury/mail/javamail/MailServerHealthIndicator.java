@@ -13,6 +13,14 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import java.util.Properties;
 
+/**
+ * Mail server health indicator for Spring Boot.
+ *
+ * Takes configured {@link org.springframework.boot.autoconfigure.mail.MailProperties}
+ * and tries to connect {@link javax.mail.Transport}. When no exception is thrown reports status "UP"
+ *
+ * @author Maciej Walkowiak
+ */
 @Component
 class MailServerHealthIndicator extends AbstractHealthIndicator {
 	private final MailProperties mailProperties;

@@ -16,6 +16,11 @@ import java.util.List;
 
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 
+/**
+ * API for receiving {@link com.maciejwalkowiak.mercury.mail.common.SendMailRequest} requests
+ *
+ * @author Maciej Walkowiak
+ */
 @RestController
 @RequestMapping("/api/mail")
 class MailController implements HateoasController {

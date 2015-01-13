@@ -11,6 +11,16 @@ import reactor.function.Consumer;
 
 import java.util.Optional;
 
+/**
+ * Consumes incoming {@link com.maciejwalkowiak.mercury.mail.common.SendMailRequest} based events
+ * and sends emails through configured provider ({@link com.maciejwalkowiak.mercury.mail.common.MailingService}).
+ *
+ * Based on Reactor.
+ *
+ * If there is no provider configured all incoming emails will get status "FAILED"
+ *
+ * @author Maciej Walkowiak
+ */
 @Component
 class MailConsumer implements Consumer<Event<MercuryMessage<SendMailRequest>>> {
 	private static final Logger LOG = LoggerFactory.getLogger(MailConsumer.class);
