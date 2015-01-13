@@ -48,7 +48,7 @@ public class SetAttitudeCommandPlugin extends AbstractCommandPlugin implements D
 		public void execute(final GroupMessage message, final Group group, final Reactor reactor) {
 			group.registerAttitude(message.getSenderPhone(), attitude);
 
-			reactor.notify("group.outbox", Event.wrap(GroupMessage.of(group.getGroupId(), "Added " + attitude + " vote for " + message.sender().nameOrPhone())));
+			reactor.notify("group.outbox", Event.wrap(GroupMessage.of(group.getGroupId(), attitude.getIcon() + " vote for " + message.sender().nameOrPhone())));
 		}
 	}
 
