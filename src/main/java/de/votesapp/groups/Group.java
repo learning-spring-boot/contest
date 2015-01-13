@@ -54,11 +54,13 @@ public class Group {
 			sum.put(attitude, sum.get(attitude) + 1);
 		}
 
-		int additionals = 0;
 		for (final Integer additionalsOfUser : userAdditionals.values()) {
-			additionals += additionalsOfUser;
+			if (additionalsOfUser > 0) {
+				sum.put(Attitude.POSITIVE, sum.get(Attitude.POSITIVE) + additionalsOfUser);
+			} else if (additionalsOfUser < 0) {
+				sum.put(Attitude.NEGATIVE, sum.get(Attitude.NEGATIVE) + additionalsOfUser);
+			}
 		}
-		sum.put(Attitude.POSITIVE, sum.get(Attitude.POSITIVE) + additionals);
 
 		return sum;
 	}

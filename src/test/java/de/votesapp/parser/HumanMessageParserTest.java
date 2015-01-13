@@ -12,22 +12,22 @@ import java.util.Optional;
 
 import org.junit.Test;
 
-import de.votesapp.parser.commandparser.RequestResetCommandParser;
-import de.votesapp.parser.commandparser.RequestStatusCommandParser;
-import de.votesapp.parser.commandparser.SetAdditionalsCommandParser;
-import de.votesapp.parser.commandparser.SetAttitudeCommandParser;
+import de.votesapp.parser.plugins.ResetCommandPlugin;
+import de.votesapp.parser.plugins.StatusCommandPlugin;
+import de.votesapp.parser.plugins.SetAdditionalsCommandPlugin;
+import de.votesapp.parser.plugins.SetAttitudeCommandPlugin;
 
 public class HumanMessageParserTest {
-	private final String[] positives = SetAttitudeCommandParser.DEFAULT_POSITIVES;
-	private final String[] negatives = SetAttitudeCommandParser.DEFAULT_NEGATIVES;
-	private final String[] unkowns = SetAttitudeCommandParser.DEFAULT_UNKOWN;
-	private final String[] resets = RequestResetCommandParser.DEFAULT_RESETS;
+	private final String[] positives = SetAttitudeCommandPlugin.DEFAULT_POSITIVES;
+	private final String[] negatives = SetAttitudeCommandPlugin.DEFAULT_NEGATIVES;
+	private final String[] unkowns = SetAttitudeCommandPlugin.DEFAULT_UNKOWN;
+	private final String[] resets = ResetCommandPlugin.DEFAULT_RESETS;
 
 	HumanMessageParser humanMessageParser = new HumanMessageParser(Arrays.asList( //
-			new SetAttitudeCommandParser(), //
-			new SetAdditionalsCommandParser(), //
-			new RequestStatusCommandParser(), //
-			new RequestResetCommandParser()));
+			new SetAttitudeCommandPlugin(), //
+			new SetAdditionalsCommandPlugin(), //
+			new StatusCommandPlugin(), //
+			new ResetCommandPlugin()));
 
 	@Test
 	public void should_be_quite_on_normal_test() throws Exception {
@@ -44,13 +44,13 @@ public class HumanMessageParserTest {
 	@Test
 	public void should_extract_positiv_numbers() throws Exception {
 		assertThat(humanMessageParser.parse("+4"), //
-				is(Optional.of(new SetAdditionalsCommandParser.SetAdditionalsCommnad(4))));
+				is(Optional.of(new SetAdditionalsCommandPlugin.SetAdditionalsCommnad(4))));
 	}
 
 	@Test
 	public void should_extract_negativ_numbers() throws Exception {
 		assertThat(humanMessageParser.parse("-4"), //
-				is(Optional.of(new SetAdditionalsCommandParser.SetAdditionalsCommnad(-4))));
+				is(Optional.of(new SetAdditionalsCommandPlugin.SetAdditionalsCommnad(-4))));
 	}
 
 	@Test
@@ -63,7 +63,7 @@ public class HumanMessageParserTest {
 	public void should_find_all_positives() throws Exception {
 		for (final String positive : positives) {
 			assertThat(humanMessageParser.parse(positive), //
-					is(Optional.of(new SetAttitudeCommandParser.SetAttitudeCommand(POSITIVE))));
+					is(Optional.of(new SetAttitudeCommandPlugin.SetAttitudeCommand(POSITIVE))));
 		}
 	}
 
@@ -72,7 +72,7 @@ public class HumanMessageParserTest {
 		for (final String negative : negatives) {
 			assertThat(negative, //
 					humanMessageParser.parse(negative), //
-					is(Optional.of(new SetAttitudeCommandParser.SetAttitudeCommand(NEGATIVE))));
+					is(Optional.of(new SetAttitudeCommandPlugin.SetAttitudeCommand(NEGATIVE))));
 		}
 	}
 
@@ -80,7 +80,7 @@ public class HumanMessageParserTest {
 	public void should_find_all_unkowns() throws Exception {
 		for (final String unkown : unkowns) {
 			assertThat(humanMessageParser.parse(unkown), //
-					is(Optional.of(new SetAttitudeCommandParser.SetAttitudeCommand(UNKOWN))));
+					is(Optional.of(new SetAttitudeCommandPlugin.SetAttitudeCommand(UNKOWN))));
 		}
 	}
 
@@ -90,32 +90,32 @@ public class HumanMessageParserTest {
 			final Optional<Command> answer = humanMessageParser.parse(reset);
 
 			assertThat(answer.isPresent(), is(true));
-			assertThat(answer.get().getClass(), is(typeCompatibleWith(RequestResetCommandParser.RequestResetCommand.class)));
+			assertThat(answer.get().getClass(), is(typeCompatibleWith(ResetCommandPlugin.RequestResetCommand.class)));
 		}
 	}
 
 	@Test
 	public void should_trim() throws Exception {
 		assertThat(humanMessageParser.parse("  +4 "), //
-				is(Optional.of(new SetAdditionalsCommandParser.SetAdditionalsCommnad(4))));
+				is(Optional.of(new SetAdditionalsCommandPlugin.SetAdditionalsCommnad(4))));
 	}
 
 	@Test
 	public void should_be_case_insensitive() throws Exception {
 		assertThat(humanMessageParser.parse("yEs"), //
-				is(Optional.of(new SetAttitudeCommandParser.SetAttitudeCommand(POSITIVE))));
+				is(Optional.of(new SetAttitudeCommandPlugin.SetAttitudeCommand(POSITIVE))));
 	}
 
 	@Test
 	public void should_normalize_spaces() throws Exception {
 		assertThat(humanMessageParser.parse("  Bin    dabei   "), // I'm in
-				is(Optional.of(new SetAttitudeCommandParser.SetAttitudeCommand(POSITIVE))));
+				is(Optional.of(new SetAttitudeCommandPlugin.SetAttitudeCommand(POSITIVE))));
 	}
 
 	@Test
 	public void should_detect_status() throws Exception {
 		assertThat(humanMessageParser.parse("Status"), //
-				is(Optional.of(RequestStatusCommandParser.RequestStatusCommand.withoutAttitude())));
+				is(Optional.of(StatusCommandPlugin.RequestStatusCommand.withoutAttitude())));
 	}
 
 	// I disabled that because it is currently now supported by the api
@@ -142,6 +142,6 @@ public class HumanMessageParserTest {
 	@Test
 	public void should_detect_status_with_invalid_attitude() throws Exception {
 		assertThat(humanMessageParser.parse("Status smthInvalidHere"), //
-				is(Optional.of(RequestStatusCommandParser.RequestStatusCommand.withoutAttitude())));
+				is(Optional.of(StatusCommandPlugin.RequestStatusCommand.withoutAttitude())));
 	}
 }

@@ -1,4 +1,4 @@
-package de.votesapp.parser.commandparser;
+package de.votesapp.parser.plugins;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -6,7 +6,7 @@ import java.util.Optional;
 
 import de.votesapp.parser.Command;
 
-public class TextEqualsWordParser extends AbstractCommandParser {
+public class TextEqualsWordPlugin extends AbstractCommandPlugin {
 
 	// Not really efficient but very easy to code!
 	private final Map<String, Command> words;
@@ -16,11 +16,11 @@ public class TextEqualsWordParser extends AbstractCommandParser {
 	 *            every word has a command that gets retunred when the word
 	 *            equals the text
 	 */
-	public TextEqualsWordParser(final Map<String, Command> words) {
+	public TextEqualsWordPlugin(final Map<String, Command> words) {
 		this.words = words;
 	}
 
-	public TextEqualsWordParser(final Command command, final String... words) {
+	public TextEqualsWordPlugin(final Command command, final String... words) {
 		final Map<String, Command> map = new HashMap<String, Command>();
 		fillAndPrepareMap(map, command, words);
 		this.words = map;
@@ -45,8 +45,8 @@ public class TextEqualsWordParser extends AbstractCommandParser {
 			return this;
 		}
 
-		public TextEqualsWordParser build() {
-			return new TextEqualsWordParser(map);
+		public TextEqualsWordPlugin build() {
+			return new TextEqualsWordPlugin(map);
 		}
 	}
 }

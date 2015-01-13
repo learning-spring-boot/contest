@@ -1,4 +1,4 @@
-package de.votesapp.parser.commandparser;
+package de.votesapp.parser.plugins;
 
 import java.text.MessageFormat;
 import java.util.Optional;
@@ -16,12 +16,12 @@ import de.votesapp.groups.Group;
 import de.votesapp.parser.Command;
 
 @Service
-public class SetAdditionalsCommandParser extends AbstractCommandParser implements Describable {
+public class SetAdditionalsCommandPlugin extends AbstractCommandPlugin implements Describable {
 
 	/**
 	 * Matches +1, +2, +42, -1, -40, but not 1, 2, 0, ...
 	 */
-	private static Pattern NUMBERS = Pattern.compile("[\\+-]?([0-9])+");
+	private static Pattern NUMBERS = Pattern.compile("[\\+-]?[0-9]+");
 
 	@Override
 	public Optional<Command> interpret(final String text) {

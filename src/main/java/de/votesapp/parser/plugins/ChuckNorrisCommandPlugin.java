@@ -1,4 +1,4 @@
-package de.votesapp.parser.commandparser;
+package de.votesapp.parser.plugins;
 
 import lombok.Data;
 
@@ -15,11 +15,11 @@ import de.votesapp.groups.Group;
 import de.votesapp.parser.Command;
 
 @Service
-public class ChuckNorrisCommandParser extends TextEqualsWordParser implements Describable {
+public class ChuckNorrisCommandPlugin extends TextEqualsWordPlugin {
 
 	public static final String[] DEFAULT_CHUCKS = { "chuck", "chucknorris", "chuck norris", "icndb" };
 
-	public ChuckNorrisCommandParser() {
+	public ChuckNorrisCommandPlugin() {
 		super(new ChuckNorrisCommand(), DEFAULT_CHUCKS);
 	}
 
@@ -48,23 +48,23 @@ public class ChuckNorrisCommandParser extends TextEqualsWordParser implements De
 		String joke;
 	}
 
-	@Override
+	// @Override
 	public String getName() {
 		return "ChuckNorris Jokes";
 	}
 
-	@Override
+	// @Override
 	public String[] getTriggers() {
 		return DEFAULT_CHUCKS;
 	}
 
-	@Override
+	// @Override
 	public String getDescription() {
 		return "Displays a random Chuck Norris joke. Powerd by www.icndb.com";
 	}
 
-	@Override
-	public int getPriority() {
-		return EASTEREGGS;
-	}
+	// @Override
+	// public int getPriority() {
+	// return EASTEREGGS;
+	// }
 }

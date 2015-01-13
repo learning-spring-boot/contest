@@ -1,4 +1,4 @@
-package de.votesapp.parser.commandparser;
+package de.votesapp.parser.plugins;
 
 import static de.votesapp.parser.Attitude.NEGATIVE;
 import static de.votesapp.parser.Attitude.POSITIVE;
@@ -15,7 +15,6 @@ import java.util.regex.Pattern;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import reactor.core.Reactor;
@@ -27,7 +26,7 @@ import de.votesapp.parser.Attitude;
 import de.votesapp.parser.Command;
 
 @Service
-public class RequestStatusCommandParser extends AbstractCommandParser implements Describable {
+public class StatusCommandPlugin extends AbstractCommandPlugin implements Describable {
 
 	private static Pattern STATUS = Pattern.compile("status ?(.+)?", Pattern.CASE_INSENSITIVE);
 
@@ -74,7 +73,14 @@ public class RequestStatusCommandParser extends AbstractCommandParser implements
 				sb.append(MessageFormat.format("{0}: {1}\n", attitude.getIcon(), sumAttitudes.get(attitude)));
 
 				for (final User user : group.usersWithAttitude(attitude)) {
-					sb.append("- " + user.nameOrPhone() + "\n");
+					sb.append("- " + user.nameOrPhone());
+
+					final Integer additionals = group.getUserAdditionals().getOrDefault(user.getPhone(), 0);
+
+					if (!additionals.equals(0)) {
+						sb.append(MessageFormat.format("({0,number,+#;-#})", additionals));
+					}
+					sb.append("\n");
 				}
 			}
 

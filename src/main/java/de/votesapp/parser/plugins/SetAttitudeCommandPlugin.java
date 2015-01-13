@@ -1,4 +1,4 @@
-package de.votesapp.parser.commandparser;
+package de.votesapp.parser.plugins;
 
 import java.util.Optional;
 
@@ -16,17 +16,17 @@ import de.votesapp.parser.Attitude;
 import de.votesapp.parser.Command;
 
 @Service
-public class SetAttitudeCommandParser extends AbstractCommandParser implements Describable {
+public class SetAttitudeCommandPlugin extends AbstractCommandPlugin implements Describable {
 
 	public static final String[] DEFAULT_POSITIVES = { "in", "I'm in", "yes", "ja", "Bin dabei" };
 	public static final String[] DEFAULT_NEGATIVES = { "out", "no", "nope", "nein", "Bin nicht dabei", "Komme nicht" };
 	public static final String[] DEFAULT_UNKOWN = { "maybe", "vielleicht" };
 
-	private final TextEqualsWordParser parser;
+	private final TextEqualsWordPlugin parser;
 
-	public SetAttitudeCommandParser() {
+	public SetAttitudeCommandPlugin() {
 
-		this.parser = new TextEqualsWordParser.Builder() //
+		this.parser = new TextEqualsWordPlugin.Builder() //
 		.with(new SetAttitudeCommand(Attitude.POSITIVE), DEFAULT_POSITIVES) //
 		.with(new SetAttitudeCommand(Attitude.NEGATIVE), DEFAULT_NEGATIVES) //
 		.with(new SetAttitudeCommand(Attitude.UNKOWN), DEFAULT_UNKOWN) //

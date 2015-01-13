@@ -1,4 +1,4 @@
-package de.votesapp.parser.commandparser;
+package de.votesapp.parser.plugins;
 
 import org.springframework.stereotype.Service;
 
@@ -9,11 +9,11 @@ import de.votesapp.groups.Group;
 import de.votesapp.parser.Command;
 
 @Service
-public class RequestResetCommandParser extends TextEqualsWordParser implements Describable {
+public class ResetCommandPlugin extends TextEqualsWordPlugin implements Describable {
 
 	public static final String[] DEFAULT_RESETS = { "reset", "start", "begin", "vote" };
 
-	public RequestResetCommandParser() {
+	public ResetCommandPlugin() {
 		super(new RequestResetCommand(), DEFAULT_RESETS);
 	}
 

@@ -1,4 +1,4 @@
-package de.votesapp.parser.commandparser;
+package de.votesapp.parser.plugins;
 
 import java.util.Random;
 
@@ -11,11 +11,11 @@ import de.votesapp.groups.Group;
 import de.votesapp.parser.Command;
 
 @Service
-public class RollCommandParser extends TextEqualsWordParser implements Describable {
+public class RollCommandPlugin extends TextEqualsWordPlugin implements Describable {
 
 	public static final String[] DEFAULT_ROLL = { "roll", "dice" };
 
-	public RollCommandParser() {
+	public RollCommandPlugin() {
 		super(new RollCommand(), DEFAULT_ROLL);
 	}
 

@@ -1,4 +1,4 @@
-package de.votesapp.parser.commandparser;
+package de.votesapp.parser.plugins;
 
 import java.util.List;
 
@@ -12,12 +12,12 @@ import de.votesapp.groups.Group;
 import de.votesapp.parser.Command;
 
 @Service
-public class HelpCommandParser extends TextEqualsWordParser implements Describable {
+public class HelpCommandPlugin extends TextEqualsWordPlugin implements Describable {
 
 	public static final String[] DEFAULT_WORDS = { "help" };
 
 	@Autowired
-	public HelpCommandParser(final List<Describable> describables) {
+	public HelpCommandPlugin(final List<Describable> describables) {
 		super(new HelpCommand(describables), DEFAULT_WORDS);
 	}
 

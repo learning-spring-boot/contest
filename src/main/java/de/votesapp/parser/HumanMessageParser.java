@@ -6,21 +6,21 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import de.votesapp.parser.commandparser.AbstractCommandParser;
+import de.votesapp.parser.plugins.AbstractCommandPlugin;
 
 @Component
 public class HumanMessageParser {
 
-	private final List<AbstractCommandParser> abstractCommandParsers;
+	private final List<AbstractCommandPlugin> abstractCommandPlugins;
 
 	@Autowired
-	public HumanMessageParser(final List<AbstractCommandParser> abstractCommandParsers) {
-		this.abstractCommandParsers = abstractCommandParsers;
+	public HumanMessageParser(final List<AbstractCommandPlugin> abstractCommandPlugins) {
+		this.abstractCommandPlugins = abstractCommandPlugins;
 	}
 
 	public Optional<Command> parse(final String rawText) {
-		for (final AbstractCommandParser abstractCommandParser : abstractCommandParsers) {
-			final Optional<Command> command = abstractCommandParser.parse(rawText);
+		for (final AbstractCommandPlugin abstractCommandPlugin : abstractCommandPlugins) {
+			final Optional<Command> command = abstractCommandPlugin.parse(rawText);
 			if (command.isPresent()) {
 				return command;
 			}

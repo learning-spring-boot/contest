@@ -1,4 +1,4 @@
-package de.votesapp.parser.commandparser;
+package de.votesapp.parser.plugins;
 
 import org.springframework.stereotype.Service;
 
@@ -9,11 +9,11 @@ import de.votesapp.groups.Group;
 import de.votesapp.parser.Command;
 
 @Service
-public class PingCommandParser extends TextEqualsWordParser {
+public class PingCommandPlugin extends TextEqualsWordPlugin {
 
 	public static final String[] DEFAULT_RESETS = { "ping", "ping?" };
 
-	public PingCommandParser() {
+	public PingCommandPlugin() {
 		super(new RequestResetCommand(), DEFAULT_RESETS);
 	}
 
