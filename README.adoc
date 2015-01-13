@@ -17,9 +17,10 @@ Mercury goal is to provide single **HTTP API** to send notifications in a compan
 
 Quite often there are many custom internal applications used in companies: HR, accounting, business trips, bug trackers and so on.
 Each one of them sends some notification to employees and developers have to solve same problems:
-- mail server connection configuration
-- sending emails in async manner
-- queue
+
+* mail server connection configuration
+* sending emails in async manner
+* queue
 
 If mail server location or account changes it's details each application has to be reconfigured.
 
