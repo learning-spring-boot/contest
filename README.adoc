@@ -48,18 +48,13 @@ For example if properties `slack.url` is not set handler for URL `http://<host>:
 * `GET http://<host>:<port>/api/message/{id}` - get message status
 * `POST http://<host>:<port>/api/mail` - sends mail message - available only if *Java Mail* or *SendGrid* is configured
 
-== Build & Install
 
-*Mercury* uses MongoDB to store messages data. Make sure you have running MongoDB instance and appropriate configuration.
+== How to run
 
-Currently in order to use **Mercury** you need to build it first.
-
-. `git clone https://github.com/maciejwalkowiak/contest.git`
-. `cd contest`
-. `mvn package`
-. Copy JAR file to some location for example `/opt/mercuryapp`: `cp target/mercury-0.0.1-SNAPSHOT.jar /opt/mercuryapp`
-. Inside `/opt/mercuryapp` create file `application.properties` and configure mail providers
-. Execute `java -jar mercury-0.0.1-SNAPSHOT.jar`
+* install required software: Java 8 and MongoDB
+* https://github.com/maciejwalkowiak/contest/releases/[Download latest release]
+* configure `config/application.properties`
+* run with `java -jar mercury-<version>.jar`
 
 == Configuration options
 
