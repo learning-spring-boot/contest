@@ -13,6 +13,9 @@ class CoreConfiguration {
 
 	@Bean
 	public Reactor rootReactor(Environment env) {
-		return Reactors.reactor().env(env).get();
+		return Reactors.reactor()
+				.env(env)
+				.dispatcher(Environment.THREAD_POOL)
+				.get();
 	}
 }
