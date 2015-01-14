@@ -6,6 +6,9 @@ import static de.votesapp.parser.Attitude.UNKOWN;
 import static org.apache.commons.lang3.StringUtils.trim;
 
 import java.text.MessageFormat;
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Arrays;
 import java.util.Map;
 import java.util.Optional;
@@ -15,6 +18,7 @@ import java.util.regex.Pattern;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import reactor.core.Reactor;
@@ -67,6 +71,10 @@ public class StatusCommandPlugin extends AbstractCommandPlugin implements Descri
 		public void execute(final GroupMessage message, final Group group, final Reactor reactor) {
 			final StringBuilder sb = new StringBuilder();
 
+			if (StringUtils.isNotBlank(group.getQuestion())) {
+				sb.append("Last Question: " + group.getQuestion() + "\n");
+			}
+
 			final Map<Attitude, Integer> sumAttitudes = group.sumAttitudes();
 
 			for (final Attitude attitude : Arrays.asList(POSITIVE, NEGATIVE, UNKOWN)) {
@@ -82,6 +90,20 @@ public class StatusCommandPlugin extends AbstractCommandPlugin implements Descri
 					}
 					sb.append("\n");
 				}
+			}
+
+			final Duration oneDay = Duration.between(group.getVotingSince().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime(), LocalDateTime.now());
+
+			final long d = oneDay.toDays();
+			final long h = oneDay.toHours() % 24;
+			final long m = oneDay.toMinutes() % 60;
+
+			if (d > 0) {
+				sb.append(MessageFormat.format("\u00F0\u009F\u0093\u0085: {0}d {1}h:{2}m", d, h, m));
+			} else if (h > 0) {
+				sb.append(MessageFormat.format("\u00F0\u009F\u0093\u0085: {0}h:{1}m", h, m));
+			} else if (m > 0) {
+				sb.append(MessageFormat.format("\u00F0\u009F\u0093\u0085: {0}m", m));
 			}
 
 			reactor.notify("group.outbox", Event.wrap(GroupMessage.of(group.getGroupId(), trim(sb.toString()))));

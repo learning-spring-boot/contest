@@ -2,6 +2,7 @@ package de.votesapp.groups;
 
 import static java.util.stream.Collectors.toList;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,6 +18,10 @@ import de.votesapp.parser.Attitude;
 public class Group {
 	@Id
 	private final String groupId;
+
+	private String question;
+
+	private Date votingSince = new Date();
 
 	private final Map<String, User> users = new HashMap<>();
 
@@ -72,6 +77,7 @@ public class Group {
 	}
 
 	public void resetVotes() {
+		votingSince = new Date();
 		userAttitude.replaceAll((k, v) -> Attitude.UNKOWN);
 		userAdditionals.replaceAll((k, v) -> 0);
 	}

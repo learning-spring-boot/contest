@@ -59,7 +59,7 @@ public class SetAttitudeCommandPlugin extends AbstractCommandPlugin implements D
 
 	@Override
 	public String[] getTriggers() {
-		return new String[] { "yes", "no", "maybe", "..." };
+		return new String[] { "yes, no, maybe ..." };
 	}
 
 	@Override

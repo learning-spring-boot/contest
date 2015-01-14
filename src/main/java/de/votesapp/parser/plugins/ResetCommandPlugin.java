@@ -37,7 +37,7 @@ public class ResetCommandPlugin extends TextEqualsWordPlugin implements Describa
 
 	@Override
 	public String[] getTriggers() {
-		return DEFAULT_RESETS;
+		return new String[] { "vote, begin, start, reset" };
 	}
 
 	@Override

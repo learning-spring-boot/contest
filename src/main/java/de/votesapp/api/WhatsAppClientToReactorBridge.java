@@ -1,5 +1,7 @@
 package de.votesapp.api;
 
+import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 
@@ -15,6 +17,7 @@ import de.votesapp.client.WhatsAppClient;
  * published received {@link GroupMessage}s via Reactor to the Application <br/>
  * Logic <-> Reactor <-> Bridge <-> WhatsAppClient <-> Yowsup
  */
+@Slf4j
 @Consumer
 public class WhatsAppClientToReactorBridge {
 
@@ -45,6 +48,8 @@ public class WhatsAppClientToReactorBridge {
 	@Selector(value = "group.outbox", reactor = "@rootReactor")
 	public void sendGroupMessage(final Event<GroupMessage> messageToSend) {
 		// TODO: Avoid NPE here
-		whatsAppClient.sendGroupMessage(messageToSend.getData());
+		final GroupMessage message = messageToSend.getData();
+		log.info("Send Message: {}", message);
+		whatsAppClient.sendGroupMessage(message);
 	}
 }

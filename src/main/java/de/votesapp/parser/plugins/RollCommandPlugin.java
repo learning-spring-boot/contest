@@ -39,7 +39,7 @@ public class RollCommandPlugin extends TextEqualsWordPlugin implements Describab
 
 	@Override
 	public String[] getTriggers() {
-		return DEFAULT_ROLL;
+		return new String[] { "roll or dice" };
 	}
 
 	@Override
