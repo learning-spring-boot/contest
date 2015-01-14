@@ -1,5 +1,4 @@
-= Mercury
------------
+image::https://raw.githubusercontent.com/maciejwalkowiak/contest/gh-pages/mercury.png[]
 
 image:https://drone.io/github.com/maciejwalkowiak/contest/status.png[link=https://drone.io/github.com/maciejwalkowiak/contest/latest]
 
