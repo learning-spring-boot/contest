@@ -21,18 +21,49 @@ Thank you for any kind of support! - s2.
 As *WhatsApp* User the probability that you have a group together with some friends is quite huge. If not try it, it's a great feature. And when you are in a group like, it will happend that someone asks a question like, *Who likes to join Karting on Saturday?*, or *Whats about pizza today after work?*. Maybe you have such voting once a week for a fixed event like playing soccer in the evinig? Then it becomes quite hard to manage this.
 
 Now you just invite **VotesApp** into your *WhatsApp* group.
-Once joined, **VotesApp** will listen to the Keywords, `in`, `out`, `yes`, `no` to count votes and `status`, `status [in|out|yes|no]` to give the names of the people which voted for this keyword.
-
-Your Scenario could look like this (mocked with german texts):
-
-![Image of our Solution](diary/solution.png)
-
-To try it, add VotesApp (+4915xxxxx *will be listed when the service is ready*) to your group and start Voting!
+Once joined, **VotesApp** will listen to the Keywords, `in`, `out`, `yes`, `no` to count votes and `status` to give the names of the people which voted for this keyword.
 
 # The VotesApp Diary
 This project was triggered because of the [Spring Boot Contest](https://github.com/learning-spring-boot/contest). To keep the judges up to date and show them why we decided like this on some points, we try to keep the diary up to date.
 
 So if you are interested in the huzzle we had, have a look :)
+
+
+## 13.01.2014 - It's deployed!
+Since today it's the full stack is deployed.
+
+Now your can invite our Test-Number ( **+49 1577 0658227** ) into your groups to start some votes.
+
+Basics votes (and some eastereggs) are supported, see:
+
+![Image of our Solution](diary/firstTest_small.png)
+
+Currently you can use the following (essential) instructions:
+
+- Help
+- Yes, No, In, Out, Maybe, +1, 2, 3,4 ..., 0
+- Reset, Vote
+- .+? (to set a question)
+- Status
+
+Or this (nice to have) stuff:
+
+- Roll, Dice
+- Chuck Norris
+
+
+### Why it took so long?
+
+Within the last three days we had strange encoding problems within our deployed python application.
+It wasn't really clear whether where the problem is comes from.
+We had serval differences (OS, Python-Version, Virtualisation) between our development machine and the server.
+The final solution was quite easy, we just need to set the `locale` correct.
+The identification wasn't obvious because the application was running in an docker container and you need to find the right command to execute `locale`  in our enviorment it's: `docker exec -i -t yourName bash`.
+
+I think we describe the full stack more detailed in the next days.
+We wil also try to make a plugin API (using Spring-Plugin) to support 3rd Party commands :)
+
+Happy testing!
 
 ## 10.01.2015 - Python brings us back to the basics
 **Yes!** We made Yowsup ready to use from our java backend. Here is a screenshot of the communication we did today:
