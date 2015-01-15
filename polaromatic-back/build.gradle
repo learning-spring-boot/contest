@@ -1,0 +1,55 @@
+buildscript {
+    ext {
+        springBootVersion = '1.2.1.RELEASE'
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath "org.grooscript:grooscript-gradle-plugin:0.9"
+    }
+}
+
+apply plugin: 'groovy'
+apply plugin: 'idea'
+apply plugin: 'spring-boot'
+apply plugin: 'org.grooscript.conversion'
+
+jar {
+    baseName = 'polaromatic'
+    version = '0.0.1-SNAPSHOT'
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+String groovyVersion = '2.4.0-rc-2'
+
+dependencies {
+    compile 'org.springframework.boot:spring-boot-starter-integration'
+    compile 'org.springframework.boot:spring-boot-starter-web'
+    compile 'org.springframework.boot:spring-boot-starter-websocket'
+    compile 'org.springframework.boot:spring-boot-starter-actuator'
+
+    compile "org.codehaus.groovy:groovy-all:${groovyVersion}"
+    compile 'org.im4java:im4java:1.4.0'
+
+    compile 'org.webjars:sockjs-client:0.3.4-1'
+    compile 'org.webjars:stomp-websocket:2.3.1-1'
+    compile 'org.webjars:jquery:2.1.3'
+    compile 'org.webjars:handlebars:2.0.0-1'
+    compile "org.codehaus.groovy:groovy-templates:${groovyVersion}"
+    compile 'org.grooscript:grooscript:1.0.0-rc-1'
+
+    testCompile 'org.springframework.boot:spring-boot-starter-test'
+    testCompile 'org.spockframework:spock-core:0.7-groovy-2.0'
+    testCompile 'cglib:cglib-nodep:3.1'
+}
+
+grooscript {
+    source = ['polaromatic-back/src/main/grooscript/polaromatic']
+    destination = 'polaromatic-back/src/main/resources/static/js'
+    addGsLib = 'grooscript.min'
+    mainContextScope = ['$', 'gs']
+}
+
+bootRun.dependsOn convert
+build.dependsOn convert

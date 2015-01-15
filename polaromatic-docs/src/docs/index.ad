@@ -1,0 +1,34 @@
+= Polaromatic
+by Iván López
+
+:numbered:
+:imagesDir: images/
+:polaromaticBackResources: ../../../polaromatic-back/src/main/resources
+:stem:
+
+
+image::polaromatic-logo.png[align=center,link=https://github.com/lmivan/contest,width=150]
+
+include::intro.ad[]
+
+<<<
+
+include::live-demo.ad[]
+
+<<<
+
+include::spring-boot-app.ad[]
+
+<<<
+
+include::android-app.ad[]
+
+<<<
+
+include::installation.ad[]
+
+<<<
+
+include::tech-stack.ad[]
+
+<<<

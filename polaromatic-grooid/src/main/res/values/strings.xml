@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Polaromatic</string>
+
+    <!-- About -->
+    <string name="about">About</string>
+    <string name="about_credits">Check https://github.com/lmivan/contest</string>
+    <string name="about_descrip">This is an Android app written in Groovy for the #LearningSpringBoot contest</string>
+
+    <!-- Settings -->
+    <string name="title_activity_settings">Settings</string>
+    <string name="action_settings">Settings</string>
+    <string name="settings_text">Please configure the url of your Polaromatic Spring Boot Application</string>
+    <string name="settings_save_url">SAVE SETTINGS</string>
+    <string name="settings_saved_ok">Settings saved correctly</string>
+
+    <!-- Share -->
+    <string name="share_text_hint">This is the text of your Polaromatic</string>
+    <string name="share_polaromatize">POLAROMATIZE THIS!</string>
+    <string name="share_ok_msg">Your photo has been polaromatized!</string>
+    <string name="share_backend_error">There was an error uploading your photo</string>
+    <string name="share_waiting_spinner">Polaromatizing...</string>
+
+</resources>

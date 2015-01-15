@@ -1,0 +1,14 @@
+multipart.maxFileSize: 2048KB
+
+endpoints:
+  autoconfig.enabled: false
+  beans.enabled: false
+  configprops.enabled: false
+  dump.enabled: false
+  env.enabled: false
+  health.enabled: true
+  info.enabled: true
+  metrics.enabled: true
+  mappings.enabled: false
+  shutdown.enabled: false
+  trace.enabled: false

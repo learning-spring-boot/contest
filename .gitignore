@@ -1,0 +1,10 @@
+build/
+*.iml
+*.ipr
+*.ips
+.gradle/
+.idea/
+work
+.lazybones/
+local.properties
+log/

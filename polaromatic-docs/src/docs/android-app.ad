@@ -1,0 +1,17 @@
+== Android Application
+
+While I was developing the backend I thought that it would be great to be able to take a photo with the phone an
+_Polaromatize it_. So I made the changes to the backend to be able to receive a photo and then I create an Android
+application to send the photo.
+
+With this application you can take a picture with your phone, add the text you want and then share it with the
+Polaromatic web.
+
+This is my first Android application and it has been fun to create it using Groovy.
+
+image::polaromatic-android.jpg[align=center, title=Sharing a photo from the Polaromatic Android app with the web]
+
+TIP: Please be sure to configure in the _Settings_ option the url in which you have deployed your Polaromatic server or
+use the default demo environment.
+
+NOTE: The application is only a _share-app_ so it is not shown in the applications list after you install it.

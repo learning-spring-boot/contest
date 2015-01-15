@@ -1,0 +1,11 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="android:Theme.Holo">
+        <!-- Customize your theme here. -->
+    </style>
+
+    <color name="spring_boot_green">#6db33f</color>
+    <color name="spring_boot_gray">#34302d</color>
+
+</resources>

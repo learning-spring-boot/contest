@@ -1,0 +1,53 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_height="fill_parent"
+            android:layout_width="fill_parent">
+
+    <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/default_padding"
+            android:weightSum="2"
+            android:orientation="vertical">
+
+        <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginBottom="20dp"
+                android:orientation="vertical">
+
+            <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/settings_text"
+                    android:textSize="@dimen/default_text_size"
+                    android:paddingBottom="10dp"/>
+
+            <EditText
+                    android:id="@+id/backendUrl"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textUri"
+                    />
+        </LinearLayout>
+
+        <LinearLayout
+                android:layout_width="fill_parent"
+                android:gravity="bottom"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+            <Button
+                    android:id="@+id/settings_save_button"
+                    android:background="@color/spring_boot_green"
+                    android:textColor="@color/spring_boot_gray"
+                    android:layout_width="fill_parent"
+                    android:layout_height="60dp"
+                    android:padding="@dimen/default_padding"
+                    android:text="@string/settings_save_url"/>
+        </LinearLayout>
+
+
+    </LinearLayout>
+</ScrollView>

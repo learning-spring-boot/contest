@@ -1,0 +1,16 @@
+buildscript {
+    dependencies {
+        classpath 'org.asciidoctor:asciidoctor-gradle-plugin:1.5.2'
+    }
+}
+
+apply plugin: 'org.asciidoctor.convert'
+
+asciidoctor {
+    sourceDir 'src/docs'
+    outputDir "${buildDir}/docs"
+
+    attributes 'source-highlighter': 'coderay',
+                toc                : 'left',
+                icons              : 'font'
+}

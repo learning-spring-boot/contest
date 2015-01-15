@@ -1,0 +1,50 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_height="fill_parent"
+            android:layout_width="fill_parent">
+
+    <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/default_padding"
+            android:orientation="vertical">
+
+        <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:layout_marginBottom="20dp"
+                android:orientation="vertical">
+
+            <ImageView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="250dp"
+                    android:id="@+id/share_image"/>
+
+            <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textMultiLine"
+                    android:ems="10"
+                    android:hint="@string/share_text_hint"
+                    android:id="@+id/share_text"
+                    android:paddingBottom="10dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:orientation="vertical">
+
+            <Button
+                    android:id="@+id/share_polaromatize_button"
+                    android:background="@color/spring_boot_green"
+                    android:textColor="@color/spring_boot_gray"
+                    android:layout_width="fill_parent"
+                    android:layout_height="60dp"
+                    android:padding="@dimen/default_padding"
+                    android:text="@string/share_polaromatize"/>
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>

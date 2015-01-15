@@ -1,0 +1,16 @@
+subprojects {
+    buildscript {
+        repositories {
+            jcenter()
+
+        }
+    }
+
+    repositories {
+        jcenter()
+    }
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.2.1'
+}
