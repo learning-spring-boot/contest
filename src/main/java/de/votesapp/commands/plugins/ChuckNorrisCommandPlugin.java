@@ -43,24 +43,4 @@ public class ChuckNorrisCommandPlugin extends TextEqualsWordPlugin {
 	public static class Value {
 		String joke;
 	}
-
-	// @Override
-	public String getName() {
-		return "ChuckNorris Jokes";
-	}
-
-	// @Override
-	public String[] getTriggers() {
-		return DEFAULT_CHUCKS;
-	}
-
-	// @Override
-	public String getDescription() {
-		return "Displays a random Chuck Norris joke. Powerd by www.icndb.com";
-	}
-
-	// @Override
-	// public int getPriority() {
-	// return EASTEREGGS;
-	// }
 }
