@@ -15,7 +15,7 @@ crontab -l | { cat; echo "0 13 * * * firefox https://github.com/s2team/contest#t
 
 Thank you for any kind of support! - s2.
 
-# About VotesApp [![Build Status](https://travis-ci.org/s2team/contest.svg?branch=master)](https://travis-ci.org/s2team/contest)
+# About VotesApp [![Build Status](https://travis-ci.org/s2team/votesapp.svg?branch=master)](https://travis-ci.org/s2team/votesapp)
 **VotesApp** is a *WhatsApp* Bot that helps you and your friends to organize Votes in *WhatsApp* groups.
 
 As *WhatsApp* User the probability that you have a group together with some friends is quite huge. If not try it, it's a great feature. And when you are in a group like, it will happend that someone asks a question like, *Who likes to join Karting on Saturday?*, or *Whats about pizza today after work?*. Maybe you have such voting once a week for a fixed event like playing soccer in the evinig? Then it becomes quite hard to manage this.
