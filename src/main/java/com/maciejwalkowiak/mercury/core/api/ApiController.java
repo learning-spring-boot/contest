@@ -1,5 +1,6 @@
 package com.maciejwalkowiak.mercury.core.api;
 
+import com.maciejwalkowiak.mercury.core.Request;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.ResourceSupport;
 import org.springframework.http.HttpEntity;
@@ -29,7 +30,7 @@ class ApiController {
 		this.controllers = controllers;
 	}
 
-	@RequestMapping(method = RequestMethod.GET)
+	@RequestMapping(method = { RequestMethod.GET, RequestMethod.OPTIONS })
 	public HttpEntity<ApiResource> links() {
 		ApiResource apiResource = new ApiResource();
 		apiResource.add(linkTo(ApiController.class).withSelfRel());

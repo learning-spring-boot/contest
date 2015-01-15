@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonView;
 import com.maciejwalkowiak.mercury.core.api.HateoasController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.Link;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -34,8 +36,10 @@ class MercuryMessageController implements HateoasController {
 
 	@RequestMapping(value = "{id}", method = RequestMethod.GET)
 	@JsonView(MercuryMessage.View.Summary.class)
-	MercuryMessage message(@PathVariable String id) {
-		return mercuryMessageRepository.findOne(id);
+	ResponseEntity<?> message(@PathVariable String id) {
+		MercuryMessage message = mercuryMessageRepository.findOne(id);
+
+		return message != null ? new ResponseEntity<>(message, HttpStatus.OK) : new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
 
 	@Override

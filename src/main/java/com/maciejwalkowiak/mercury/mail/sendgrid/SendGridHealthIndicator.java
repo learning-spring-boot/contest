@@ -12,6 +12,11 @@ import org.springframework.web.client.RestTemplate;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Checks if connection to SendGrid is working and if it's possible to get profile with provided credentials.
+ *
+ * @author Maciej Walkowiak
+ */
 @Component
 class SendGridHealthIndicator extends AbstractHealthIndicator {
 	private static final String GET_PROFILE_URL = "https://api.sendgrid.com/api/profile.get.json";
@@ -27,14 +32,19 @@ class SendGridHealthIndicator extends AbstractHealthIndicator {
 
 	@Override
 	protected void doHealthCheck(Health.Builder builder) throws Exception {
-		SendGridResponse sendGridResponse = restTemplate.getForObject(GET_PROFILE_URL, SendGridResponse.class,
-				getAuthenticationProperties());
+		try {
+			SendGridResponse sendGridResponse = restTemplate.getForObject(GET_PROFILE_URL, SendGridResponse.class,
+					getAuthenticationProperties());
 
-		if (sendGridResponse.error != null) {
-			builder.down().withDetail("message", sendGridResponse.error.message);
-		} else {
-			builder.up();
+			if (sendGridResponse.error != null) {
+				builder.down().withDetail("message", sendGridResponse.error.message);
+			} else {
+				builder.up();
+			}
+		} catch (Exception e) {
+			builder.down().withException(e);
 		}
+
 	}
 
 	private Map<String, String> getAuthenticationProperties() {
@@ -46,7 +56,7 @@ class SendGridHealthIndicator extends AbstractHealthIndicator {
 	}
 
 	private static class SendGridResponse {
-		private ErrorDetails error;
+		private final ErrorDetails error;
 
 		@JsonCreator
 		public SendGridResponse(@JsonProperty("error") ErrorDetails error) {
@@ -54,8 +64,8 @@ class SendGridHealthIndicator extends AbstractHealthIndicator {
 		}
 
 		private static class ErrorDetails {
-			private String code;
-			private String message;
+			private final String code;
+			private final String message;
 
 			@JsonCreator
 			public ErrorDetails(@JsonProperty("code") String code, @JsonProperty("message") String message) {

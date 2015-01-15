@@ -24,6 +24,7 @@ import java.util.Optional;
 @Component
 class MailConsumer implements Consumer<Event<MercuryMessage<SendMailRequest>>> {
 	private static final Logger LOG = LoggerFactory.getLogger(MailConsumer.class);
+
 	private final Optional<MailingService> mailingService;
 	private final Messenger messenger;
 

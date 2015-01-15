@@ -12,6 +12,7 @@ import reactor.function.Consumer;
 @Component
 class SlackConsumer implements Consumer<Event<MercuryMessage<SlackRequest>>> {
 	private static final Logger LOG = LoggerFactory.getLogger(SlackConsumer.class);
+
 	private final SlackService slackService;
 	private final Messenger messenger;
 
