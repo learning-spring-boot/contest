@@ -3,6 +3,7 @@ package com.maciejwalkowiak.mercury;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.internal.matchers.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.boot.test.WebIntegrationTest;
@@ -33,9 +34,8 @@ public class MercuryApplicationTests {
 	@Test
 	public void testSendingMailRequest() throws Exception {
 		this.mockMvc.perform(post("/api/mail").content("{ \"to\":[\"foo@bar.com\"],\"text\":\"bar\", \"subject\":\"subject\" }").contentType(MediaType.APPLICATION_JSON))
-				.andExpect(status().isOk())
+				.andExpect(status().isCreated())
 				.andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-				.andExpect(jsonPath("$.id").exists())
-				.andExpect(jsonPath("$.status").exists());
+				.andExpect(header().string("Location", NotNull.NOT_NULL));
 	}
 }
