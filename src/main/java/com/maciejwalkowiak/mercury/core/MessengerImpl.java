@@ -1,5 +1,7 @@
 package com.maciejwalkowiak.mercury.core;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import reactor.core.Reactor;
@@ -12,6 +14,8 @@ import reactor.event.Event;
  */
 @Component
 class MessengerImpl implements Messenger {
+	private static final Logger LOG = LoggerFactory.getLogger(MessengerImpl.class);
+
 	private final MercuryMessageRepository repository;
 	private final QueueNameObtainer queueNameObtainer;
 	private final Reactor rootReactor;
@@ -25,6 +29,7 @@ class MessengerImpl implements Messenger {
 
 	@Override
 	public MercuryMessage publish(Request request) {
+		LOG.info("Received request: {}", request);
 		MercuryMessage message = MercuryMessage.queued(request);
 		repository.save(message);
 		rootReactor.notify(queueNameObtainer.getQueueName(request), Event.wrap(message));

@@ -28,14 +28,14 @@ If mail server location or account changes it's details each application has to 
 == Features
 
 * sending email through *Java Mail*
-* sending email through *SendGrid*
+* sending email through *https://sendgrid.com/[SendGrid]*
+* sending messages to *https://slack.com[Slack]*
 * asynchronous message processing - all incoming requests are saved in queue and processed by consumers
 * messages are stored in *MongoDB* - you can anytime check if notification has been sent or not and what's the error message if there is any
 * health checks - you can easily check if mail server/SendGrid connection is not misconfigured
 
 Upcoming features:
 
-* *Slack* integration
 * metrics
 
 == API
@@ -46,6 +46,7 @@ For example if properties `slack.url` is not set handler for URL `http://<host>:
 * `GET http://<host>:<port>/api/` - lists all available API methods in current configuration
 * `GET http://<host>:<port>/api/message/{id}` - get message status
 * `POST http://<host>:<port>/api/mail` - sends mail message - available only if *Java Mail* or *SendGrid* is configured
+* `POST http://<host>:<port>/api/slack` - sends slack message - available only if *Slack* is configured
 
 
 == How to run
@@ -109,3 +110,13 @@ sendgrid.proxy.port=
 
 *IMPORTANT:* if both Java Mail *and* SendGrid configuration is provided
 - all emails will be sent using SendGrid.
+
+=== Slack configuration
+
+Put following properties to `application.properties` file:
+
+------------------
+slack.hook.url=
+------------------
+
+Learn more about Slack webhooks at https://api.slack.com/
