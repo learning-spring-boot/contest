@@ -1,6 +1,5 @@
 package com.maciejwalkowiak.mercury.core.api;
 
-import com.maciejwalkowiak.mercury.core.Request;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.ResourceSupport;
 import org.springframework.http.HttpEntity;

@@ -2,6 +2,7 @@ package com.maciejwalkowiak.mercury.mail.common;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.maciejwalkowiak.mercury.core.MercuryMessage;
+import com.maciejwalkowiak.mercury.core.MercuryMessageController;
 import com.maciejwalkowiak.mercury.core.Messenger;
 import com.maciejwalkowiak.mercury.core.api.HateoasController;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 
 /**
  * API for receiving {@link com.maciejwalkowiak.mercury.mail.common.SendMailRequest} requests
@@ -36,10 +38,13 @@ class MailController implements HateoasController {
 
 	@RequestMapping(method = RequestMethod.POST)
 	@JsonView(MercuryMessage.View.Summary.class)
-	public ResponseEntity<MercuryMessage> send(@RequestBody @Valid SendMailRequest sendMailRequest) {
+	public ResponseEntity<Void> send(@RequestBody @Valid SendMailRequest sendMailRequest) {
 		MercuryMessage message = messenger.publish(sendMailRequest);
 
-		return new ResponseEntity<>(message, HttpStatus.CREATED);
+		return ResponseEntity
+				.status(HttpStatus.CREATED)
+				.location(linkTo(methodOn(MercuryMessageController.class).message(message.getId())).toUri())
+				.build();
 	}
 
 	@Override

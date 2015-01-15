@@ -26,7 +26,7 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
  */
 @RestController
 @RequestMapping("/api/message/")
-class MercuryMessageController implements HateoasController {
+public class MercuryMessageController implements HateoasController {
 	private final MercuryMessageRepository mercuryMessageRepository;
 
 	@Autowired
@@ -36,7 +36,7 @@ class MercuryMessageController implements HateoasController {
 
 	@RequestMapping(value = "{id}", method = RequestMethod.GET)
 	@JsonView(MercuryMessage.View.Summary.class)
-	ResponseEntity<?> message(@PathVariable String id) {
+	public ResponseEntity<?> message(@PathVariable String id) {
 		MercuryMessage message = mercuryMessageRepository.findOne(id);
 
 		return message != null ? new ResponseEntity<>(message, HttpStatus.OK) : new ResponseEntity<>(HttpStatus.NOT_FOUND);
