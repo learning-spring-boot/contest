@@ -12,7 +12,7 @@ import lombok.Data;
 import org.springframework.data.annotation.Id;
 
 import de.votesapp.client.User;
-import de.votesapp.parser.Attitude;
+import de.votesapp.commands.plugins.Attitude;
 
 @Data
 public class Group {

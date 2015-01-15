@@ -1,5 +1,6 @@
 package de.votesapp.groups;
 
+import java.util.List;
 import java.util.Optional;
 
 import lombok.extern.slf4j.Slf4j;
@@ -11,22 +12,21 @@ import reactor.event.Event;
 import reactor.spring.annotation.Consumer;
 import reactor.spring.annotation.Selector;
 import de.votesapp.client.GroupMessage;
-import de.votesapp.parser.Command;
-import de.votesapp.parser.HumanMessageParser;
+import de.votesapp.commands.CommandPlugin;
+import de.votesapp.commands.plugins.Answer;
 
 @Consumer
 @Slf4j
 public class GroupMessageListener {
 
-	private final HumanMessageParser parser;
-
+	private final Reactor reactor;
 	private final GroupService groupService;
 
-	private final Reactor reactor;
+	private final List<CommandPlugin> commandPlugins;
 
 	@Autowired
-	public GroupMessageListener(final HumanMessageParser parser, final GroupService groupService, final Reactor reactor) {
-		this.parser = parser;
+	public GroupMessageListener(final List<CommandPlugin> commandPlugins, final GroupService groupService, final Reactor reactor) {
+		this.commandPlugins = commandPlugins;
 		this.groupService = groupService;
 		this.reactor = reactor;
 	}
@@ -39,13 +39,25 @@ public class GroupMessageListener {
 		final Group group = groupService.createOrLoadGroup(message.getGroupId());
 		group.addUserIfNotExists(message.sender());
 
-		final Optional<Command> command = parser.parse(message.getText());
-		if (command.isPresent()) {
-			command.get().execute(message, group, reactor);
-			groupService.save(group);
-		} else {
-			log.debug("Found message we couldn't parse: ", message);
+		boolean answered = false;
+		for (final CommandPlugin abstractCommandPlugin : commandPlugins) {
+			final Optional<Answer> answer = abstractCommandPlugin.interpret(message, group);
+
+			if (answer.isPresent()) {
+				answered = true;
+				try {
+					answer.get().invoke(group, reactor, message);
+				} catch (final Exception e) {
+					log.error("The Plugin {} threw an exception on this message {}", abstractCommandPlugin.getClass().getName(), message);
+				}
+			}
 		}
+
+		if (answered == false) {
+			log.info("Found message we couldn't answer: {}", message);
+		}
+
 		groupService.save(group);
+
 	}
 }

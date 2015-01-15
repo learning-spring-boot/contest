@@ -1,4 +1,5 @@
-package de.votesapp.parser.plugins;
+package de.votesapp.commands;
+
 
 public interface Describable {
 
@@ -8,11 +9,6 @@ public interface Describable {
 	public int EASTEREGGS = 3000;
 	public int BOTTOM = Integer.MAX_VALUE - 10000;
 
-	public int getPriority();
+	public Description describe();
 
-	public String getName();
-
-	public String[] getTriggers();
-
-	public String getDescription();
 }

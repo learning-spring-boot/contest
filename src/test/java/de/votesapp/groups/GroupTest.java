@@ -1,8 +1,8 @@
 package de.votesapp.groups;
 
-import static de.votesapp.parser.Attitude.NEGATIVE;
-import static de.votesapp.parser.Attitude.POSITIVE;
-import static de.votesapp.parser.Attitude.UNKOWN;
+import static de.votesapp.commands.plugins.Attitude.NEGATIVE;
+import static de.votesapp.commands.plugins.Attitude.POSITIVE;
+import static de.votesapp.commands.plugins.Attitude.UNKOWN;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
@@ -10,7 +10,7 @@ import java.util.Map;
 
 import org.junit.Test;
 
-import de.votesapp.parser.Attitude;
+import de.votesapp.commands.plugins.Attitude;
 
 public class GroupTest {
 

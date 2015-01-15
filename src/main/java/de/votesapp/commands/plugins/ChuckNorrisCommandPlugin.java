@@ -1,18 +1,16 @@
-package de.votesapp.parser.plugins;
+package de.votesapp.commands.plugins;
+
+import java.util.Optional;
 
 import lombok.Data;
 
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import reactor.core.Reactor;
-import reactor.event.Event;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import de.votesapp.client.GroupMessage;
 import de.votesapp.groups.Group;
-import de.votesapp.parser.Command;
 
 @Service
 public class ChuckNorrisCommandPlugin extends TextEqualsWordPlugin {
@@ -20,20 +18,18 @@ public class ChuckNorrisCommandPlugin extends TextEqualsWordPlugin {
 	public static final String[] DEFAULT_CHUCKS = { "chuck", "chucknorris", "chuck norris", "icndb" };
 
 	public ChuckNorrisCommandPlugin() {
-		super(new ChuckNorrisCommand(), DEFAULT_CHUCKS);
+		super(DEFAULT_CHUCKS);
 	}
 
-	public static class ChuckNorrisCommand extends Command {
-		@Override
-		public void execute(final GroupMessage message, final Group group, final Reactor reactor) {
-			reactor.notify("group.outbox", Event.wrap(GroupMessage.of(group.getGroupId(), fetchNewJoke())));
-		}
+	@Override
+	public Optional<Answer> matches(final GroupMessage message, final Group group) {
+		return Optional.of(Answer.intoGroup(group, fetchNewJoke()));
+	}
 
-		public String fetchNewJoke() {
-			final RestTemplate restTemplate = new RestTemplate();
-			final ChuckNorrisJoke root = restTemplate.getForObject("http://api.icndb.com/jokes/random/", ChuckNorrisJoke.class);
-			return root.getValue().getJoke();
-		}
+	public String fetchNewJoke() {
+		final RestTemplate restTemplate = new RestTemplate();
+		final ChuckNorrisJoke root = restTemplate.getForObject("http://api.icndb.com/jokes/random/", ChuckNorrisJoke.class);
+		return root.getValue().getJoke();
 	}
 
 	@Data

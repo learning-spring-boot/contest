@@ -17,9 +17,9 @@ import reactor.core.Reactor;
 import reactor.event.Event;
 import reactor.event.selector.Selectors;
 import de.votesapp.client.GroupMessage;
+import de.votesapp.commands.plugins.Attitude;
 import de.votesapp.groups.Group;
 import de.votesapp.groups.GroupService;
-import de.votesapp.parser.Attitude;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = VotesAppApplication.class)

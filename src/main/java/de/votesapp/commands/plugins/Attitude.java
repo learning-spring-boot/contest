@@ -1,4 +1,4 @@
-package de.votesapp.parser;
+package de.votesapp.commands.plugins;
 
 /**
  * The "Attitude" of a vote describes whether its more {@value #POSITIVE},

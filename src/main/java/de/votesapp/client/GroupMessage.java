@@ -10,6 +10,8 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import de.votesapp.commands.TextNormalizer;
+
 /**
  * Represents a Messages that got sent inside a group.
  */
@@ -64,5 +66,9 @@ public class GroupMessage {
 	public User sender() {
 		// TODO: That should be done lazy
 		return new User(senderPhone, senderName);
+	}
+
+	public String normalizedText() {
+		return TextNormalizer.normalize(text);
 	}
 }
