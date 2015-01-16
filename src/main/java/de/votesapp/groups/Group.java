@@ -10,11 +10,14 @@ import java.util.Map;
 import lombok.Data;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import de.votesapp.client.User;
 import de.votesapp.commands.plugins.Attitude;
 
 @Data
+// "group" is a reserved collection in mongo
+@Document(collection = "groups")
 public class Group {
 	@Id
 	private final String groupId;
@@ -28,11 +31,6 @@ public class Group {
 	private final Map<String, Attitude> userAttitude = new HashMap<>();
 
 	private final Map<String, Integer> userAdditionals = new HashMap<>();
-
-	public Group(final String groupId) {
-		// TODO: Replace that by mongomapper.
-		this.groupId = groupId.replaceAll("\\.", "_");
-	}
 
 	/**
 	 * Sets the new attitude for the given user

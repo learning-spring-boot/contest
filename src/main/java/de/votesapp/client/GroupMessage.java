@@ -23,7 +23,7 @@ import de.votesapp.commands.TextNormalizer;
 public class GroupMessage {
 
 	public static GroupMessage of(final String groupId, final String text) {
-		return new GroupMessage(null, groupId, null, null, text);
+		return new GroupMessage(null, escapeDot(groupId), null, null, text);
 	}
 
 	@JsonIgnoreProperties(ignoreUnknown = true)
@@ -34,7 +34,23 @@ public class GroupMessage {
 			@JsonProperty("participant") final String senderPhone, //
 			@JsonProperty(value = "notify", required = false) final String senderName, //
 			@JsonProperty("body") final String text) {
-		return new GroupMessage(id, groupId, senderPhone, senderName, text);
+
+		return new GroupMessage(escapeDot(id), escapeDot(groupId), escapeDot(senderPhone), senderName, text);
+	}
+
+	private static String escapeDot(final String txt) {
+		// TODO: That could be done by overwriting the mongo config like this:
+		// @Override
+		// public MappingMongoConverter mappingMongoConverter() throws Exception
+		// {
+		// final MappingMongoConverter mappingMongoConverter =
+		// super.mappingMongoConverter();
+		// // WhatsApp Keys are containing dots in domains.
+		// mappingMongoConverter.setMapKeyDotReplacement("_");
+		// return mappingMongoConverter;
+		// }
+		// But then we need to have one. Now it's autoconfigured
+		return txt.replaceAll("\\.", "_");
 	}
 
 	/**

@@ -36,7 +36,7 @@ public class YowsupRestClient implements WhatsAppClient {
 		// WhatsApp won't return the unique messages IDs, so we don't receive a
 		// resource ID for that.
 		final Map<String, String> message = new HashMap<>();
-		message.put("to", messageToSend.getGroupId());
+		message.put("to", messageToSend.getGroupId().replaceAll("_", "."));
 		// TODO: Add test that the text is trimmed. WhatsApp doesn't accept
 		// messages ending with \n!
 		message.put("text", trim(messageToSend.getText()));
