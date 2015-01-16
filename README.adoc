@@ -59,17 +59,32 @@ For example if properties `slack.url` is not set handler for URL `http://<host>:
 
 == Configuration options
 
-*Mercury* has following configuration properties.
+All *Mercury* configuration is stored in `config/application.properties` that you find in distribution package.
 
-------------------------------------------------------------------------
-# Mercury configuration
+=== Database configuration
 
-# MongoDB - required
-#spring.data.mongodb.uri=mongodb://localhost/test # connection URL
-#spring.data.mongodb.database=
-#spring.data.mongodb.username=
-#spring.data.mongodb.password=
+*Mercury* can persist messages with their statuses to MongoDB or save them into in-memory database that disappears when application goes down.
 
+For in-memory configuration make sure configuration contains following line:
+
+----
+mercury.db.inMemory=true
+----
+
+For MongoDB configuration make sure that property *mercury.db.inMemory* does not exist or is set to *false* and put following configuration properties:
+
+----
+spring.data.mongodb.uri=mongodb://localhost/test # connection URL
+spring.data.mongodb.database=
+spring.data.mongodb.username=
+spring.data.mongodb.password=
+----
+
+=== Services configuration
+
+In the same place you can configure configuration to services. Configuration properties presence activates related service (make sure to delete *#* at the beginning of each property you wish to use):
+
+----
 # JavaMail configuration - optional
 #spring.mail.host=
 #spring.mail.port=
@@ -80,9 +95,9 @@ For example if properties `slack.url` is not set handler for URL `http://<host>:
 #sendgrid.username=
 #sendgrid.password=
 
-# Slack configuration
+# Slack configuration - optional
 #slack.hook.url=
-------------------------------------------------------------------------
+----
 
 To configure additional Java Mail properties use
 `spring.mail.properties` prefix.
