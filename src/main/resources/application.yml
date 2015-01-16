@@ -5,3 +5,12 @@ spring.data.mongodb:
     authenticationDatabase: ${MONGO_AUTH_DB:}
     username: ${MONGO_USERNAME:}
     password: ${MONGO_PASSWORD:}
+
+# Somehow just logging.level ist not working in .yml,
+# in .properties it is. I'll create an issue for this
+logging:
+    level: 
+        org: ${LOGGING_LEVEL:INFO}
+        net: ${LOGGING_LEVEL:INFO}
+        com: ${LOGGING_LEVEL:INFO}
+        de: ${LOGGING_LEVEL:INFO}

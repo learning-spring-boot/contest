@@ -5,9 +5,12 @@ import static org.apache.commons.lang3.StringUtils.trim;
 import java.util.HashMap;
 import java.util.Map;
 
+import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 /**
@@ -15,6 +18,7 @@ import org.springframework.web.client.RestTemplate;
  *
  * Currently only sending and
  */
+@Slf4j
 @Component
 @Profile("yowsup")
 public class YowsupRestClient implements WhatsAppClient {
@@ -45,11 +49,21 @@ public class YowsupRestClient implements WhatsAppClient {
 	 */
 	@Override
 	public GroupMessage[] fetchGroupMessages() {
-		final GroupMessage[] messages = restTemplate.getForObject(yowsupRestConfig.getBaseUrl() + "/messages/inbox", GroupMessage[].class);
+		try {
+			final GroupMessage[] messages = restTemplate.getForObject(yowsupRestConfig.getBaseUrl() + "/messages/inbox", GroupMessage[].class);
 
-		deleteMessages(messages);
+			deleteMessages(messages);
 
-		return messages;
+			return messages;
+		} catch (final HttpClientErrorException e) {
+			if (e.getStatusCode().value() == 401) {
+				log.error("Wrong credentials for yowsup restservice are given. The endpoint returned 401. Cfg: {}", yowsupRestConfig);
+			} else {
+
+				log.error("Can't access Yowsup Service. Error: {} {} - {}", e.getStatusCode().value(), e.getStatusCode().getReasonPhrase(), e.getStatusText());
+			}
+			return new GroupMessage[0];
+		}
 	}
 
 	private void deleteMessages(final GroupMessage... messages) {
