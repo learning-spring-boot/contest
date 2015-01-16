@@ -1,6 +1,5 @@
 package com.maciejwalkowiak.mercury.core.message;
 
-import com.maciejwalkowiak.mercury.core.Consumer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
@@ -21,11 +20,11 @@ import java.util.Map;
  */
 @Component
 public class AsyncMessageNotifier implements MessageNotifier {
-	private final Map<Class, Consumer> consumersMap = new HashMap<>();
-	private final List<Consumer> consumers;
+	private final Map<Class, MessageConsumer> consumersMap = new HashMap<>();
+	private final List<MessageConsumer> consumers;
 
 	@Autowired
-	AsyncMessageNotifier(List<Consumer> consumers) {
+	AsyncMessageNotifier(List<MessageConsumer> consumers) {
 		this.consumers = consumers;
 	}
 

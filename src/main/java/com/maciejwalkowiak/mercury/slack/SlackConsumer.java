@@ -1,6 +1,6 @@
 package com.maciejwalkowiak.mercury.slack;
 
-import com.maciejwalkowiak.mercury.core.Consumer;
+import com.maciejwalkowiak.mercury.core.message.MessageConsumer;
 import com.maciejwalkowiak.mercury.core.message.Message;
 import com.maciejwalkowiak.mercury.core.message.MessageService;
 import org.slf4j.Logger;
@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-class SlackConsumer implements Consumer<SlackRequest> {
+class SlackConsumer implements MessageConsumer<SlackRequest> {
 	private static final Logger LOG = LoggerFactory.getLogger(SlackConsumer.class);
 
 	private final SlackService slackService;

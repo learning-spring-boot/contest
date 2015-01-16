@@ -1,6 +1,6 @@
 package com.maciejwalkowiak.mercury.mail.common;
 
-import com.maciejwalkowiak.mercury.core.Consumer;
+import com.maciejwalkowiak.mercury.core.message.MessageConsumer;
 import com.maciejwalkowiak.mercury.core.message.Message;
 import com.maciejwalkowiak.mercury.core.message.MessageService;
 import org.slf4j.Logger;
@@ -19,7 +19,7 @@ import java.util.Optional;
  * @author Maciej Walkowiak
  */
 @Component
-class MailConsumer implements Consumer<SendMailRequest> {
+class MailConsumer implements MessageConsumer<SendMailRequest> {
 	private static final Logger LOG = LoggerFactory.getLogger(MailConsumer.class);
 
 	private final Optional<MailingService> mailingService;
