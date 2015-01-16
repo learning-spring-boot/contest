@@ -1,8 +1,10 @@
 package com.maciejwalkowiak.mercury.core.message;
 
-import org.springframework.scheduling.annotation.Async;
-
+/**
+ * Notifies consumers about incoming messages
+ *
+ * @author Maciej Walkowiak
+ */
 public interface MessageNotifier {
-	@Async
 	void notifyConsumers(Message<?> message);
 }

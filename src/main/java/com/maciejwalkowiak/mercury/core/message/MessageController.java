@@ -35,7 +35,6 @@ public class MessageController implements HateoasController {
 	}
 
 	@RequestMapping(value = "{id}", method = RequestMethod.GET)
-	@JsonView(Message.View.Summary.class)
 	public ResponseEntity<?> message(@PathVariable String id) {
 		Message message = messageRepository.findOne(id);
 

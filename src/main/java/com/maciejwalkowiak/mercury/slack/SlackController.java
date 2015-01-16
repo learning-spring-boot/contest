@@ -32,7 +32,6 @@ class SlackController implements HateoasController {
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	@JsonView(Message.View.Summary.class)
 	public ResponseEntity<Void> send(@RequestBody @Valid SlackRequest slackRequest) {
 		Message message = messenger.publish(slackRequest);
 

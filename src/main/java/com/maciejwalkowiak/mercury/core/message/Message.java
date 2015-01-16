@@ -26,11 +26,8 @@ public class Message<T extends Request> {
 	}
 
 	@Id
-	@JsonView(View.Summary.class)
 	private String id;
-	@JsonView(View.Summary.class)
 	private Status status;
-	@JsonView(View.Summary.class)
 	private String errorMessage;
 	private T request;
 
@@ -72,9 +69,5 @@ public class Message<T extends Request> {
 
 	public String getErrorMessage() {
 		return errorMessage;
-	}
-
-	public static class View {
-		public interface Summary {}
 	}
 }

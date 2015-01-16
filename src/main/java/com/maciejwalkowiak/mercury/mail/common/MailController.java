@@ -37,7 +37,6 @@ class MailController implements HateoasController {
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	@JsonView(Message.View.Summary.class)
 	public ResponseEntity<Void> send(@RequestBody @Valid SendMailRequest sendMailRequest) {
 		Message message = messenger.publish(sendMailRequest);
 

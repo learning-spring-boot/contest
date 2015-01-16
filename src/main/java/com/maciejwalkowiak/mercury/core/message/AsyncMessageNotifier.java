@@ -12,8 +12,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Notifies consumers about incoming message in asynchronous manner
+ *
+ * Has to be public because of @Async & JDK Proxies
+ *
+ * @author Maciej Walkowiak
+ */
 @Component
-class AsyncMessageNotifier implements MessageNotifier {
+public class AsyncMessageNotifier implements MessageNotifier {
 	private final Map<Class, Consumer> consumersMap = new HashMap<>();
 	private final List<Consumer> consumers;
 
