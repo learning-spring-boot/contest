@@ -1,9 +1,9 @@
 package com.maciejwalkowiak.mercury.slack;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.maciejwalkowiak.mercury.core.MercuryMessage;
-import com.maciejwalkowiak.mercury.core.MercuryMessageController;
-import com.maciejwalkowiak.mercury.core.Messenger;
+import com.maciejwalkowiak.mercury.core.message.Message;
+import com.maciejwalkowiak.mercury.core.message.MessageController;
+import com.maciejwalkowiak.mercury.core.message.Messenger;
 import com.maciejwalkowiak.mercury.core.api.HateoasController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.Link;
@@ -32,13 +32,13 @@ class SlackController implements HateoasController {
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	@JsonView(MercuryMessage.View.Summary.class)
+	@JsonView(Message.View.Summary.class)
 	public ResponseEntity<Void> send(@RequestBody @Valid SlackRequest slackRequest) {
-		MercuryMessage message = messenger.publish(slackRequest);
+		Message message = messenger.publish(slackRequest);
 
 		return ResponseEntity
 				.status(HttpStatus.CREATED)
-				.location(linkTo(methodOn(MercuryMessageController.class).message(message.getId())).toUri())
+				.location(linkTo(methodOn(MessageController.class).message(message.getId())).toUri())
 				.build();
 	}
 

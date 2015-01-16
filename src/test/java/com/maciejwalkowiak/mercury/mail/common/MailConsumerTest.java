@@ -1,12 +1,11 @@
 package com.maciejwalkowiak.mercury.mail.common;
 
-import com.maciejwalkowiak.mercury.core.MercuryMessage;
-import com.maciejwalkowiak.mercury.core.Messenger;
+import com.maciejwalkowiak.mercury.core.message.Message;
+import com.maciejwalkowiak.mercury.core.message.MessageService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
-import reactor.event.Event;
 
 import java.util.Optional;
 
@@ -20,42 +19,43 @@ public class MailConsumerTest {
 
 	@Mock
 	private MailingService mailingService;
+
 	@Mock
-	private Messenger messenger;
+	private MessageService messageService;
 
 	@Test
 	public void shouldFailWhenMailingServiceNotPresent() {
-		mailConsumer = new MailConsumer(Optional.empty(), messenger);
+		mailConsumer = new MailConsumer(Optional.empty(), messageService);
 
-		MercuryMessage<SendMailRequest> message = mock(MercuryMessage.class);
+		Message<SendMailRequest> message = mock(Message.class);
 
-		mailConsumer.accept(new Event<>(message));
+		mailConsumer.consume(message);
 
-		verify(messenger).deliveryFailed(eq(message), anyString());
+		verify(messageService).deliveryFailed(eq(message), anyString());
 	}
 
 	@Test
 	public void shouldSendMessage() throws SendMailException {
-		mailConsumer = new MailConsumer(Optional.of(mailingService), messenger);
+		mailConsumer = new MailConsumer(Optional.of(mailingService), messageService);
 
-		MercuryMessage<SendMailRequest> message = mock(MercuryMessage.class);
+		Message<SendMailRequest> message = mock(Message.class);
 
-		mailConsumer.accept(new Event<>(message));
+		mailConsumer.consume(message);
 
 		verify(mailingService).send(eq(message.getRequest()));
-		verify(messenger).messageSent(eq(message));
+		verify(messageService).messageSent(eq(message));
 	}
 
 	@Test
 	public void shouldFailWhenMailingServiceFailed() throws SendMailException {
-		mailConsumer = new MailConsumer(Optional.of(mailingService), messenger);
+		mailConsumer = new MailConsumer(Optional.of(mailingService), messageService);
 
-		MercuryMessage<SendMailRequest> message = mock(MercuryMessage.class);
+		Message<SendMailRequest> message = mock(Message.class);
 		doThrow(new SendMailException("some message")).when(mailingService).send(any());
 
-		mailConsumer.accept(new Event<>(message));
+		mailConsumer.consume(message);
 
-		verify(messenger).deliveryFailed(eq(message), eq("some message"));
+		verify(messageService).deliveryFailed(eq(message), eq("some message"));
 	}
 
 

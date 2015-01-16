@@ -1,9 +1,9 @@
 package com.maciejwalkowiak.mercury.mail.common;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.maciejwalkowiak.mercury.core.MercuryMessage;
-import com.maciejwalkowiak.mercury.core.MercuryMessageController;
-import com.maciejwalkowiak.mercury.core.Messenger;
+import com.maciejwalkowiak.mercury.core.message.Message;
+import com.maciejwalkowiak.mercury.core.message.MessageController;
+import com.maciejwalkowiak.mercury.core.message.Messenger;
 import com.maciejwalkowiak.mercury.core.api.HateoasController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.Link;
@@ -37,13 +37,13 @@ class MailController implements HateoasController {
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	@JsonView(MercuryMessage.View.Summary.class)
+	@JsonView(Message.View.Summary.class)
 	public ResponseEntity<Void> send(@RequestBody @Valid SendMailRequest sendMailRequest) {
-		MercuryMessage message = messenger.publish(sendMailRequest);
+		Message message = messenger.publish(sendMailRequest);
 
 		return ResponseEntity
 				.status(HttpStatus.CREATED)
-				.location(linkTo(methodOn(MercuryMessageController.class).message(message.getId())).toUri())
+				.location(linkTo(methodOn(MessageController.class).message(message.getId())).toUri())
 				.build();
 	}
 

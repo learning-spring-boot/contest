@@ -1,4 +1,4 @@
-package com.maciejwalkowiak.mercury.core;
+package com.maciejwalkowiak.mercury.core.message;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.maciejwalkowiak.mercury.core.api.HateoasController;
@@ -26,24 +26,24 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
  */
 @RestController
 @RequestMapping("/api/message/")
-public class MercuryMessageController implements HateoasController {
-	private final MercuryMessageRepository mercuryMessageRepository;
+public class MessageController implements HateoasController {
+	private final MessageRepository messageRepository;
 
 	@Autowired
-	MercuryMessageController(MercuryMessageRepository mercuryMessageRepository) {
-		this.mercuryMessageRepository = mercuryMessageRepository;
+	MessageController(MessageRepository messageRepository) {
+		this.messageRepository = messageRepository;
 	}
 
 	@RequestMapping(value = "{id}", method = RequestMethod.GET)
-	@JsonView(MercuryMessage.View.Summary.class)
+	@JsonView(Message.View.Summary.class)
 	public ResponseEntity<?> message(@PathVariable String id) {
-		MercuryMessage message = mercuryMessageRepository.findOne(id);
+		Message message = messageRepository.findOne(id);
 
 		return message != null ? new ResponseEntity<>(message, HttpStatus.OK) : new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
 
 	@Override
 	public List<Link> links() {
-		return Arrays.asList(linkTo(methodOn(MercuryMessageController.class).message("{id}")).withRel("message"));
+		return Arrays.asList(linkTo(methodOn(MessageController.class).message("{id}")).withRel("message"));
 	}
 }

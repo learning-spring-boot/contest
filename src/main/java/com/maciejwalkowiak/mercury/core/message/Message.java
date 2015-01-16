@@ -1,7 +1,8 @@
-package com.maciejwalkowiak.mercury.core;
+package com.maciejwalkowiak.mercury.core.message;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonView;
+import com.maciejwalkowiak.mercury.core.Request;
 import org.springframework.data.annotation.Id;
 
 /**
@@ -10,14 +11,14 @@ import org.springframework.data.annotation.Id;
  * - status
  * - and error message if sending failed
  *
- * It's instances are saved in MongoDB by {@link com.maciejwalkowiak.mercury.core.MercuryMessageRepository}
+ * It's instances are saved in MongoDB by {@link MessageRepository}
  *
  * @param <T> - request class
  *
  * @author Maciej Walkowiak
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class MercuryMessage<T extends Request> {
+public class Message<T extends Request> {
 	public enum Status {
 		QUEUED,
 		SENT,
@@ -36,16 +37,16 @@ public class MercuryMessage<T extends Request> {
 	/**
 	 * Public no-arg controller required by Spring Hateoas
 	 */
-	public MercuryMessage() {
+	public Message() {
 	}
 
-	private MercuryMessage(Status status, T request) {
+	private Message(Status status, T request) {
 		this.status = status;
 		this.request = request;
 	}
 
-	public static <T extends Request> MercuryMessage queued(T request) {
-		return new MercuryMessage<>(Status.QUEUED, request);
+	public static <T extends Request> Message queued(T request) {
+		return new Message<>(Status.QUEUED, request);
 	}
 
 	void sent() {
