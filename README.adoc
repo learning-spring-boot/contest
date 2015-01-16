@@ -51,6 +51,7 @@ GET,OPTIONS /api/
 
 ==== Response
 
+[source,json]
 ----
 Status: 200 OK
 
@@ -83,6 +84,7 @@ GET /api/message/{id}
 
 ==== Response
 
+[source,json]
 ----
 Status: 200 OK
 
@@ -116,6 +118,7 @@ POST /api/mail
 
 ==== Request
 
+[source,json]
 ----
 {
    "to":[
@@ -137,12 +140,14 @@ Location: http://localhost:8082/api/message/54b992023004a2bf10dcaf98
 
 TIP: available only if *Slack* is configured
 
+[source,json]
 ----
 POST /api/slack
 ----
 
 ==== Request
 
+[source,json]
 ----
 {
    "text":"hello from slack!",
@@ -153,6 +158,7 @@ POST /api/slack
 
 ==== Response
 
+[source,json]
 ----
 Status: 201 CREATED
 Location: http://localhost:8082/api/message/54b992023004a2bf10dcaf98
@@ -176,12 +182,14 @@ All *Mercury* configuration is stored in `config/application.properties` that yo
 
 For in-memory configuration make sure configuration contains following line:
 
+[source,json]
 ----
 mercury.db.inMemory=true
 ----
 
 For MongoDB configuration make sure that property *mercury.db.inMemory* does not exist or is set to *false* and put following configuration properties:
 
+[source,json]
 ----
 spring.data.mongodb.uri=mongodb://localhost/test # connection URL
 spring.data.mongodb.database=
@@ -193,6 +201,7 @@ spring.data.mongodb.password=
 
 In the same place you can configure configuration to services. Configuration properties presence activates related service (make sure to delete *#* at the beginning of each property you wish to use):
 
+[source,json]
 ----
 # JavaMail configuration - optional
 #spring.mail.host=
@@ -213,6 +222,7 @@ To configure additional Java Mail properties use
 
 Sample configuration for Gmail account:
 
+[source,json]
 -----------------------------------------------------
 spring.mail.host=smtp.gmail.com
 spring.mail.port=587
