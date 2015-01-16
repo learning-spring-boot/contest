@@ -13,7 +13,20 @@ public class GroupService {
 		this.groupRepository = groupRepository;
 	}
 
-	public Group createOrLoadGroup(final String groupId) {
+	public Group createOrLoadGroup(String groupId) {
+
+		// TODO: That could be done by overwriting the mongo config like this:
+		// @Override
+		// public MappingMongoConverter mappingMongoConverter() throws Exception
+		// {
+		// final MappingMongoConverter mappingMongoConverter =
+		// super.mappingMongoConverter();
+		// // WhatsApp Keys are containing dots in domains.
+		// mappingMongoConverter.setMapKeyDotReplacement("_");
+		// return mappingMongoConverter;
+		// }
+		// But then we need to have one. Now it's autoconfigured
+		groupId = groupId.replaceAll("\\.", "_");
 
 		Group existingGroup = groupRepository.findOne(groupId);
 

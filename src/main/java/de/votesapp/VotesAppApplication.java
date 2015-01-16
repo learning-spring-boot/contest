@@ -49,8 +49,7 @@ public class VotesAppApplication {
 		return new RestTemplate(requestFactory);
 	}
 
-	// TODO: That should be use in the test (profile) only. Since we have not
-	// real database config, we let it here.
+	@Profile("!mongo")
 	@Configuration
 	static class MongoDbTestConfiguration extends AbstractMongoConfiguration {
 
