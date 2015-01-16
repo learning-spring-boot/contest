@@ -28,6 +28,71 @@ This project was triggered because of the [Spring Boot Contest](https://github.c
 
 So if you are interested in the huzzle we had, have a look :)
 
+## 15.01.2015 - Make it fucking Delightful! - Michael Ducy
+Ya, we really like this quote, so today we start [implementing](https://github.com/s2team/votesapp/commit/da662945c78726107fc8456e43a8c02d96b04701) it.
+
+It felt like we were able to delete 2 tons of code without losing features.
+We feel that the backend is really lean now.
+When start reading the code I think there are just two concepts you need to know.
+The **Plugin-Classes** and the **VotesApp/WhatsApp-Classes**.
+And for those you can have a look to this two chapters:
+
+### VotesApp/WhatsApp-Classes
+To understand the WhatsApp part you just need to know that we abstracted the communication behind the `WhatsAppClient` interface.
+We provide the two implementations `YowsupRestClient` and `ConsoleClient` to make the code run on production using WhatsApp (via Yowsup) and
+run on development via the `ConsoleClient`.
+As we [mentioned](https://github.com/s2team/votesapp#07012015---hello-reactor-can-we-vote) already in a previous post, the selection is done by utilizing Springs `@Profile`.
+
+![Image of our Solution](diary/whatsAppDiagram.png)
+
+To receive and forward the messages, we created the `WhatsAppClientToReactorBridge`.
+This classes uses the interfaces to Poll new messages (that part would be nicer with Websockets)
+and sends new messages. When a message is polled, it will be given to `Reactor` where it get caught up by the `GroupMessageListener`.
+And from there the magic with our PluginApi starts.
+
+### PluginApi
+The PluginApi becomes really easy now. To register a plugin that listens for "Ping" and then answer "Pong!",
+you just need to put this lines:
+
+```java
+@Service
+public class PingCommandPlugin extends TextEqualsWordPlugin implements Describable {
+
+  public PingCommandPlugin() {
+    // varargs for the text comparsion
+    super("ping", "ping?");
+  }
+
+  @Override
+  public Optional<Answer> matches(final GroupMessage message, final Group group) {
+    // this answer will be returned "into the group"
+    return Optional.of(Answer.intoGroup(group, "Pong!"));
+  }
+
+  @Override
+  public Description describe() {
+    // that is the construction of the help
+    return DescriptionBuilder.describe("Ping Command")
+    .withTrigger("ping") // This is also a vararg
+    .withDescription("Returns \"Pong!\"")
+    .onPosition(1)
+    .done();
+  }
+}
+```
+
+If you like to understand the already existing plugins and the hierachy of them,
+you can have look to this diagram:
+
+![Image of our Solution](diary/pluginsDiagram.png)
+
+Today we had also the Idea that it should be possible to register own plugins from inside the Chat.
+With this a message like "load http://github.com/xxx/votesAppPlugin/cinemaTop10" could import the plugin provide its service.
+But I gues we will not have time for this.
+
+O damn, two days left before the deadline arrives.
+
+Need to hurry up, bye bye :)
 
 ## 13.01.2014 - It's deployed!
 Since today it's the full stack is deployed.
