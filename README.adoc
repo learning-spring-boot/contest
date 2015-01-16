@@ -58,25 +58,30 @@ For example if properties `slack.url` is not set handler for URL `http://<host>:
 
 == Configuration options
 
-=== MongoDB configuration
+*Mercury* has following configuration properties.
 
 ------------------------------------------------------------------------
-spring.data.mongodb.uri=mongodb://localhost/test # connection URL
-spring.data.mongodb.database=
-spring.data.mongodb.username=
-spring.data.mongodb.password=
+# Mercury configuration
+
+# MongoDB - required
+#spring.data.mongodb.uri=mongodb://localhost/test # connection URL
+#spring.data.mongodb.database=
+#spring.data.mongodb.username=
+#spring.data.mongodb.password=
+
+# JavaMail configuration - optional
+#spring.mail.host=
+#spring.mail.port=
+#spring.mail.username=
+#spring.mail.password=
+
+# SendGrid configuration - optional
+#sendgrid.username=
+#sendgrid.password=
+
+# Slack configuration
+#slack.hook.url=
 ------------------------------------------------------------------------
-
-=== Java Mail configuration
-
-Put following properties to `application.properties` file:
-
----------------------
-spring.mail.host=
-spring.mail.port=
-spring.mail.username=
-spring.mail.password=
----------------------
 
 To configure additional Java Mail properties use
 `spring.mail.properties` prefix.
@@ -92,31 +97,9 @@ spring.mail.properties.mail.smtp.auth=true
 spring.mail.properties.mail.smtp.starttls.enable=true
 -----------------------------------------------------
 
-=== SendGrid configuration
-
-Put following properties to `application.properties` file:
-
-------------------
-sendgrid.username=
-sendgrid.password=
-------------------
-
-If you need to access SendGrid through proxy server add:
-
---------------------
-sendgrid.proxy.host=
-sendgrid.proxy.port=
---------------------
-
 *IMPORTANT:* if both Java Mail *and* SendGrid configuration is provided
 - all emails will be sent using SendGrid.
 
-=== Slack configuration
-
-Put following properties to `application.properties` file:
-
-------------------
-slack.hook.url=
-------------------
-
 Learn more about Slack webhooks at https://api.slack.com/
+
+Additionally, since *Mercury* is based on *Spring Boot* you can use pretty much any of configuration property described in Boot docs: http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
