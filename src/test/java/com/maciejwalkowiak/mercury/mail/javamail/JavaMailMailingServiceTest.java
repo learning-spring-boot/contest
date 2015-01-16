@@ -2,7 +2,6 @@ package com.maciejwalkowiak.mercury.mail.javamail;
 
 import com.maciejwalkowiak.mercury.mail.common.SendMailException;
 import com.maciejwalkowiak.mercury.mail.common.SendMailRequest;
-import com.maciejwalkowiak.mercury.mail.common.SendMailRequestBuilder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -24,7 +23,7 @@ public class JavaMailMailingServiceTest {
 	@Mock
 	private MailSender mailSender;
 
-	private final SendMailRequest request = new SendMailRequestBuilder()
+	private final SendMailRequest request = new SendMailRequest.Builder()
 			.to("foo@bar.com")
 			.subject("subject")
 			.text("content")

@@ -1,7 +1,6 @@
 package com.maciejwalkowiak.mercury.core.message;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonView;
 import com.maciejwalkowiak.mercury.core.Request;
 import org.springframework.data.annotation.Id;
 

@@ -1,7 +1,6 @@
 package com.maciejwalkowiak.mercury.core.message;
 
 import com.maciejwalkowiak.mercury.mail.common.SendMailRequest;
-import com.maciejwalkowiak.mercury.mail.common.SendMailRequestBuilder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -13,9 +12,9 @@ import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
-public class MessageServiceImplTest {
+public class MessageServiceTest {
 	@InjectMocks
-	private MessageServiceImpl service;
+	private MessageService service;
 
 	@Mock
 	private MessageNotifier messageNotifier;
@@ -23,7 +22,7 @@ public class MessageServiceImplTest {
 	@Mock
 	private MessageRepository repository;
 
-	private final SendMailRequest request = new SendMailRequestBuilder()
+	private final SendMailRequest request = new SendMailRequest.Builder()
 			.to("foo@bar.com")
 			.subject("subject")
 			.text("content")

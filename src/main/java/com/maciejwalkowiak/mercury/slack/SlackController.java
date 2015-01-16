@@ -1,10 +1,9 @@
 package com.maciejwalkowiak.mercury.slack;
 
-import com.fasterxml.jackson.annotation.JsonView;
+import com.maciejwalkowiak.mercury.core.api.HateoasController;
 import com.maciejwalkowiak.mercury.core.message.Message;
 import com.maciejwalkowiak.mercury.core.message.MessageController;
 import com.maciejwalkowiak.mercury.core.message.Messenger;
-import com.maciejwalkowiak.mercury.core.api.HateoasController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.Link;
 import org.springframework.http.HttpStatus;

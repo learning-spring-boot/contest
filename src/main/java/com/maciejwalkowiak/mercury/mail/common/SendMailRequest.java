@@ -67,4 +67,41 @@ public class SendMailRequest extends Request {
 				", subject='" + subject + '\'' +
 				'}';
 	}
+
+	public static class Builder {
+		private List<String> to = new ArrayList<>();
+		private List<String> cc = new ArrayList<>();
+		private List<String> bcc = new ArrayList<>();
+		private String subject;
+		private String text;
+
+		public Builder to(String to) {
+			this.to.add(to);
+			return this;
+		}
+
+		public Builder cc(String cc) {
+			this.cc.add(cc);
+			return this;
+		}
+
+		public Builder bcc(String bcc) {
+			this.bcc.add(bcc);
+			return this;
+		}
+
+		public Builder subject(String subject) {
+			this.subject = subject;
+			return this;
+		}
+
+		public Builder text(String text) {
+			this.text = text;
+			return this;
+		}
+
+		public SendMailRequest build() {
+			return new SendMailRequest(to, cc, bcc, subject, text);
+		}
+	}
 }
