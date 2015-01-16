@@ -29,6 +29,11 @@ public class Group {
 
 	private final Map<String, Integer> userAdditionals = new HashMap<>();
 
+	public Group(final String groupId) {
+		// TODO: Replace that by mongomapper.
+		this.groupId = groupId.replaceAll("\\.", "_");
+	}
+
 	/**
 	 * Sets the new attitude for the given user
 	 *
