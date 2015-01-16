@@ -26,32 +26,6 @@ class SendGridConfiguration {
 
 	@Bean
 	public SendGrid sendGrid() {
-		SendGrid sendGrid = new SendGrid(properties.getUsername(), properties.getPassword());
-
-		if (properties.isProxyConfigured()) {
-			HttpHost proxy = new HttpHost(properties.getProxy().getHost(), properties.getProxy().getPort());
-			CloseableHttpClient http = HttpClientBuilder.create()
-					.setProxy(proxy)
-					.setUserAgent("sendgrid/" + sendGrid.getVersion() + ";java")
-					.build();
-
-			sendGrid.setClient(http);
-		}
-
-		return sendGrid;
-	}
-
-	@Bean(name = "sendGridRestTemplate")
-	public RestTemplate restTemplate() {
-		if (properties.isProxyConfigured()) {
-			SimpleClientHttpRequestFactory requestFactory = new SimpleClientHttpRequestFactory();
-
-			Proxy proxy= new Proxy(Proxy.Type.HTTP, new InetSocketAddress(properties.getProxy().getHost(), properties.getProxy().getPort()));
-			requestFactory.setProxy(proxy);
-
-			return new RestTemplate(requestFactory);
-		} else {
-			return new RestTemplate();
-		}
+		return new SendGrid(properties.getUsername(), properties.getPassword());
 	}
 }

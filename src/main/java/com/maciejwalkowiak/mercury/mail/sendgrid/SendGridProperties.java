@@ -14,11 +14,6 @@ class SendGridProperties {
 	 */
 	private String password;
 
-	/**
-	 * Proxy configuration
-	 */
-	private Proxy proxy;
-
 	public String getUsername() {
 		return username;
 	}
@@ -33,47 +28,5 @@ class SendGridProperties {
 
 	public void setPassword(String password) {
 		this.password = password;
-	}
-
-	public Proxy getProxy() {
-		return proxy;
-	}
-
-	public void setProxy(Proxy proxy) {
-		this.proxy = proxy;
-	}
-
-	public boolean isProxyConfigured() {
-		return proxy != null
-				&& proxy.getHost() != null
-				&& proxy.getPort() != null;
-	}
-
-	public static class Proxy {
-		/**
-		 * SendGrid proxy host
-		 */
-		private String host;
-
-		/**
-		 * SendGrid proxy port
-		 */
-		private Integer port;
-
-		public String getHost() {
-			return host;
-		}
-
-		public void setHost(String host) {
-			this.host = host;
-		}
-
-		public Integer getPort() {
-			return port;
-		}
-
-		public void setPort(Integer port) {
-			this.port = port;
-		}
 	}
 }

@@ -7,11 +7,12 @@ import org.springframework.web.client.RestTemplate;
 
 @Service
 class SlackService {
-	private final RestTemplate restTemplate = new RestTemplate();
+	private final RestTemplate restTemplate;
 	private final String slackWebHookUrl;
 
 	@Autowired
-	public SlackService(@Value("${slack.hook.url}") String slackWebHookUrl) {
+	public SlackService(RestTemplate restTemplate, @Value("${slack.hook.url}") String slackWebHookUrl) {
+		this.restTemplate = restTemplate;
 		this.slackWebHookUrl = slackWebHookUrl;
 	}
 

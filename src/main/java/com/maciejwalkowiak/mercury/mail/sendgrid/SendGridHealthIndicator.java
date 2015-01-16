@@ -25,7 +25,7 @@ class SendGridHealthIndicator extends AbstractHealthIndicator {
 	private final SendGridProperties sendGridProperties;
 
 	@Autowired
-	SendGridHealthIndicator(@Qualifier("sendGridRestTemplate") RestTemplate restTemplate, SendGridProperties sendGridProperties) {
+	SendGridHealthIndicator(RestTemplate restTemplate, SendGridProperties sendGridProperties) {
 		this.restTemplate = restTemplate;
 		this.sendGridProperties = sendGridProperties;
 	}
