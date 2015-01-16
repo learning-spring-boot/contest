@@ -55,6 +55,7 @@ For example if properties `slack.url` is not set handler for URL `http://<host>:
 * https://github.com/maciejwalkowiak/contest/releases/[Download latest release]
 * configure `config/application.properties`
 * run with `java -jar mercury-<version>.jar`
+* go to `http://localhost:8080/api`
 
 == Configuration options
 
