@@ -43,11 +43,120 @@ Upcoming features:
 Exposed API is dynamic - meaning that depending on what notifications provider is configured - corresponding endpoint is available.
 For example if properties `slack.url` is not set handler for URL `http://<host>:<port>/api/slack` is not created.
 
-* `GET http://<host>:<port>/api/` - lists all available API methods in current configuration
-* `GET http://<host>:<port>/api/message/{id}` - get message status
-* `POST http://<host>:<port>/api/mail` - sends mail message - available only if *Java Mail* or *SendGrid* is configured
-* `POST http://<host>:<port>/api/slack` - sends slack message - available only if *Slack* is configured
+=== List API methods
 
+----
+GET,OPTIONS /api/
+----
+
+==== Response
+
+----
+Status: 200 OK
+
+{
+  "links":[
+     {
+        "rel":"self",
+        "href":"http://localhost:8082/api"
+     },
+     {
+        "rel":"message",
+        "href":"http://localhost:8082/api/message/{id}"
+     },
+     {
+        "rel":"mail",
+        "href":"http://localhost:8082/api/mail"
+     },       {
+        "rel":"slack",
+        "href":"http://localhost:8082/api/slack"
+     }
+   ]
+}
+----
+
+=== Get message
+
+----
+GET /api/message/{id}
+----
+
+==== Response
+
+----
+Status: 200 OK
+
+{
+   "id":"54b992023004a2bf10dcaf98",
+   "status":"FAILED",
+   "errorMessage":"Mailing provider is not configured",
+   "request":{
+      "to":[
+         "john.doe@mercuryapp.com"
+      ],
+      "cc":[
+
+      ],
+      "bcc":[
+
+      ],
+      "text":"Hello John",
+      "subject":"It's been a long time"
+   }
+}
+----
+
+=== Send email
+
+TIP: available only if *Java Mail* or *SendGrid* is configured
+
+----
+POST /api/mail
+----
+
+==== Request
+
+----
+{
+   "to":[
+      "john.doe@mercuryapp.com"
+   ],
+   "text":"Hello John",
+   "subject":"It's been a long time"
+}
+----
+
+==== Response
+
+----
+Status: 201 CREATED
+Location: http://localhost:8082/api/message/54b992023004a2bf10dcaf98
+----
+
+=== Send Slack message
+
+TIP: available only if *Slack* is configured
+
+----
+POST /api/slack
+----
+
+==== Request
+
+----
+{
+   "text":"hello from slack!",
+   "icon_emoji":":chart_with_upwards_trend:",
+   "channel":"#urgent"
+}
+----
+
+==== Response
+
+----
+Status: 201 CREATED
+Location: http://localhost:8082/api/message/54b992023004a2bf10dcaf98
+----
 
 == How to run
 
