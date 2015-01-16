@@ -68,6 +68,12 @@
 			<version>1.7.0</version>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>com.github.fakemongo</groupId>
+			<artifactId>fongo</artifactId>
+			<version>1.5.9</version>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 
 	<build>
