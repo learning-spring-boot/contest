@@ -18,7 +18,7 @@ public class YowsupRestClientTest {
 	YowsupRestClient cut = new YowsupRestClient(new YowsupRestConfig("base", "base", "", ""), restTemplate);
 
 	@Test
-	public void should_delete_message_after_fetching() {
+	public void should_delete_message_after_fetching() throws WhatsAppConnectionException {
 		final MockRestServiceServer mockServer = MockRestServiceServer.createServer(restTemplate);
 
 		mockServer.expect(MockRestRequestMatchers.requestTo("base/messages/inbox")) //

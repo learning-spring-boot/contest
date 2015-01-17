@@ -2,6 +2,7 @@ package de.votesapp.client;
 
 import static org.apache.commons.lang3.StringUtils.trim;
 
+import java.text.MessageFormat;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -19,7 +20,6 @@ import org.springframework.web.client.RestTemplate;
  *
  * Currently only sending and
  */
-@Slf4j
 @Component
 @Profile("yowsup")
 public class YowsupRestClient implements WhatsAppClient {
@@ -49,7 +49,7 @@ public class YowsupRestClient implements WhatsAppClient {
 	 * Receive all new messages and delete them from the inbox.
 	 */
 	@Override
-	public GroupMessage[] fetchGroupMessages() {
+	public GroupMessage[] fetchGroupMessages() throws WhatsAppConnectionException {
 		try {
 			final GroupMessage[] messages = restTemplate.getForObject(yowsupRestConfig.getBaseUrl() + "/messages/inbox", GroupMessage[].class);
 
@@ -58,15 +58,19 @@ public class YowsupRestClient implements WhatsAppClient {
 			return messages;
 		} catch (final HttpClientErrorException e) {
 			if (e.getStatusCode().value() == 401) {
-				log.error("Wrong credentials for yowsup restservice are given. The endpoint returned 401. Cfg: {}", yowsupRestConfig);
+				throw new WhatsAppConnectionException(
+						"Wrong credentials for yowsup restservice are given. The endpoint returned 401. Cfg: " + yowsupRestConfig, e);
 			} else {
-
-				log.error("Can't access Yowsup Service. Error: {} {} - {}", e.getStatusCode().value(), e.getStatusCode().getReasonPhrase(), e.getStatusText());
+				throw new WhatsAppConnectionException( //
+						MessageFormat.format("Can''t access Yowsup Service. Error: {0} {1} - {2}", //
+								e.getStatusCode().value(), //
+								e.getStatusCode().getReasonPhrase(), //
+								e.getStatusText()), //
+								e);
 			}
 		} catch (final ResourceAccessException e) {
-			log.error("Seems the VotesApp-Yowsup Rest Serviers isn't running. Is the Config correct? {}", yowsupRestConfig);
+			throw new WhatsAppConnectionException("Seems the VotesApp-Yowsup Rest Serviers isn't running. Is the Config correct? " + yowsupRestConfig, e);
 		}
-		return new GroupMessage[0];
 	}
 
 	private void deleteMessages(final GroupMessage... messages) {

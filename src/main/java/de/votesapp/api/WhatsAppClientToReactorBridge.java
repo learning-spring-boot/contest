@@ -12,6 +12,7 @@ import reactor.spring.annotation.Consumer;
 import reactor.spring.annotation.Selector;
 import de.votesapp.client.GroupMessage;
 import de.votesapp.client.WhatsAppClient;
+import de.votesapp.client.WhatsAppConnectionException;
 
 /**
  * Connects the {@link WhatsAppClient} to the {@link VotesAppSendApi} and
@@ -26,6 +27,8 @@ public class WhatsAppClientToReactorBridge {
 	private final Reactor rootReactor;
 	private final CounterService counterService;
 
+	private int errorThrottle = 0;
+
 	@Autowired
 	public WhatsAppClientToReactorBridge(final WhatsAppClient whatsAppClient, final Reactor rootReactor, final CounterService counterService) {
 		this.whatsAppClient = whatsAppClient;
@@ -37,14 +40,21 @@ public class WhatsAppClientToReactorBridge {
 	 * Poll Messages and translate into Reactor Events
 	 */
 	// Replace by WebSockets
-	@Scheduled(fixedDelay = 1000)
-	public void pollMessages() {
-		// fetches until the "queue" is empty
-		GroupMessage[] groupMessages;
-		while ((groupMessages = whatsAppClient.fetchGroupMessages()).length != 0) {
-			for (final GroupMessage groupMessage : groupMessages) {
-				absorpGroupMessage(groupMessage);
+	@Scheduled(fixedDelay = 100)
+	public void pollMessages() throws InterruptedException {
+		try {
+			GroupMessage[] groupMessages;
+			// fetches until the "queue" is empty
+			while ((groupMessages = whatsAppClient.fetchGroupMessages()).length != 0) {
+				for (final GroupMessage groupMessage : groupMessages) {
+					absorpGroupMessage(groupMessage);
+				}
 			}
+			errorThrottle = 0;
+		} catch (final WhatsAppConnectionException e) {
+			log.error(e.getMessage());
+			// don't bump the system if it isn't reachable.
+			Thread.sleep(errorThrottle += 10_000);
 		}
 	}
 
