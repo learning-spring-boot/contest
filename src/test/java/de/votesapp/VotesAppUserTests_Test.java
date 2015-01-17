@@ -6,7 +6,6 @@ import static org.junit.Assert.assertThat;
 import java.text.MessageFormat;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,8 +34,6 @@ public class VotesAppUserTests_Test {
 	@Autowired
 	GroupService groupService;
 
-	// TODO:
-	@Ignore
 	@Test
 	public void should_regonize_a_vote() throws InterruptedException {
 
@@ -46,27 +43,26 @@ public class VotesAppUserTests_Test {
 		Thread.sleep(1000);
 
 		final Group group = groupService.createOrLoadGroup("Test");
-
 		assertThat(group.getUserAttitude().get("490000"), is(Attitude.POSITIVE));
 	}
 
-	@Ignore
-	@Test(timeout = 1_000)
+	@Test(timeout = 10_000)
 	public void some_positive_and_negative_votes() throws InterruptedException {
 
 		final AtomicBoolean success = new AtomicBoolean(false);
 
 		// expect
 		reactor.on(Selectors.$("group.outbox"), e -> {
+			final String expected = MessageFormat.format("{0}: 1\n" //
+					+ "- 491111\n" //
+					+ "{1}: 1\n" //
+					+ "- 492222\n" //
+					+ "{2}: 2\n" //
+					+ "- 490000\n" //
+					+ "- 493333", Attitude.POSITIVE.getIcon(), Attitude.NEGATIVE.getIcon(), Attitude.UNKOWN.getIcon());
+
 			synchronized (reactor) {
-				success.compareAndSet(false, GroupMessage.of("Test", //
-						MessageFormat.format("{0}: 1\n" //
-								+ "- 491111\n" //
-								+ "{1}: 1\n" //
-								+ "- 492222\n" //
-								+ "{2}: 2\n" //
-								+ "- 490000\n" //
-								+ "- 493333", Attitude.POSITIVE.getIcon(), Attitude.NEGATIVE.getIcon(), Attitude.UNKOWN.getIcon())).equals(e.getData()));
+				success.compareAndSet(false, expected.equals(((GroupMessage) e.getData()).getText()));
 				reactor.notifyAll();
 			}
 		});
@@ -87,8 +83,7 @@ public class VotesAppUserTests_Test {
 		assertThat(success.get(), is(true));
 	}
 
-	@Ignore
-	@Test(timeout = 1_000)
+	@Test(timeout = 10_000)
 	public void reset_a_given_vote() throws InterruptedException {
 
 		final AtomicBoolean success = new AtomicBoolean(false);
@@ -96,14 +91,14 @@ public class VotesAppUserTests_Test {
 		// expect
 		reactor.on(Selectors.$("group.outbox"), e -> {
 			synchronized (reactor) {
-				success.compareAndSet(false, GroupMessage.of("Test", MessageFormat.format("{0}: 1\n" //
+				final String expectedMessage = MessageFormat.format("{0}: 1\n" //
 						+ "- 492222\n" //
 						+ "{1}: 0\n" //
 						+ "{2}: 3\n" //
 						+ "- 490000\n" //
 						+ "- 491111\n" //
-						+ "- 493333", Attitude.POSITIVE.getIcon(), Attitude.NEGATIVE.getIcon(), Attitude.UNKOWN.getIcon())).equals(e.getData()));
-
+						+ "- 493333", Attitude.POSITIVE.getIcon(), Attitude.NEGATIVE.getIcon(), Attitude.UNKOWN.getIcon());
+				success.compareAndSet(false, expectedMessage.equals(((GroupMessage) e.getData()).getText()));
 				reactor.notifyAll();
 			}
 		});
