@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestTemplate;
 
 /**
@@ -62,8 +63,10 @@ public class YowsupRestClient implements WhatsAppClient {
 
 				log.error("Can't access Yowsup Service. Error: {} {} - {}", e.getStatusCode().value(), e.getStatusCode().getReasonPhrase(), e.getStatusText());
 			}
-			return new GroupMessage[0];
+		} catch (final ResourceAccessException e) {
+			log.error("Seems the VotesApp-Yowsup Rest Serviers isn't running. Is the Config correct? {}", yowsupRestConfig);
 		}
+		return new GroupMessage[0];
 	}
 
 	private void deleteMessages(final GroupMessage... messages) {
@@ -71,5 +74,4 @@ public class YowsupRestClient implements WhatsAppClient {
 			restTemplate.delete(yowsupRestConfig.getBaseUrl() + "/messages/inbox/{id}", msg.getId());
 		}
 	}
-
 }
