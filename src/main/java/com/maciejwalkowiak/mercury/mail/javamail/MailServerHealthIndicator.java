@@ -1,5 +1,7 @@
 package com.maciejwalkowiak.mercury.mail.javamail;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.actuate.health.AbstractHealthIndicator;
 import org.springframework.boot.actuate.health.Health;
@@ -23,6 +25,8 @@ import java.util.Properties;
  */
 @Component
 class MailServerHealthIndicator extends AbstractHealthIndicator {
+	private static final Logger LOG = LoggerFactory.getLogger(MailServerHealthIndicator.class);
+
 	private final MailProperties mailProperties;
 
 	@Autowired
@@ -44,6 +48,7 @@ class MailServerHealthIndicator extends AbstractHealthIndicator {
 
 			builder.up();
 		} catch (MessagingException e) {
+			LOG.error("JavaMail connection is down", e);
 			builder.down(e);
 		}
 	}

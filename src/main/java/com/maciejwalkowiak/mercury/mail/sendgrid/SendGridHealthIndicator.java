@@ -2,6 +2,8 @@ package com.maciejwalkowiak.mercury.mail.sendgrid;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.actuate.health.AbstractHealthIndicator;
 import org.springframework.boot.actuate.health.Health;
@@ -18,6 +20,7 @@ import java.util.Map;
  */
 @Component
 class SendGridHealthIndicator extends AbstractHealthIndicator {
+	private static final Logger LOG = LoggerFactory.getLogger(SendGridHealthIndicator.class);
 	private static final String GET_PROFILE_URL = "https://api.sendgrid.com/api/profile.get.json";
 
 	private final RestTemplate restTemplate;
@@ -36,6 +39,7 @@ class SendGridHealthIndicator extends AbstractHealthIndicator {
 					getAuthenticationProperties());
 
 			if (sendGridResponse.error != null) {
+				LOG.error("SendGrid connection is down: {}", sendGridResponse.error);
 				builder.down().withDetail("message", sendGridResponse.error.message);
 			} else {
 				builder.up();
@@ -71,6 +75,21 @@ class SendGridHealthIndicator extends AbstractHealthIndicator {
 				this.code = code;
 				this.message = message;
 			}
+
+			@Override
+			public String toString() {
+				return "ErrorDetails{" +
+						"code='" + code + '\'' +
+						", message='" + message + '\'' +
+						'}';
+			}
+		}
+
+		@Override
+		public String toString() {
+			return "SendGridResponse{" +
+					"error=" + error +
+					'}';
 		}
 	}
 
