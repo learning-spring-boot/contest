@@ -1,6 +1,5 @@
 package de.votesapp.commands.plugins;
 
-import java.text.MessageFormat;
 import java.util.Optional;
 import java.util.regex.Pattern;
 
@@ -26,9 +25,6 @@ public class SetAdditionalsCommandPlugin implements de.votesapp.commands.Command
 			try {
 				final Integer additionals = Integer.parseInt(message.normalizedText());
 				group.registerAdditionals(message.getSenderPhone(), additionals);
-
-				final String answerText = MessageFormat.format("Set {0} additionals for {1}", additionals, message.sender().nameOrPhone());
-				return Optional.of(Answer.intoGroup(group, answerText));
 			} catch (final NumberFormatException nfe) {
 				// Number to large, we don't deal with this.
 			}

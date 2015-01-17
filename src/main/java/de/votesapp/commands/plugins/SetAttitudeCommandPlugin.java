@@ -48,17 +48,15 @@ public class SetAttitudeCommandPlugin implements CommandPlugin, Describable {
 
 	@Override
 	public Optional<Answer> interpret(final GroupMessage message, final Group group) {
-		final ImmutableCollection<Attitude> interpret = words.get(message.normalizedText());
+		final ImmutableCollection<Attitude> foundAttitude = words.get(message.normalizedText());
 
-		if (interpret.isEmpty()) {
-			return Optional.empty();
+		if (!foundAttitude.isEmpty()) {
+			// There is just one by definition.
+			final Attitude attitude = foundAttitude.iterator().next();
+			group.registerAttitude(message.getSenderPhone(), attitude);
 		}
 
-		// There is just one by definition.
-		final Attitude attitude = interpret.iterator().next();
-		group.registerAttitude(message.getSenderPhone(), attitude);
-
-		return Optional.of(Answer.intoGroup(group, attitude.getIcon() + " vote for " + message.sender().nameOrPhone()));
+		return Optional.empty();
 	}
 
 	@Override
