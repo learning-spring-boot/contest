@@ -12,9 +12,6 @@ import reactor.core.Reactor;
 import reactor.event.Event;
 import reactor.spring.annotation.Consumer;
 import reactor.spring.annotation.Selector;
-
-import com.codahale.metrics.annotation.Timed;
-
 import de.votesapp.client.GroupMessage;
 import de.votesapp.commands.CommandPlugin;
 import de.votesapp.commands.plugins.Answer;
@@ -39,7 +36,7 @@ public class GroupMessageListener {
 	}
 
 	@Selector(value = "group.inbox", reactor = "@rootReactor")
-	@Timed
+	// @Timed
 	public void onGroupReceiveMessage(final Event<GroupMessage> evt) {
 		final GroupMessage message = evt.getData();
 		log.info("Process Message: {}", message);
@@ -60,7 +57,7 @@ public class GroupMessageListener {
 		groupService.save(group);
 	}
 
-	@Timed
+	// @Timed
 	private boolean invokePlugin(final GroupMessage message, final Group group, boolean answered, final CommandPlugin abstractCommandPlugin) {
 		final Optional<Answer> answer = abstractCommandPlugin.interpret(message, group);
 
