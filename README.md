@@ -23,6 +23,29 @@ As *WhatsApp* User the probability that you have a group together with some frie
 Now you just invite **VotesApp** into your *WhatsApp* group.
 Once joined, **VotesApp** will listen to the Keywords, `in`, `out`, `yes`, `no` to count votes and `status` to give the names of the people which voted for this keyword.
 
+# Technology Stack
+**VotesApp** is divided into the following three major backend stacks:
+
+* **VotesApp**:
+It's purpose is to communicate via ReST with the **Yowsup-Rest** Backend to send and receive WhatsApp messages.
+Inside the Application we put our logic behind an own `Plugin` API (blue).
+That enables us to add more and more features over the time.
+We utilizes Reactor (gray) to pass messages forth and back to the Plugins.
+As persistance layer we choose mongodb. This layer can runs as Standalone Application by default.
+To integrate it with the others the `Yowsup`-profile needs to be active.
+
+* **Yowsup-Rest**:
+Thats a Spring Boot ReST-Service which abstracts all the Yowsup communication behind the two Resources `/inbox` and `/outbox`.
+
+* **Yowsup**:
+Yowsup is a really cool 3rd Party Framework to communicates with WhatsApp.
+On-Top of yowsup we put a "File" Layer to controll it from **Yowsup-Rest**.
+Why Files? See [this](http://votesapp.de/10-01-2015/Python_brings_us_back_to_the_basics/).
+
+![Image of our Solution](diary/architecture.png)
+
+We submit the VotesApp stack to the SpringBoot Content only.
+
 # The VotesApp Diary
 This project was triggered because of the [Spring Boot Contest](https://github.com/learning-spring-boot/contest). To keep the judges up to date and show them why we decided like this on some points, we try to keep the diary up to date.
 
