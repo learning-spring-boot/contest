@@ -27,10 +27,10 @@ Once joined, **VotesApp** will listen to the Keywords, `in`, `out`, `yes`, `no` 
 **VotesApp** is divided into the following three major backend stacks:
 
 * **VotesApp**:
-It's purpose is to communicate via ReST with the **Yowsup-Rest** Backend to send and receive WhatsApp messages.
+It's purpose is to communicate via ReST with the **Yowsup-Rest** backend to send and receive WhatsApp messages.
 Inside the Application we put our logic behind an own `Plugin` API (blue).
 That enables us to add more and more features over the time.
-We utilizes Reactor (gray) to pass messages forth and back to the Plugins.
+We utilize Reactor (gray) to pass messages forth and back to the Plugins.
 As persistance layer we choose mongodb. This layer can runs as Standalone Application by default.
 To integrate it with the others the `Yowsup`-profile needs to be active.
 
