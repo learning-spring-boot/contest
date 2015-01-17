@@ -1,36 +1,16 @@
-== _Learning Spring Boot_ Contest
+image::https://raw.githubusercontent.com/maciejwalkowiak/contest/gh-pages/mercury.png[]
 
-This is a contest based on _Learning Spring Boot_. The idea is to submit a small, pithy, cool Spring Boot application to win a prize. We will soon announce the prizes.
+image:https://drone.io/github.com/maciejwalkowiak/contest/status.png[link=https://drone.io/github.com/maciejwalkowiak/contest/latest]
 
-=== Calling all Spring Boot apps
+____
+In Roman mythology *Mercury* is the patron god of messages and communication.
+____
 
-Years ago, the http://www.ioccc.org/years.html[The International Obfuscated C Code Contest] was invented. Seeing http://blog.aerojockey.com/post/iocccsim[Carl Banks' flight simulator] forever impressed me as a neat, pithy little app. 
+*Mercury* is an application initially created for http://blog.greglturnquist.com/2014/12/announcing-learningspringboot-contest-cc-packtpub-springcentral.html[_Learning Spring Boot_] contest.
+Source code is available at GitHub: https://github.com/maciejwalkowiak/contest/
 
-Well, we aren't looking for obfuscated, complex, impossible to read apps. But we *ARE* looking for slick, cool apps that show off the power/coolness/wicked abilities of Spring Boot mixed with your hackable creativity. Characteristics the judges evaluate include:
+TIP: If you like the application *star* this Github repository and *tweet* about it with #mercuryapp hashtag.
 
-* Stylish
-* Short and sweet
-* Custom auto-configurations are welcome
-* Custom health indicators, metrics, and fancy usage thereof
-* Nice on the server side OR cool frontends (You don't have to build a web frontend to have a slick, elegeant, and original UI.)
-* Popularity. Tweet things up while you work on your submission. We will definitely look at stars on your forked repo of this contest, volume of traffic your generate, and other evidence of popularity.
+Mercury goal is to provide single **HTTP API** to send notifications in a company with internal applications in mind.
 
-=== How/when to submit
-
-IMPORANT: Deadline is 11:59pm January 17th CST (UTC-6). (I hate midnight deadlines, since they're so ambiguous.)
-
-To submit an entery:
-
-. Fork this repo.
-. Code your solution inside your fork.
-. Tweet/blog/reddit/facebook your efforts and gather evidence of your apps popularity (stars on your repo, total hits on your blog entry, total number of registered userse for your slick app, etc.)
-. Replace this README.adoc with your own documentation (cuteness rewarded!).
-. Submit a pull request (before the deadline!!!)
-. Wait to see the announcement.
-. Collect your prize!
-
-Those of you that can't wait, use the holiday time as you wish. Those of you that are enjoying time with family and friends, we included enough time so you can still get into the contest.
-
-NOTE: No member of Pivotal Inc. is permitted to enter this contest. Only one submission per person or team. If there is evidence of multiple "sock puppet" entries coming from the same group of people, the judges reserve the right to disqualify anyone involved. All decisions are final.
-
-Good luck!
+Read more on project website: https://maciejwalkowiak.github.io/contest/

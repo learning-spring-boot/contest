@@ -1,0 +1,12 @@
+package com.maciejwalkowiak.mercury.slack;
+
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+@ComponentScan
+@ConditionalOnProperty(name = "slack.hook.url")
+class SlackConfiguration {
+
+}
