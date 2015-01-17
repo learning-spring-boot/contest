@@ -13,6 +13,7 @@ import java.util.Arrays;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.boot.actuate.metrics.CounterService;
 
 import reactor.core.Reactor;
 import reactor.event.Event;
@@ -38,7 +39,7 @@ public class GroupMessageListenerTest {
 				new StatusCommandPlugin(), //
 				new ResetCommandPlugin()),//
 				groupService, //
-				reactor);
+				reactor, mock(CounterService.class));
 		when(groupService.createOrLoadGroup(any())).thenReturn(group);
 		when(groupService.save(group)).thenReturn(group);
 	}
