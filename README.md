@@ -1,4 +1,4 @@
-# ![Image of our Solution](diary/onair.png)[ON AIR] until 17.01.2015 -  √ote for s2 ![Image of our Solution](diary/logoVotesapp.png)
+# ![Image of our Solution](diary/onair.png)[ON AIR] until Jan. 17th - Star us ![Image of our Solution](diary/logoVotesapp.png)
 The project is started for the [Spring Boot Contest](https://github.com/learning-spring-boot/contest). To support us please
 
 * "Star" the Repository and/or
@@ -10,7 +10,7 @@ During the contest we write a small [diary](https://github.com/s2team/contest#th
 If you are really interested in recent updates, you *could* add this `crontab` :)
 
 ```bash
-crontab -l | { cat; echo "0 13 * * * firefox https://github.com/s2team/contest#the-votesapp-diary"; } | crontab -
+crontab -l | { cat; echo "0 13 * * * firefox http://votesapp.de/articles.html"; } | crontab -
 ```
 
 Thank you for any kind of support! - s2.
