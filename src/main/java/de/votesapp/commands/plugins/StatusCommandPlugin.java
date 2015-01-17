@@ -16,10 +16,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import reactor.core.Reactor;
 import de.votesapp.client.GroupMessage;
 import de.votesapp.client.User;
 import de.votesapp.commands.CommandPlugin;
@@ -38,9 +36,6 @@ import de.votesapp.groups.Group;
 public class StatusCommandPlugin implements CommandPlugin, Describable {
 
 	private static Pattern STATUS = Pattern.compile("status ?(.+)?", Pattern.CASE_INSENSITIVE);
-
-	@Autowired
-	Reactor reactor;
 
 	@Override
 	public Optional<Answer> interpret(final GroupMessage message, final Group group) {

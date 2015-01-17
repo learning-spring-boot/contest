@@ -6,7 +6,6 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import reactor.core.Reactor;
 import de.votesapp.client.GroupMessage;
 import de.votesapp.commands.Describable;
 import de.votesapp.commands.Description;
@@ -18,9 +17,6 @@ public class HelpCommandPlugin extends TextEqualsWordPlugin implements Describab
 
 	public static final String[] DEFAULT_WORDS = { "help" };
 	private final List<Describable> describables;
-
-	@Autowired
-	Reactor reactor;
 
 	@Autowired
 	public HelpCommandPlugin(final List<Describable> describables) {
@@ -38,9 +34,9 @@ public class HelpCommandPlugin extends TextEqualsWordPlugin implements Describab
 		// 2. sort them by priority
 		// 3. append them to the StringBuilder
 		describables.stream() //
-				.map(describable -> describable.describe()) //
-				.sorted((descriptionA, descriptionB) -> Integer.compare(descriptionA.getPriority(), descriptionB.getPriority())) //
-				.forEach(description -> appendToSb(description, sb));
+		.map(describable -> describable.describe()) //
+		.sorted((descriptionA, descriptionB) -> Integer.compare(descriptionA.getPriority(), descriptionB.getPriority())) //
+		.forEach(description -> appendToSb(description, sb));
 
 		sb.append("\nIf you like to stop using VotesApp, kick me out of the room.\n");
 		sb.append("\nIf you like to use VotesApp in another room, invite my there.");

@@ -2,10 +2,8 @@ package de.votesapp.commands.plugins;
 
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import reactor.core.Reactor;
 import de.votesapp.client.GroupMessage;
 import de.votesapp.commands.Describable;
 import de.votesapp.commands.Description;
@@ -16,9 +14,6 @@ import de.votesapp.groups.Group;
 public class ResetCommandPlugin extends TextEqualsWordPlugin implements Describable {
 
 	public static final String[] DEFAULT_RESETS = { "reset", "start", "begin", "vote" };
-
-	@Autowired
-	Reactor reactor;
 
 	public ResetCommandPlugin() {
 		super(DEFAULT_RESETS);

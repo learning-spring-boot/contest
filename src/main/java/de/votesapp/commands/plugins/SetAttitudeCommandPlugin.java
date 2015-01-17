@@ -7,10 +7,7 @@ import static de.votesapp.commands.plugins.Attitude.UNKOWN;
 import java.util.Arrays;
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import reactor.core.Reactor;
 
 import com.google.common.collect.ImmutableCollection;
 import com.google.common.collect.ImmutableMultimap;
@@ -28,9 +25,6 @@ public class SetAttitudeCommandPlugin implements CommandPlugin, Describable {
 	public static final String[] DEFAULT_POSITIVES = { "ok", "in", "I'm in", "yes", "ja", "Bin dabei", Attitude.POSITIVE.getIcon() };
 	public static final String[] DEFAULT_NEGATIVES = { "out", "no", "nope", "nein", "Bin nicht dabei", "Komme nicht", Attitude.NEGATIVE.getIcon() };
 	public static final String[] DEFAULT_UNKOWN = { "maybe", "vielleicht", Attitude.UNKOWN.getIcon() };
-
-	@Autowired
-	Reactor reactor;
 
 	private final ImmutableMultimap<String, Attitude> words;
 

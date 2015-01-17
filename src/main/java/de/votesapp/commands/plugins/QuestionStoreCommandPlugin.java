@@ -18,9 +18,6 @@ public class QuestionStoreCommandPlugin implements CommandPlugin, Describable {
 
 	private static Pattern QUESTION = Pattern.compile(".+\\?", Pattern.CASE_INSENSITIVE);
 
-	public QuestionStoreCommandPlugin() {
-	}
-
 	@Override
 	public Optional<Answer> interpret(final GroupMessage message, final Group group) {
 		final Matcher statusMatcher = QUESTION.matcher(message.getText());
