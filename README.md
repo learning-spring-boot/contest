@@ -61,6 +61,7 @@ This section describes some highlights of our Backend.
 * Environment Variables
 * Cough, dude, I need some meds. Really, check my health!
 * Profile Configuration
+* 1, 2, 3, 4, metric
 
 ## Diary
 From day zero we tried to put our experience during the contest into a diary.
@@ -70,7 +71,7 @@ Today it has more then 10 entries describing the fun we had.
 During the contest we had a lot of ideas what else can be done with this.
 Okay, ... the most important [Chuck Norris Plugin](https://github.com/s2team/votesapp/blob/master/src/main/java/de/votesapp/commands/plugins/ChuckNorrisCommandPlugin.java) is done.
 But there are much more, - like the *Rock-paper-scissors*, *Cinema Moves*,
-*Random Cats Videos* (@Kathy, this one was for you <3) or more advanced votings.
+*Random Cats Videos* (@Kathy, this one is for you <3) or more advanced votings.
 
 For those we provide this interface:
 
@@ -142,7 +143,8 @@ static class MongoDbInMemoryConfiguration extends AbstractMongoConfiguration {
 }
 ```
 
-Please give them some fame on Github. They are doing really great!
+Please give [them](https://github.com/fakemongo/fongo) some fame on Github.
+They are doing really great!
 
 The `WebClient` is also activated by the same technique.
 There we used the `@Profile("!yowsup")` annotation.
@@ -181,8 +183,16 @@ We store exceptions, when they occur in an `Optional` field and anounce them ove
 
 ![Image of our Solution](diary/highlightHealth.png)
 
+To see the status, you can check `http://localhost:8080/health`.
+
 ## Profile Configuration
-We really like to feature to have properties per Profile.
+We really like the feature to have properties per profile.
 With this we were able to separate the configuration for mongodb, yowsup and our application.
 
 ![Image of our Solution](diary/highlightProperties.png)
+
+## 1, 2, 3, 4, metric
+We haven't expand them very much, but there are some metrics about how many messages we processed and how many are answered.
+To do this we used Springs `CounterService` from the [GroupMessageListener](https://github.com/s2team/votesapp/blob/master/src%2Fmain%2Fjava%2Fde%2Fvotesapp%2Fgroups%2FGroupMessageListener.java)
+
+As configured by default, those can be checked at `http://localhost:8080/metrics`.
