@@ -1,8 +1,12 @@
 package de.votesapp.api;
 
+import java.util.Optional;
+
 import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.actuate.health.Health;
+import org.springframework.boot.actuate.health.HealthIndicator;
 import org.springframework.boot.actuate.metrics.CounterService;
 import org.springframework.scheduling.annotation.Scheduled;
 
@@ -21,13 +25,14 @@ import de.votesapp.client.WhatsAppConnectionException;
  */
 @Slf4j
 @Consumer
-public class WhatsAppClientToReactorBridge {
+public class WhatsAppClientToReactorBridge implements HealthIndicator {
 
 	private final WhatsAppClient whatsAppClient;
 	private final Reactor rootReactor;
 	private final CounterService counterService;
 
 	private int errorThrottle = 0;
+	private volatile Optional<WhatsAppConnectionException> whatsAppConnectionException = Optional.empty();
 
 	@Autowired
 	public WhatsAppClientToReactorBridge(final WhatsAppClient whatsAppClient, final Reactor rootReactor, final CounterService counterService) {
@@ -51,6 +56,7 @@ public class WhatsAppClientToReactorBridge {
 				}
 			}
 			errorThrottle = 0;
+			whatsAppConnectionException = Optional.empty();
 		} catch (final WhatsAppConnectionException e) {
 			log.error(e.getMessage());
 			// don't bump the system if it isn't reachable.
@@ -70,5 +76,13 @@ public class WhatsAppClientToReactorBridge {
 		final GroupMessage message = messageToSend.getData();
 		log.info("Send Message: {}", message);
 		whatsAppClient.sendGroupMessage(message);
+	}
+
+	@Override
+	public Health health() {
+		if (whatsAppConnectionException.isPresent()) {
+			return Health.down(whatsAppConnectionException.get()).build();
+		}
+		return Health.up().build();
 	}
 }
