@@ -11,13 +11,12 @@ import javax.annotation.PostConstruct;
 import lombok.SneakyThrows;
 
 import org.springframework.context.annotation.Profile;
-import org.springframework.stereotype.Component;
 
 /**
  * This makes it run on a developers pc without a connection to yowsup. Later we
  * could replace this by an more elegant ui.
  */
-@Component
+// @Component
 @Profile("!yowsup")
 public class ConsoleClient implements WhatsAppClient {
 
