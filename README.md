@@ -46,7 +46,153 @@ Why Files? See [our diary](http://votesapp.de/10-01-2015/Python_brings_us_back_t
 
 We submit the VotesApp stack to the SpringBoot Content only.
 
-
 # VotesApp Diary
 
 To keep Readme clean, we moved the diary to: http://votesapp.de
+
+# Highlights
+
+This section describes some highlights of our Backend.
+
+* Diary
+* Extensibility with Plugins
+* Developer "friendliness"
+* @Value(#":}{}$:"#$@}#$!$), - em how was it?
+* Environment Variables
+* Cough, dude, I need some meds. Really, check my health!
+* Profile Configuration
+* 1, 2, 3, 4, metric
+
+## Diary
+From day zero we tried to put our experience during the contest into a diary.
+Today it has more then 10 entries describing the fun we had.
+
+## Extensibility with Plugins
+During the contest we had a lot of ideas what else can be done with this.
+Okay, ... the most important [Chuck Norris Plugin](https://github.com/s2team/votesapp/blob/master/src/main/java/de/votesapp/commands/plugins/ChuckNorrisCommandPlugin.java) is done.
+But there are much more, - like the *Rock-paper-scissors*, *Cinema Moves*,
+*Random Cats Videos* (@Kathy, this one is for you <3) or more advanced votings.
+
+For those we provide this interface:
+
+```java
+public interface CommandPlugin {
+  public abstract Optional<Answer> interpret(final GroupMessage message, final Group group);
+}
+```
+
+In the simplest way it can be implemented like this:
+
+```java
+@Service
+public class PingCommandPlugin extends TextEqualsWordPlugin {
+
+  public static final String[] DEFAULT_RESETS = { "ping", "ping?" };
+
+  public PingCommandPlugin() {
+    super(DEFAULT_RESETS);
+  }
+
+  @Override
+  public Optional<Answer> matches(final GroupMessage message, final Group group) {
+    return Optional.of(Answer.intoGroup(group, "Pong!"));
+  }
+}
+```
+
+To see more about Plugins, you can checkout [our Diary post](http://votesapp.de/15-01-2015/Make_it_fucking_delightful/) about it.
+
+## Developer "friendliness"
+Nobody likes to have tons of configurations to do before start hacking, right?
+
+So we took care that the application can be started without huzzle (excpect lombok...).
+Services like MongoDB and Yowsup which aren't usable by default will mocked by "runnable" replacements.
+This is done by utilizing the `@Profile` annotations.
+When the `default` profile is loaded, [fongo](https://github.com/fakemongo/fongo) is used to replace the real MongoDb
+and our `WebClient` replaced all the Yowsup Python stuff.
+
+To use Fongo we only need to import `compile("com.github.fakemongo:fongo:1.5.9")` and provide this neat configuration:
+
+```java
+@Profile("!mongo")
+@Configuration
+static class MongoDbInMemoryConfiguration extends AbstractMongoConfiguration {
+
+  @Override
+  public MappingMongoConverter mappingMongoConverter() throws Exception {
+    final MappingMongoConverter mappingMongoConverter = super.mappingMongoConverter();
+    // WhatsApp Keys are containing dots in domains.
+    mappingMongoConverter.setMapKeyDotReplacement("_");
+    return mappingMongoConverter;
+  }
+
+  @Override
+  protected String getDatabaseName() {
+    return "test";
+  }
+
+  @Override
+  public Mongo mongo() {
+    return new Fongo("mongo").getMongo();
+  }
+
+  @Override
+  protected String getMappingBasePackage() {
+    return "de.votesapp";
+  }
+}
+```
+
+Please give [them](https://github.com/fakemongo/fongo) some fame on Github.
+They are doing really great!
+
+The `WebClient` is also activated by the same technique.
+There we used the `@Profile("!yowsup")` annotation.
+
+Once you configured both, you can active them with `--spring.profiles.active=yowsup,mongo`, or you just don't :).
+
+## @Value(#":}{}$:"#$@}#$!$), - em how was it?
+Okay, if you really use it all the day,
+you probably know the syntax (because you understand whats going on).
+But if I work with some Students or ppl. new to Spring, they really create every combination of parentheses,
+dollars, braces and so on.
+
+With Spring Boot those @ConfigurationProperties` can be used.
+
+![Image of our Solution](diary/highlightConfig.png)
+
+Just create a counterpart of your configuration structure (yml) and it can be autowirred in your application.
+That is so nice!
+
+## Environment Variables
+Our P-System is deployed using docker.
+From there we don't really like to edit property files.
+To get rid of them we use environment variables for the mandatory properties.
+
+This makes it also handy to create various Eclipse 8Run Configurations* and an easy deployment.
+
+![Image of our Solution](diary/highlightEnvVars.png)
+
+## *Cough*, dude, I need some meds. Really, check my health!
+The most critical (and not by AutoConfiguration monitored) Module in VotesApp is the communication to the Yowsup-Rest Server.
+If this services isn't available, VotesApp can't work. Tracking it was really easy with SpringBoot.
+
+Since we Poll for new message all day long, we can use this to detect the health.
+
+We store exceptions, when they occur in an `Optional` field and anounce them over Springs `HealthIndicator`.
+
+![Image of our Solution](diary/highlightHealth.png)
+
+To see the status, you can check `http://localhost:8080/health`.
+
+## Profile Configuration
+We really like the feature to have properties per profile.
+With this we were able to separate the configuration for mongodb, yowsup and our application.
+
+![Image of our Solution](diary/highlightProperties.png)
+
+## 1, 2, 3, 4, metric
+We haven't expand them very much, but there are some metrics about how many messages we processed and how many are answered.
+To do this we used Springs `CounterService` from the [GroupMessageListener](https://github.com/s2team/votesapp/blob/master/src%2Fmain%2Fjava%2Fde%2Fvotesapp%2Fgroups%2FGroupMessageListener.java)
+
+As configured by default, they can be checked at `http://localhost:8080/metrics`.
