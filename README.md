@@ -50,6 +50,22 @@ We submit the VotesApp stack to the SpringBoot Content only.
 
 To keep Readme clean, we moved the diary to: http://votesapp.de
 
+# Run it on localhost
+To run it in development mode, checkout the project and use the `bootRun` command to start it.
+
+```
+./gradlew bootRun
+```
+
+Now you can navigate your browser to "http://localhost:8080/" and access the WhatsApp/Yowsup mock.
+
+> Integrating it with the real WhatsApp Servers can be done by using the `yowsup` and `mongo` profiles.
+But this requieres a more complex setup (with https://github.com/s2team/yowsup and https://github.com/s2team/yowsup-rest) which we haven't submitted for the contest.
+To make them run you need a SIM Card, an WhatsApp Password, ...
+But to use and rate this application the "*developer*" mock should be enough.
+
+Have a look to the Highlights section below for more insights.
+
 # Highlights
 
 This section describes some highlights of our Backend.
@@ -201,7 +217,7 @@ As configured by default, they can be checked at `http://localhost:8080/metrics`
 That was a really great week! Independent of the result we like to give special thanks to:
 
 * Greg for organizing this contest
-* Tarek for keeping Yowsup run
+* Tarek for your work on Yowsup. It was really interesting to have look at it
+* The Spring Boot Team to make our work during this contest free of pain (regarding the java side)
 
 We'll invite you both for beer, Greg when comming to US and Tarek when we are the next time in Berlin.
-
