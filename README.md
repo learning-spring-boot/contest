@@ -195,4 +195,4 @@ With this we were able to separate the configuration for mongodb, yowsup and our
 We haven't expand them very much, but there are some metrics about how many messages we processed and how many are answered.
 To do this we used Springs `CounterService` from the [GroupMessageListener](https://github.com/s2team/votesapp/blob/master/src%2Fmain%2Fjava%2Fde%2Fvotesapp%2Fgroups%2FGroupMessageListener.java)
 
-As configured by default, those can be checked at `http://localhost:8080/metrics`.
+As configured by default, they can be checked at `http://localhost:8080/metrics`.
