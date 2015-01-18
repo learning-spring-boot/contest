@@ -18,7 +18,6 @@ public class PingCommandPlugin extends TextEqualsWordPlugin {
 
 	@Override
 	public Optional<Answer> matches(final GroupMessage message, final Group group) {
-		group.resetVotes();
 		return Optional.of(Answer.intoGroup(group, "Pong!"));
 	}
 
