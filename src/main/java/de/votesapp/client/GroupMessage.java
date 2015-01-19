@@ -1,10 +1,13 @@
 package de.votesapp.client;
 
 import javax.annotation.Nullable;
+import javax.validation.constraints.NotNull;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import org.apache.commons.lang3.StringUtils;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -22,7 +25,7 @@ import de.votesapp.commands.TextNormalizer;
 @NoArgsConstructor
 public class GroupMessage {
 
-	public static GroupMessage of(final String groupId, final String text) {
+	public static GroupMessage of(final String groupId, @NotNull final String text) {
 		return new GroupMessage(null, escapeDot(groupId), null, null, text);
 	}
 
@@ -33,9 +36,9 @@ public class GroupMessage {
 			@JsonProperty("_from") final String groupId, //
 			@JsonProperty("participant") final String senderPhone, //
 			@JsonProperty(value = "notify", required = false) final String senderName, //
-			@JsonProperty("body") final String text) {
+			@JsonProperty(value = "body", required = false) final String text) {
 
-		return new GroupMessage(escapeDot(id), escapeDot(groupId), escapeDot(senderPhone), senderName, text);
+		return new GroupMessage(escapeDot(id), escapeDot(groupId), escapeDot(senderPhone), senderName, text == null ? "" : text);
 	}
 
 	private static String escapeDot(final String txt) {
@@ -50,7 +53,7 @@ public class GroupMessage {
 		// return mappingMongoConverter;
 		// }
 		// But then we need to have one. Now it's autoconfigured
-		return txt.replaceAll("\\.", "_");
+		return StringUtils.replace(txt, ".", "_");
 	}
 
 	/**
