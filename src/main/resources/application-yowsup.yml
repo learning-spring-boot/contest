@@ -1,0 +1,5 @@
+yowsupRest:
+    baseUrl: ${YOWSUP_REST_URL:http://localhost:8081/}
+    hostname: ${YOWSUP_REST_HOST:localhost}
+    username: user
+    password: ${YOWSUP_REST_PASSWORD:user}

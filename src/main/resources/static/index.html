@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>VotesApp WebClient Frontend</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="//cdn.jsdelivr.net/sockjs/0.3.4/sockjs.min.js"></script>
+    <script src="stomp.min.js"></script>
+    <script type="text/javascript">
+      $(function() {
+        function connect() {
+            var socket = new SockJS('/whatsapp');
+            stompClient = Stomp.over(socket);
+            stompClient.connect({}, function(frame) {
+                console.log('Connected: ' + frame);
+                stompClient.subscribe('/receive', function(msg){
+                    var body = JSON.parse(msg.body);
+                    var content = { text: body.text, groupId: body.groupId };
+                    $("#msgs").append('<div class="alert alert-info" role="alert"><strong>' + body.groupId + '</strong> ' + body.text +'</div>');
+                });
+            });
+        }
+
+        connect();
+
+        $('#sendButton').on('click', function() {
+            var phone = $('#phone').val();
+            var group = $('#group').val();
+            var text = $('#text').val();
+            $.ajax({
+                type: "POST",
+                url: "/send",
+                data: JSON.stringify({phone: phone, group: group, text: text}),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json"
+            });
+            $("#msgs").append('<div class="alert alert-success" role="alert"><strong>' + group + '</strong> ' + text +'</div>');
+        });
+      });
+    </script>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+</head>
+<body>
+    <noscript><h2 style="color: #ff0000">Please enable Javascript and reload this page!</h2></noscript>
+    <div class="container">
+        <h1>Debug VotestApp Interface</h1>
+        <form>
+            <div class="form-group">
+                <label for="phone">Phone (like: 4938148294, 2314891491, ...):</label>
+                <input type="text" class="form-control" id="phone" placeholder="Enter phone number">
+            </div>
+            <div class="form-group">
+                <label for="group">Group (SpringOne or any string):</label>
+                <input type="text" class="form-control" id="group" placeholder="Enter group">
+            </div>
+            <div class="form-group">
+                <label for="text">Text (like: yes, no, maybe, +3, status or any string):</label>
+                <input type="text" class="form-control" id="text" placeholder="Enter message text">
+            </div>
+            <button type="button" class="btn btn-lg btn-primary" id="sendButton">Send Message</button>
+        </form>
+        <p>
+        <div id="msgs"></div>
+    </div>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>
