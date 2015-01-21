@@ -33,4 +33,14 @@ Those of you that can't wait, use the holiday time as you wish. Those of you tha
 
 NOTE: No member of Pivotal Inc. is permitted to enter this contest. Only one submission per person or team. If there is evidence of multiple "sock puppet" entries coming from the same group of people, the judges reserve the right to disqualify anyone involved. All decisions are final.
 
+=== Entries
+
+We have three official entries. A snapshot of each entrant was captured to prevent any further edits by contestants. You are free to view them here:
+
+* https://github.com/learning-spring-boot/contest-mercury
+* https://github.com/learning-spring-boot/contest-polaromatic
+* https://github.com/learning-spring-boot/contest-votesapp
+
+NOTE: They are listed alphabetically based on the name of the app.
+
 Good luck!
