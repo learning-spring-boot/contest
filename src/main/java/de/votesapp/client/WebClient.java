@@ -26,8 +26,11 @@ public class WebClient implements WhatsAppClient {
 
 	private volatile List<GroupMessage> groupMessages = new ArrayList<>();
 
+	private volatile GroupMessage last;
+
 	@Override
 	public void sendGroupMessage(final GroupMessage messageToSend) {
+		last = messageToSend;
 		brokerMessagingTemplate.convertAndSend("/receive", messageToSend);
 	}
 
@@ -38,6 +41,11 @@ public class WebClient implements WhatsAppClient {
 			groupMessages.clear();
 			return messages;
 		}
+	}
+
+	@RequestMapping("/last")
+	public GroupMessage re() {
+		return last;
 	}
 
 	@RequestMapping("/send")
