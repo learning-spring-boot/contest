@@ -173,7 +173,7 @@ you probably know the syntax (because you understand whats going on).
 But if I work with some Students or ppl. new to Spring, they really create every combination of parentheses,
 dollars, braces and so on.
 
-With Spring Boot those @ConfigurationProperties` can be used.
+With Spring Boot those `@ConfigurationProperties` can be used.
 
 ![Image of our Solution](diary/highlightConfig.png)
 
