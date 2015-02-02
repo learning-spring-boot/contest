@@ -2,8 +2,8 @@
 <html>
 <head>
     <title>VotesApp WebClient Frontend</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="//cdn.jsdelivr.net/sockjs/0.3.4/sockjs.min.js"></script>
+    <script src="jquery.min.js"></script>
+    <script src="sockjs.min.js"></script>
     <script src="stomp.min.js"></script>
     <script type="text/javascript">
       $(function() {
@@ -14,8 +14,8 @@
                 console.log('Connected: ' + frame);
                 stompClient.subscribe('/receive', function(msg){
                     var body = JSON.parse(msg.body);
-                    var content = { text: body.text, groupId: body.groupId };
-                    $("#msgs").append('<div class="alert alert-info" role="alert"><strong>' + body.groupId + '</strong> ' + body.text +'</div>');
+                    var content = { text: body.text.replace(/\n/g, '<br>'), groupId: body.groupId };
+                    $("#msgs").append('<div class="alert alert-info" role="alert"><strong>' + content.groupId + '</strong> ' + content.text +'</div>');
                 });
             });
         }
@@ -30,15 +30,14 @@
                 type: "POST",
                 url: "/send",
                 data: JSON.stringify({phone: phone, group: group, text: text}),
-                contentType: "application/json; charset=utf-8",
-                dataType: "json"
+                contentType: "application/json; charset=utf-8"
             });
             $("#msgs").append('<div class="alert alert-success" role="alert"><strong>' + group + '</strong> ' + text +'</div>');
         });
       });
     </script>
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="bootstrap.min.css">
 </head>
 <body>
     <noscript><h2 style="color: #ff0000">Please enable Javascript and reload this page!</h2></noscript>
@@ -63,6 +62,6 @@
         <div id="msgs"></div>
     </div>
 
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+    <script src="bootstrap.min.js"></script>
 </body>
 </html>
