@@ -22,8 +22,9 @@ import de.votesapp.groups.Group;
 @Service
 public class SetAttitudeCommandPlugin implements CommandPlugin, Describable {
 
-	public static final String[] DEFAULT_POSITIVES = { "ok", "in", "I'm in", "yes", "ja", "Bin dabei", Attitude.POSITIVE.getIcon() };
-	public static final String[] DEFAULT_NEGATIVES = { "out", "no", "nope", "nein", "Bin nicht dabei", "Komme nicht", Attitude.NEGATIVE.getIcon() };
+	public static final String[] DEFAULT_POSITIVES = { "ok", "in", "i'm in", "yes", "ja", "bin dabei", Attitude.POSITIVE.getIcon() };
+	public static final String[] DEFAULT_NEGATIVES = { "out", "no", "nope", "nein", "bin nicht dabei", "komme nicht", "bin raus", "kann nicht",
+			Attitude.NEGATIVE.getIcon() };
 	public static final String[] DEFAULT_UNKOWN = { "maybe", "vielleicht", Attitude.UNKOWN.getIcon() };
 
 	private final ImmutableMultimap<String, Attitude> words;
