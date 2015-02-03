@@ -56,6 +56,10 @@ public class GroupMessage {
 		return StringUtils.replace(txt, ".", "_");
 	}
 
+	public static String unescapeDot(final String txt) {
+		return StringUtils.replace(txt, "_", ".");
+	}
+
 	/**
 	 * Unique messageId. 4917917413454-1, 2, 3, ...
 	 *
