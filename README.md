@@ -1,17 +1,9 @@
-# ![Image of our Solution](diary/onair.png)[ON AIR] until Jan. 17th - Star us ![Image of our Solution](diary/logoVotesapp.png)
-The project is started for the [Spring Boot Contest](https://github.com/learning-spring-boot/contest). To support us please
-
-* "Star" the Repository and/or
-* Tweet about it using the #VotesApp HashTag
+# About the project ![Image of our Solution](diary/logoVotesapp.png)
+The project was developed to join the [Spring Boot Contest](https://github.com/learning-spring-boot/contest).
 
 It is submitted by [@d0x (Christian Schneider)](https://github.com/d0x) and [@walery (Walery Strauch)](https://github.com/walery). If you have any ideas or feedback, contact us on Twitter or open a ticket on github.
 
-During the contest we write a small [diary](https://github.com/s2team/contest#the-votesapp-diary) and maintain a [trello board for this project](https://trello.com/b/VzijoLhr/votesapp).
-If you are really interested in recent updates, you *could* add this `crontab` :)
-
-```bash
-crontab -l | { cat; echo "0 13 * * * firefox http://votesapp.de/articles.html"; } | crontab -
-```
+During the contest we wrote a small [diary](https://github.com/s2team/contest#the-votesapp-diary).
 
 Thank you for any kind of support! - s2.
 
