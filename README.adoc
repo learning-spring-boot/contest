@@ -1,5 +1,5 @@
 == Polaromatic
 
-Please read the documentation here: http://lmivan.github.io/contest/
+Please read the documentation here: http://ilopmar.github.io/contest/
 
 If you like the application please star this Github repository. You can also write some tweets with the *#Polaromatic* hashtag.
